@@ -216,7 +216,7 @@ template <typename EventType>
 void ISmaccStateMachine::postEvent(EventLifeTime evlifetime)
 {
   auto evname = smacc2::introspection::demangleSymbol<EventType>();
-  RCLCPP_DEBUG_STREAM(getLogger(), "Event " << evname);
+  RCLCPP_INFO_STREAM(getLogger(), "Event " << evname);
   auto * ev = new EventType();
   this->postEvent(ev, evlifetime);
 }
@@ -752,7 +752,7 @@ void ISmaccStateMachine::buildStateMachineInfo()
   this->checkStateMachineConsistence();
 }
 
-uint64_t ISmaccStateMachine::getCurrentStateCounter() const { return this->stateSeqCounter_; }
+int64_t ISmaccStateMachine::getCurrentStateCounter() const { return this->stateSeqCounter_; }
 
 ISmaccState * ISmaccStateMachine::getCurrentState() const { return this->currentState_.back(); }
 

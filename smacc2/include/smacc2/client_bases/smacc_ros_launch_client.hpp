@@ -51,6 +51,10 @@ public:
 protected:
   std::future<std::string> result_;
 
+  typedef std::function<void> cancelCallback;
+
+  static std::map<std::future<void>, cancelCallback> detached_futures_;
+
   std::atomic<bool> cancellationToken_ = ATOMIC_VAR_INIT(false);
 };
 }  // namespace client_bases
