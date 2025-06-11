@@ -21,19 +21,18 @@
 
 #pragma once
 
-#include "rclcpp/rclcpp.hpp"
-#include "smacc2/smacc.hpp"
-
 namespace sm_panda_moveit2z_cb_inventory
 {
 // SMACC2 classes
+using smacc2::EvStateRequestFinish;
 using smacc2::Transition;
 using smacc2::default_transition_tags::SUCCESS;
 using namespace smacc2;
+using namespace cl_moveit2z;
 using namespace cl_keyboard;
 
 // STATE DECLARATION
-struct StCircularPivotMotion : smacc2::SmaccState<StCircularPivotMotion, SmPandaMoveit2zCbInventory>
+struct StMoveJoints3 : smacc2::SmaccState<StMoveJoints3, SmPandaMoveit2zCbInventory>
 {
   using SmaccState::SmaccState;
 
@@ -43,21 +42,43 @@ struct StCircularPivotMotion : smacc2::SmaccState<StCircularPivotMotion, SmPanda
 
   // TRANSITION TABLE
   typedef boost::mpl::list<
-    // Transition<EvCbSuccess<CbMoveCartesianRelative2, OrArm>, StMoveCartesianRelative2, SUCCESS>
+
+    Transition<EvCbSuccess<CbMoveJoints, OrArm>, StPause5, SUCCESS>,
+    Transition<EvCbFailure<CbMoveJoints, OrArm>, StMoveJoints3, ABORT>,
+  
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StPause5, NEXT>  
+
+
     >
     reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-    configure_orthogonal<OrArm, CbCircularPivotMotion>();
+    std::map<std::string, double> jointValues{
+      {"panda_joint1", 0.0},
+      {"panda_joint2", 0.0},
+      {"panda_joint3", 0.0},
+      {"panda_joint4", -M_PI/2},
+      {"panda_joint5", 0.0},
+      {"panda_joint6", M_PI/2},
+      {"panda_joint7", 0.0}
+      };
+
+    // panda_joint6:
+    // panda_joint7:
+    // panda_finger_joint1:
+    // panda_finger_joint2:
+
+    configure_orthogonal<OrArm, CbMoveJoints>(jointValues);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+  };
+
+  void runtimeConfigure()
+  {
+    ClMoveit2z * moveGroupClient;
+    this->requiresClient(moveGroupClient);
+    this->getClientBehavior<OrArm,CbMoveJoints>()->scalingFactor_ = 1;
   }
-
-  void runtimeConfigure() { RCLCPP_INFO(getLogger(), "Entering StCircularPivotMotion"); }
-
-  void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }
-
-  void onExit() { RCLCPP_INFO(getLogger(), "On Exit!"); }
 };
 }  // namespace sm_panda_moveit2z_cb_inventory

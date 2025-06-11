@@ -112,9 +112,10 @@ void UndoPathGlobalPlanner::configure(
 void UndoPathGlobalPlanner::onForwardTrailMsg(const nav_msgs::msg::Path::SharedPtr forwardPath)
 {
   lastForwardPathMsg_ = *forwardPath;
-  RCLCPP_DEBUG_STREAM(
-    nh_->get_logger(), "[UndoPathGlobalPlanner] received backward path msg poses ["
-                         << lastForwardPathMsg_.poses.size() << "]");
+  RCLCPP_INFO_STREAM_THROTTLE(
+    nh_->get_logger(), *nh_, 1000,
+    "[UndoPathGlobalPlanner] received backward path msg poses [" << lastForwardPathMsg_.poses.size()
+                                                                 << "]");
 }
 
 /**
@@ -236,14 +237,14 @@ void UndoPathGlobalPlanner::createDefaultUndoPathPlan(
       linear_mindist = dist;
       startPositionProjected = pose.pose;
 
-      RCLCPP_DEBUG_STREAM(
+      RCLCPP_INFO_STREAM(
         nh_->get_logger(), "[UndoPathGlobalPlanner] initial start point search, NEWBEST_LINEAR= "
                              << i << ". error, linear: " << linear_mindist
                              << ", angular: " << angleError);
     }
     else
     {
-      RCLCPP_DEBUG_STREAM(
+      RCLCPP_INFO_STREAM(
         nh_->get_logger(), "[UndoPathGlobalPlanner] initial start point search, skipped= "
                              << i << ". best linear error: " << linear_mindist
                              << ". current error, linear: " << dist << " angular: " << angleError);
@@ -257,7 +258,7 @@ void UndoPathGlobalPlanner::createDefaultUndoPathPlan(
   // close angular targets, (accepting a larger linear minerror of 1.5 besterror. That is, more or less in the same
   // point).
 
-  RCLCPP_DEBUG(nh_->get_logger(), "[UndoPathGlobalPlanner] second angular pass");
+  RCLCPP_INFO(nh_->get_logger(), "[UndoPathGlobalPlanner] second angular pass");
   double angularMinDist = std::numeric_limits<double>::max();
 
   if (mindistindex >= (int)transformedPlan.poses.size())
@@ -271,12 +272,12 @@ void UndoPathGlobalPlanner::createDefaultUndoPathPlan(
     }
 
     // ------- FULL FORWARD PASS TO FIND THE STARTING POIINT OF THE FORWARD MOTION ------
-    RCLCPP_DEBUG_STREAM(nh_->get_logger(), "[UndoPathGlobalPlanner] second pass loop");
+    RCLCPP_INFO_STREAM(nh_->get_logger(), "[UndoPathGlobalPlanner] second pass loop");
     for (int i = mindistindex; i >= 0; i--)
     {
       // warning this index, i refers to some inverse interpretation from the previous loop,
       // (last indexes in this path corresponds to the poses closer to our current position)
-      RCLCPP_DEBUG_STREAM(
+      RCLCPP_INFO_STREAM(
         nh_->get_logger(), "[UndoPathGlobalPlanner] " << i << "/" << transformedPlan.poses.size());
       auto index = (int)transformedPlan.poses.size() - i - 1;
       if (index < 0 || (size_t)index >= transformedPlan.poses.size())
@@ -289,7 +290,7 @@ void UndoPathGlobalPlanner::createDefaultUndoPathPlan(
       geometry_msgs::msg::PoseStamped pose =
         transformedPlan.poses[transformedPlan.poses.size() - i - 1];
 
-      RCLCPP_DEBUG_STREAM(nh_->get_logger(), "[UndoPathGlobalPlanner] global frame");
+      RCLCPP_INFO_STREAM(nh_->get_logger(), "[UndoPathGlobalPlanner] global frame");
       pose.header.frame_id = costmap_ros_->getGlobalFrameID();
 
       double dx = pose.pose.position.x - start.pose.position.x;
@@ -305,7 +306,7 @@ void UndoPathGlobalPlanner::createDefaultUndoPathPlan(
         {
           angularMinDist = angleError;
           mindistindex = i;
-          RCLCPP_DEBUG_STREAM(
+          RCLCPP_INFO_STREAM(
             nh_->get_logger(),
             "[UndoPathGlobalPlanner] initial start point search (angular update), NEWBEST_ANGULAR= "
               << i << ". error, linear: " << dist << "(" << linear_mindist << ")"
@@ -313,7 +314,7 @@ void UndoPathGlobalPlanner::createDefaultUndoPathPlan(
         }
         else
         {
-          RCLCPP_DEBUG_STREAM(
+          RCLCPP_INFO_STREAM(
             nh_->get_logger(),
             "[UndoPathGlobalPlanner] initial start point search (angular update), skipped= "
               << i << ". error, linear: " << dist << "(" << linear_mindist << ")"
@@ -322,7 +323,7 @@ void UndoPathGlobalPlanner::createDefaultUndoPathPlan(
       }
       else
       {
-        RCLCPP_DEBUG_STREAM(
+        RCLCPP_INFO_STREAM(
           nh_->get_logger(),
           "[UndoPathGlobalPlanner] initial start point search (angular update) not in linear "
           "range, skipped= "
@@ -384,6 +385,7 @@ nav_msgs::msg::Path UndoPathGlobalPlanner::createPlan(
   RCLCPP_INFO_STREAM(
     nh_->get_logger(),
     "[UndoPathGlobalPlanner] last forward path msg size: " << lastForwardPathMsg_.poses.size());
+
   RCLCPP_INFO_STREAM(
     nh_->get_logger(), "[UndoPathGlobalPlanner] last forward path frame id: "
                          << lastForwardPathMsg_.poses.front().header.frame_id);
@@ -449,6 +451,9 @@ nav_msgs::msg::Path UndoPathGlobalPlanner::createPlan(
       break;
     }
   }
+
+  // if(planMsg.poses.size() == 1)
+  //   planMsg.poses.clear();
 
   //--------  PUBLISHING RESULTS ---------------------------------------
   RCLCPP_INFO_STREAM(

@@ -33,7 +33,7 @@ using namespace smacc2;
 using namespace cl_keyboard;
 
 // STATE DECLARATION
-struct StCircularPivotMotion : smacc2::SmaccState<StCircularPivotMotion, SmPandaMoveit2zCbInventory>
+struct StMoveKnownState3 : smacc2::SmaccState<StMoveKnownState3, SmPandaMoveit2zCbInventory>
 {
   using SmaccState::SmaccState;
 
@@ -43,18 +43,25 @@ struct StCircularPivotMotion : smacc2::SmaccState<StCircularPivotMotion, SmPanda
 
   // TRANSITION TABLE
   typedef boost::mpl::list<
-    // Transition<EvCbSuccess<CbMoveCartesianRelative2, OrArm>, StMoveCartesianRelative2, SUCCESS>
+      Transition<EvCbSuccess<CbMoveKnownState, OrArm>, StPouringMotion, SUCCESS>,
+      Transition<EvCbFailure<CbMoveKnownState, OrArm>, StPouringMotion, ABORT>,
+
+      Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StExecuteLastTrajectory, PREVIOUS>,  
+      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StPouringMotion, NEXT>  
     >
     reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-    configure_orthogonal<OrArm, CbCircularPivotMotion>();
+    std::string pkg = "sm_panda_moveit2z_cb_inventory";
+    std::string filepath = "config/move_group_client/known_states/control_authority_posture.yaml";
+
+    configure_orthogonal<OrArm, CbMoveKnownState>(pkg, filepath);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
-  void runtimeConfigure() { RCLCPP_INFO(getLogger(), "Entering StCircularPivotMotion"); }
+  void runtimeConfigure() { RCLCPP_INFO(getLogger(), "Entering StMoveKnownState"); }
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }
 
