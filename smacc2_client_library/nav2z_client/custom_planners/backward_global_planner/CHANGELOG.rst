@@ -563,30 +563,30 @@ Section_10
 ==========
 
 Added
-~~~~~
+-----
 - Added galactic CI setup and renamed rolling files. (#58)
 - Added new feature, cb_wait_topic_message: asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - Added new client behavior for nav2, wait nav2 nodes subscribing to the /bond topic and waiting for them to be alive. You can optionally select the nodes to wait for.
 
 Changed
-~~~~~~~
+-------
 - Changed launch command to ros2 launch sm_respira_1 sm_respira_1.launch (#69)
 - Updated doxygen links (#70)
 - Updated README.md launch command.
 - Corrected all linters and formatters.
 
 Fixed
-~~~~
+----
 - Fixed source CI and corrected README overview. (#62)
 - Fixed trailing spaces.
 - Fixed pre-commit issues.
 
 Removed
-~~~~~~~
+-------
 - Removed execution of clang-format on smacc2_sm_reference_library package.
 
 Other
-~~~~~
+-----
 - Updated smacc2_rta command across readmes.
 - Renamed event generator library.
 - Cleaned up sm_atomic_24hr.
@@ -1505,12 +1505,12 @@ Section_14
 -----------
 
 Added
-~~~~~
+-----
 - Added README tutorial for Dockerfile.
 - Added smacc2_performance_tools.
 
 Changed
-~~~~~~~
+-------
 - Reverted markdowns to html.
 - Edited tracing.md to reflect new tracing event names.
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
@@ -1526,20 +1526,20 @@ Changed
 - Corrected all linters and formatters.
 
 Fixed
-~~~~
+----
 - Fixed source CI and corrected README overview (#62).
 - Fixed pre-commit issues.
 - Fixed Pre-Commit issues.
 - Attempted pre-commit fixes.
 
 Removed
-~~~~~~~
+-------
 - Removed galactic builds from master and kept only rolling.
 - Removed submodules and used .repos file.
 - Do not execute clang-format on smacc2_sm_reference_library package.
 
 Other
-~~~~~
+-----
 - Enabled build of missing rolling repositories.
 - Enabled Navigation2 for semi-binary build.
 - Some progress on navigation rolling.
@@ -1939,7 +1939,7 @@ Section_15
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: `add` behavior waits for nav2 nodes subscribing to the `/bond` topic and ensures they are alive. Optional node selection available.
 - Base for the `sm_aws_warehouse` navigation.
@@ -1955,13 +1955,13 @@ Added
 - More changes in `sm_dance_bot`.
 
 Changed
-~~~~~~~
+-------
 - Navigation parameters fixes on `sm_dance_bot`.
 - Minor formatting improvements.
 - Format fixes for gazebo to show the robot and lidar.
 
 Fixed
-~~~~
+----
 - Removed some compile warnings.
 - Removed `neo_simulation2` package.
 - Corrected formatting.
@@ -1970,11 +1970,11 @@ Fixed
 - Removed merge markers from a Python file.
 
 Removed
-~~~~~~~
+-------
 - Removed `neo_simulation2` package.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored by: pabloinigoblasco <pablo@ibrobotics.com>
 ```
@@ -2146,12 +2146,12 @@ Section_19
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: wait for `nav2` nodes subscribing to the `/bond` topic and wait for them to be alive. Optionally select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Minor format improvements.
 - Progress in AWS navigation demo.
 - Navigation parameters fixes on `sm_dance_bot`.
@@ -2165,18 +2165,18 @@ Changed
 - Gaining traction with `sm_multi_stage_1`.
 
 Fixed
-~~~~
+----
 - Remove some compile warnings.
 - Correct formatting.
 - Enable source build on PR for testing.
 - Adjust build packages of source CI.
 
 Removed
-~~~~~~~
+-------
 - Removed `neo_simulation2` package.
 
 Other
-~~~~~
+-----
 - Merge and progress.
 - Precommit cleanup run.
 - Updates `yaml`.
@@ -2894,7 +2894,7 @@ Section_23
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success
 - New client behavior for nav2: `wait nav2 nodes subscribing to the /bond topic and waiting they are alive`, with optional node selection
 - New client behavior: `cb pause slam` for pausing SLAM operations
@@ -2903,7 +2903,7 @@ Added
 - New client behavior: `sm_multi_stage_1 doubling` for multi-stage operations
 
 Changed
-~~~~~~~
+-------
 - Minor format improvements
 - Navigation parameters fixes on `sm_dance_bot`
 - Gazebo fixes to show the robot and the lidar
@@ -2912,22 +2912,22 @@ Changed
 - Hotfix for minor issues
 
 Fixed
-~~~~
+----
 - Corrected all linters and formatters
 - Removed some compile warnings
 
 Removed
-~~~~~~~
+-------
 - None
 
 Commits
-~~~~~~~
+-------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Brett <brett@robosoft.ai>
 - Denis Štogl <destogl@users.noreply.github.com>
 ```

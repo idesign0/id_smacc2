@@ -521,7 +521,7 @@ Version 0.1.0 (2022-01-01)
 ---------------------------
 
 Added
-~~~~~
+-----
 
 - Feature/replanning 16 dec (#193): Replanning for all examples.
 - Feature/undo motion 20 12 (#196): Improving undo motion navigation in warehouse2.
@@ -532,7 +532,7 @@ Added
 - Foxy backport (#206): Minor formatting fixes, trailing spaces, codespell corrections, linters adjustments, CI build for Galactic, ament_cpplint changes, tf2_ros dependency, ccache version bump, licenses added, and more.
 
 Changed
-~~~~~~~
+-------
 
 - Renamed header files and corrected format.
 - Updated doxygen-check-build.yml and created doxygen-deploy.yml.
@@ -542,7 +542,7 @@ Changed
 - Updated description table and changelogs.
 
 Fixed
-~~~~~
+-----
 
 - Fixed minor broken build.
 - Enabled cppcheck and corrected formatting of python files.
@@ -556,7 +556,7 @@ Fixed
 - Added smacc2_performance_tools for performance tests improvements.
 
 Removed
-~~~~~~~
+-------
 
 - Deleted tracing directory.
 - Removed manual installation of ros-rolling-ros2trace.
@@ -739,7 +739,7 @@ Section_12
 -----------
 
 Added
-~~~~~
+-----
 - Feature/undo motion 20 12 (#198)
 - Feature/sync 21 12 (#199)
 - Feature/warehouse2 22 12 (#200)
@@ -780,7 +780,7 @@ Added
 - added a dockerfile for Rolling and Galactic
 
 Changed
-~~~~~~~
+-------
 - improving undo motion navigation warehouse2
 - tuning warehouse3 (#197)
 - undo tuning and errors
@@ -807,11 +807,11 @@ Changed
 - Update smacc2_ci/docker/ros_rollingAndGalactic_ubuntu_20.04/buildGalactic.sh
 
 Fixed
-~~~~~
+-----
 - minor broken build
 
 Removed
-~~~~~~~
+-------
 - weird moveit not downloaded repo
 
 Co-authored-by: Denis Štogl <denis@stogl.de>
@@ -828,7 +828,7 @@ Section_13
 ==========
 
 Added
-~~~~~
+-----
 - Reactivated smacc2 nav clients for rolling via submodules.
 - Added README tutorial for Dockerfile.
 - Added smacc2_performance_tools.
@@ -836,7 +836,7 @@ Added
 - Added new client behavior add for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You optionally can select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Renamed tracing events.
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed folders, deleted tracing.md, and edited README.md.
@@ -846,7 +846,7 @@ Changed
 - Corrected all linters and formatters.
 
 Fixed
-~~~~
+----
 - Bug in smacc2 component.
 - Reverted markdowns to html.
 - Fixed source CI and corrected README overview.
@@ -860,11 +860,11 @@ Fixed
 - Pre-commit fixes.
 
 Removed
-~~~~~~~
+-------
 - Removed galactic builds from master and kept only rolling. Removed submodules and used .repos file.
 
 Other
-~~~~~
+-----
 - Some progress on navigation rolling.
 - More changes on performance tests.
 - More on performance and other issues.
@@ -1486,7 +1486,7 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - Feature/aws demo progress (#92)
 - New feature: cb_wait_topic_message, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success
 - New client behavior for nav2: wait for nav2 nodes subscribing to the /bond topic and ensure they are alive
@@ -1501,11 +1501,11 @@ Added
 - a3 (#113)
 
 Changed
-~~~~~~~
+-------
 - Navigation parameters fixes on sm_dance_bot
 
 Fixed
-~~~~
+----
 - Remove some compile warnings (#96)
 - Remove neo_simulation2 package (#112)
 
@@ -1517,7 +1517,7 @@ Section 19
 -----------
 
 Added
-~~~~~
+-----
 - Enable source build on PR for testing.
 - Adjust build packages of source CI.
 - Diverse improvements in navigation and performance.
@@ -1533,7 +1533,7 @@ Added
 - More on AWS demo.
 
 Changed
-~~~~~~~
+-------
 - Move method after the method it calls to prevent recursion.
 - Renamed SMs to smacc2_performance_tools.
 - Minor navigation improvements.
@@ -1543,7 +1543,7 @@ Changed
 - Update dependencies for husky in rolling and galactic.
 
 Fixed
-~~~~
+----
 - Remove merge markers from a python file.
 - Fix CI: format fix python version.
 - Noticed launch command was incorrect in README.md.
@@ -1552,12 +1552,12 @@ Fixed
 - Fixing compiling issues.
 
 Removed
-~~~~~~~
+-------
 - Removing sm_dance_bot_msgs.
 - Removing parameters smacc.
 
 Authors
-~~~~~~~
+-------
 - Pablo Iñigo Blasco (pabloinigoblasco)
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: pabloinigoblasco <pablo@ibrobotics.com>
@@ -1755,26 +1755,26 @@ Section_22
 ==========
 
 Added
-~~~~~
+-----
 - New feature: cb_wait_topic_message, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success (#81, #82, #92, #93, #94, #95, #98)
   Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>, Denis Štogl <destogl@users.noreply.github.com>, Denis Štogl <denis@stogl.de>
 
 - New client behavior for nav2: wait nav2 nodes subscribing to the /bond topic and waiting for them to be alive, with optional node selection (#82, #92, #93, #94, #95, #98)
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters (#82)
 
 Fixed
-~~~~
+----
 - Navigation parameters fixes on sm_dance_bot (#93, #95)
 
 Removed
-~~~~~~~
+-------
 - Removed some compile warnings (#96)
 
 Miscellaneous
-~~~~~~~~~~~~~
+-------------
 - Minor hotfix (#100)
 - Updates yaml (#99)
 - Precommit fixes (#99)

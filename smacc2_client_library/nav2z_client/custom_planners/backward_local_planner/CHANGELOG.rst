@@ -236,7 +236,7 @@ Section 5
 ----------
 
 Added
-~~~~~
+-----
 - Enable Navigation2 for semi-binary build.
 - Added smacc2_performance_tools.
 - Added galactic CI setup and renamed rolling files. (#58)
@@ -244,7 +244,7 @@ Added
 - Added new client behavior add for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You optionally can select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed folders, deleted tracing.md, edited README.md.
 - Updated smacc2_rta command across readmes.
@@ -253,7 +253,7 @@ Changed
 - Updated README.md launch command.
 
 Fixed
-~~~~
+----
 - Correct trailing spaces.
 - Optimized dependencies in move_base_z_planners_common.
 - Corrected README overview. (#62).
@@ -261,11 +261,11 @@ Fixed
 - Corrected all linters and formatters.
 
 Removed
-~~~~~~~
+-------
 - Do not execute clang-format on smacc2_sm_reference_library package.
 
 Other
-~~~~~
+-----
 - Some progress on navigation rolling.
 - Performance tests improvements.
 - More changes on performance tests.
@@ -281,7 +281,7 @@ Other
 - Minor format.
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>.
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>.
 - Co-authored-by: Denis Štogl <denis@stogl.de>.
@@ -982,7 +982,7 @@ Section_14
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: Asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: Waits for nav2 nodes subscribing to the `/bond` topic and ensures they are alive. Optional selection of nodes to wait for.
 - Base for the `sm_aws_warehouse` navigation.
@@ -1000,21 +1000,21 @@ Added
 - Diverse improvements in navigation and performance.
 
 Changed
-~~~~~~~
+-------
 - Minor formatting improvements.
 - Navigation parameters fixes on `sm_dance_bot`.
 - Format fixes for gazebo to show the robot and the lidar.
 
 Fixed
-~~~~
+----
 - Removed some compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Removed `neo_simulation2` package.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored by Ubuntu 20-04-02-amd64 <brett@robosoft.ai>.
 ```
 
@@ -1208,14 +1208,14 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - Introduce new feature `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally verifies its contents for success.
 - Implement new client behavior for nav2, `add`, to wait for nav2 nodes subscribing to the `/bond` topic and ensure they are alive. Optionally select nodes to wait for.
 - Add base for the `sm_aws_aarehouse` navigation.
 - Introduce `cb_pause_slam` client behavior.
 
 Changed
-~~~~~~~
+-------
 - Correct all linters and formatters.
 - Minor formatting improvements.
 - Navigation parameters fixes on `sm_dance_bot`.
@@ -1225,21 +1225,21 @@ Changed
 - Format fixes for `sm_multi_stage_1` and `sm_dance_bot_strikes_back`.
 
 Fixed
-~~~~
+----
 - Remove some compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Eliminate redundant entries.
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 
 Commits
-~~~~~~~
+-------
 - Feature/aws demo progress (#92)
 - Feature/sm dance bot fixes (#93)
 - Feature/sm aws warehouse (#94)

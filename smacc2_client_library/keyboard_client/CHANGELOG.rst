@@ -718,7 +718,7 @@ Section_11
 ==========
 
 Added
-~~~~~
+-----
 - New feature, cb_wait_topic_message: asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for nav2, wait for nav2 nodes subscribing to the /bond topic and wait for them to be alive. Optional selection of nodes to wait.
 - Base for the sm_aws_warehouse navigation.
@@ -728,7 +728,7 @@ Added
 - First working version of sm template and template generator.
 
 Changed
-~~~~~~~
+-------
 - Minor format improvements.
 - Navigation parameters fixes on sm_dance_bot.
 - Cleaning and lidar show/hide option.
@@ -737,7 +737,7 @@ Changed
 - Refinement in sm_dance_bot.
 
 Fixed
-~~~~
+----
 - Remove some compile warnings.
 - Remove neo_simulation2 package.
 - Correct formatting.
@@ -747,11 +747,11 @@ Fixed
 - Noticed typo and corrected it.
 
 Removed
-~~~~~~~
+-------
 - Removed neo_simulation2 package.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored by: pabloinigoblasco <pablo@ibrobotics.com>
 ```
@@ -841,7 +841,7 @@ Section 13
 -----------
 
 Added
-~~~~~
+-----
 - Feature/undo motion 20 12 (#198)
 - Feature/sync 21 12 (#199)
 - Feature/warehouse2 22 12 (#200)
@@ -894,7 +894,7 @@ Added
 - Update smacc2_ci/docker/ros_rollingAndGalactic_ubuntu_20.04/buildGalactic.sh
 
 Changed
-~~~~~~~
+-------
 - tuning warehouse3 (#197)
 - improving undo motion navigation warehouse2
 - finishing warehouse2
@@ -915,11 +915,11 @@ Changed
 - changing wording "smacc application" to "SMACC2 library"
 
 Fixed
-~~~~~
+-----
 - minor broken build
 
 Removed
-~~~~~~~
+-------
 - weird moveit not downloaded repo
 
 Co-authored-by: Denis Štogl <denis@stogl.de>
@@ -1366,7 +1366,7 @@ Section_15
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: waits for `nav2` nodes subscribing to the `/bond` topic and ensures they are alive. Optional node selection available.
 - Base for the `sm_aws_warehouse` navigation.
@@ -1381,13 +1381,13 @@ Added
 - `slam` toggle and `smacc` deep history feature.
 
 Changed
-~~~~~~~
+-------
 - Navigation parameters fixes on `sm_dance_bot`.
 - Minor format improvements.
 - Format fixes for `gazebo` to show the robot and the `lidar`.
 
 Fixed
-~~~~
+----
 - Remove some compile warnings.
 - Remove `neo_simulation2` package.
 - Correct formatting.
@@ -1397,11 +1397,11 @@ Fixed
 - Remove merge markers from a Python file.
 
 Removed
-~~~~~~~
+-------
 - `neo_simulation2` package.
 
 Authors
-~~~~~~~
+-------
 - Pablo Iñigo Blasco <pablo@ibrobotics.com>
 - Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 ```
@@ -1546,7 +1546,7 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - Created alternative ManualTracing.
 - Added new sm markdowns.
 - Added a dockerfile for Rolling and Galactic.
@@ -1556,7 +1556,7 @@ Added
 - Added new client behavior add for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You optionally can select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Changed wording "smacc application" to "SMACC2 library".
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed tracing events after.
@@ -1564,7 +1564,7 @@ Changed
 - Renamed event generator library.
 
 Fixed
-~~~~
+----
 - Bug in smacc2 component.
 - Reverted markdowns to html.
 - Correct trailing spaces.
@@ -1575,12 +1575,12 @@ Fixed
 - Corrected all linters and formatters.
 
 Removed
-~~~~~~~
+-------
 - Removed manual installation of ros-rolling-ros2trace. This is now automated in setupTracing.sh. Location of sh file assumed if user follows README.md under "Getting started".
 - Removed galactic builds from master and kept only rolling. Removed submodules and use .repos file.
 
 Other
-~~~~~
+-----
 - Reactivated smacc2 nav clients for rolling via submodules.
 - Edited tracing.md to reflect new tracing event names.
 - Enabled build of missing rolling repositories.

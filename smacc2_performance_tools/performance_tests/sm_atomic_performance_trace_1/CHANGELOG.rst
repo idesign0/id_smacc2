@@ -852,7 +852,7 @@ Section_10
 ==========
 
 Added
-~~~~~
+-----
 - New feature: cb_wait_topic_message, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for nav2: wait for nav2 nodes to subscribe to the /bond topic and ensure they are alive, with the option to select nodes to wait for.
 - Base for the sm_aws_warehouse navigation.
@@ -866,7 +866,7 @@ Added
 - Feature: dance bot s pattern.
 
 Changed
-~~~~~~~
+-------
 - Navigation parameters fixes on sm_dance_bot.
 - Minor formatting improvements.
 - Remove some compile warnings.
@@ -878,15 +878,15 @@ Changed
 - Move method after the method it calls to prevent recursion.
 
 Fixed
-~~~~
+----
 - Several core improvements during navigation testing.
 
 Removed
-~~~~~~~
+-------
 - Removed neo_simulation2 package.
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: pabloinigoblasco <pablo@ibrobotics.com>
 ```
@@ -1080,7 +1080,7 @@ Section_13
 ==========
 
 Added
-~~~~~
+-----
 - Reactivated smacc2 nav clients for rolling via submodules.
 - Added README tutorial for Dockerfile.
 - Added smacc2_performance_tools.
@@ -1088,7 +1088,7 @@ Added
 - Added new client behavior add for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You optionally can select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Changed wording "smacc application" to "SMACC2 library".
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed tracing events.
@@ -1102,7 +1102,7 @@ Changed
 - Minor formatting improvements.
 
 Fixed
-~~~~
+----
 - Fixed bug in smacc2 component.
 - Fixed source CI and corrected README overview.
 - Fixed several core improvements during navigation testing.
@@ -1110,13 +1110,13 @@ Fixed
 - Corrected all linters and formatters.
 
 Removed
-~~~~~~~
+-------
 - Removed galactic builds from master and kept only rolling.
 - Removed submodules and used .repos file.
 - Deleted tracing.md.
 
 Authors
-~~~~~~~
+-------
 - Pablo Iñigo Blasco
 - Denis Štogl <destogl@users.noreply.github.com>
 - Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
@@ -1574,7 +1574,7 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: `add`, waits for nav2 nodes subscribing to the `/bond` topic and ensures they are alive. Optional node selection.
 - Base for the `sm_aws_aarehouse` navigation.
@@ -1585,7 +1585,7 @@ Added
 - `sm_dance_bot_strikes_back` gazebo fixes.
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters.
 - Navigation parameters fixes on `sm_dance_bot`.
 - Minor formatting improvements.
@@ -1597,15 +1597,15 @@ Changed
 - Precommit cleanup run.
 
 Fixed
-~~~~
+----
 - Removed some compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Compile warnings.
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
@@ -1615,31 +1615,31 @@ Section 19
 -----------
 
 Added
-~~~~~
+-----
 - Added multistage modes to sm_multi_stage_1 (#172).
 - Added sequences and steps to sm_multi_stage_1.
 - Added finishing touches to sm_multi_stage_1.
 - Added AWS navigation to sm_dance_bot (#174).
 
 Changed
-~~~~~~~
+-------
 - Renamed sm_advanced_recovery_1 (#171).
 - Reworked sm_multi_stage_1 for improved functionality.
 
 Fixed
-~~~~
+----
 - Fixed waypoint and iteration changes for course completion (#155).
 - Fixed CI formatting for Python version (#148).
 
 Removed
-~~~~~~~
+-------
 - Removed neo_simulation2 package (#112).
 - Removed redundant sm_dance_bot_msgs package.
 - Removed unnecessary parameters from smacc (#147).
 - Removed node creation in favor of logger (#149).
 
 Other
-~~~~~
+-----
 - Co-authored commits by Ubuntu 20-04-02-amd64, Brett (brett@robosoft.ai), DecDury (declandury@gmail.com), and Denis Štogl (destogl@users.noreply.github.com).
 - Various minor improvements, linting, and formatting changes.
 - Updated README files and added SVGs for better documentation.
@@ -2104,7 +2104,7 @@ Section_24
 -----------
 
 Added
-~~~~~
+-----
 
 - Added QOS durability to SmaccPublisherClient (#163)
 - Added reliability QOS config
@@ -2139,7 +2139,7 @@ Added
 - Added progress in barrel husky
 
 Changed
-~~~~~~~
+-------
 
 - Changed pre-commit cleanup
 - Changed reference library SMs to smacc2_performance_tools
@@ -2157,7 +2157,7 @@ Changed
 - Changed format issues
 
 Fixed
-~~~~~
+-----
 
 - Fixed fixing pipeline error
 - Fixed fixing broken master build
@@ -2170,7 +2170,7 @@ Fixed
 - Fixed fixing broken build
 
 Removed
-~~~~~~~
+-------
 
 - Removed weird moveit not downloaded repo
 

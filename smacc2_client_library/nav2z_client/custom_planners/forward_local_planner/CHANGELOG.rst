@@ -942,7 +942,7 @@ Section_10
 ==========
 
 Added
-~~~~~
+-----
 - New client behavior `cb_wait_topic_message`: asynchronous behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for nav2: waits for nav2 nodes to subscribe to the /bond topic and confirms they are active. Optional node selection available.
 - Base for the `sm_aws_warehouse` navigation.
@@ -956,7 +956,7 @@ Added
 - More fixes and improvements in `sm_dance_bot`.
 
 Changed
-~~~~~~~
+-------
 - Minor formatting improvements.
 - Navigation parameters fixes on `sm_dance_bot`.
 - Remove some compile warnings.
@@ -965,17 +965,17 @@ Changed
 - Move method after the method it calls to prevent recursion.
 
 Fixed
-~~~~
+----
 - Merge and progress.
 - Minor hotfix.
 - Precommit cleanup run.
 
 Removed
-~~~~~~~
+-------
 - Removed `neo_simulation2` package.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Pablo Iñigo Blasco <pablo@ibrobotics.com>
 - Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 ```
@@ -1765,7 +1765,7 @@ Section_18
 -----------
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: `add`, waits for `nav2` nodes subscribing to the `/bond` topic and ensures they are alive. Optional node selection available.
 - Base for the `sm_aws_warehouse` navigation.
@@ -1779,17 +1779,17 @@ Added
 - `sm_multi_stage_1` progress in `Brettpac` branch.
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters.
 - Minor formatting improvements.
 - Navigation parameters fixes on `sm_dance_bot`.
 
 Fixed
-~~~~
+----
 - Removed some compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Redundant formatting entries.
 
 Co-authored-by: Denis Štogl <denis@stogl.de>
@@ -2018,14 +2018,14 @@ Section_22
 ==========
 
 Added
-~~~~~
+-----
 - Added new feature: cb_wait_topic_message, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - Added new client behavior for nav2: wait nav2 nodes subscribing to the /bond topic and waiting for them to be alive, with optional node selection.
 - Added new client behavior: cb pause slam for pausing SLAM operations.
 - Added new client behavior: cb dance bot lite for lightweight dance bot operations.
 
 Changed
-~~~~~~~
+-------
 - Modified sm_atomic_performance_test_a_2 (#89).
 - Updated launch command.
 - Corrected all linters and formatters.
@@ -2035,17 +2035,17 @@ Changed
 - Visualized TurtleBot3 in sm_dance_bot.
 
 Removed
-~~~~~~~
+-------
 - Removed some compile warnings (#96).
 
 Fixed
-~~~~
+----
 - Fixed precommit issues.
 - Fixed formatting.
 - Fixed minor issues in navigation testing.
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Denis Štogl <denis@stogl.de>

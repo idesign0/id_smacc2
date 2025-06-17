@@ -432,7 +432,7 @@ Version 0.1.0 (2022-01-01)
 ---------------------------
 
 Added
-~~~~~
+-----
 
 - Feature/replanning 16 dec (#193): Replanning for all examples.
 - Feature/undo motion 20 12 (#196): Improving undo motion navigation in warehouse2.
@@ -442,7 +442,7 @@ Added
 - Merging code from backport foxy and updates about autoware (#208): Backport to foxy.
 
 Changed
-~~~~~~~
+-------
 
 - Foxy backport (#206): Minor formatting fixes, trailing spaces, codespell corrections, python linters warnings, and more.
 - Update cb_navigate_global_position.hpp: Improvements in smacc core, adding more components mostly developed for autoware demo.
@@ -450,7 +450,7 @@ Changed
 - Update tracing/ManualTracing.md: Changed wording "smacc application" to "SMACC2 library".
 
 Fixed
-~~~~~
+-----
 
 - Enable build of missing rolling repositories.
 - Enable Navigation2 for semi-binary build.
@@ -459,7 +459,7 @@ Fixed
 - Added smacc2_performance_tools: Performance tests improvements.
 
 Removed
-~~~~~~~
+-------
 
 - Deleted tracing directory.
 - Removed manual installation of ros-rolling-ros2trace, now automated in setupTracing.sh.
@@ -624,7 +624,7 @@ Section_12
 -----------
 
 Added
-~~~~~
+-----
 - Feature/undo motion 20 12 (#198)
 - Feature/sync 21 12 (#199)
 - Feature/warehouse2 22 12 (#200)
@@ -645,7 +645,7 @@ Added
 - Added a dockerfile for Rolling and Galactic
 
 Changed
-~~~~~~~
+-------
 - Improving undo motion navigation warehouse2
 - Undo tuning and errors
 - Tuning and fixes (#202)
@@ -673,7 +673,7 @@ Changed
 - Edit from html to markdown syntax
 
 Fixed
-~~~~~
+-----
 - Minor broken build
 - Fix rolling builds (#222)
 - Remove example things from Foxy CI setup. (#214)
@@ -690,7 +690,7 @@ Fixed
 - Add missing licenses.
 
 Removed
-~~~~~~~
+-------
 - Weird moveit not downloaded repo
 - Delete tracing directory
 - Moved tracing.md to tracing directory
@@ -700,7 +700,7 @@ Removed
 - Created alternative ManualTracing
 
 Co-Authored-By
-~~~~~~~~~~~~~~
+--------------
 - Denis Štogl <denis@stogl.de>
 - Denis Štogl <destogl@users.noreply.github.com>
 - Declan Dury <44791484+DecDury@users.noreply.github.com>
@@ -762,7 +762,7 @@ Section_14
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for nav2: `add` behavior waits for nav2 nodes subscribing to the `/bond` topic and ensures they are alive. Nodes to wait for can be optionally selected.
 - `cb_pause_slam` client behavior.
@@ -772,7 +772,7 @@ Added
 - AWS demo.
 
 Changed
-~~~~~~~
+-------
 - Progress in AWS navigation demo.
 - Navigation parameters fixes on `sm_dance_bot`.
 - Cleaning and lidar show/hide option for `sm_dance_bot`.
@@ -780,7 +780,7 @@ Changed
 - Progress in navigation, slam toggle client behaviors, and `slam_toolbox` components. Also `smacc2::deep_history` syntax.
 
 Fixed
-~~~~
+----
 - Minor format improvements.
 - Remove some compile warnings.
 - Correct formatting.
@@ -788,11 +788,11 @@ Fixed
 - Remove merge markers from a Python file.
 
 Removed
-~~~~~~~
+-------
 - Removed `neo_simulation2` package.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Pablo Iñigo Blasco <pablo@ibrobotics.com>
 - Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 ```
@@ -1146,7 +1146,7 @@ Section_20
 ==========
 
 Added
-~~~~~
+-----
 - Waypoint Inputs (#178) by Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - wharehouse2 progress (#179)
 - sm_dance_bot_warehouse_3 (#181) by Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
@@ -1208,7 +1208,7 @@ Added
 - Enable cppcheck
 
 Changed
-~~~~~~~
+-------
 - fix: some formatting and templating on SrConditional
 - fix: move trigger logic into headers
 - fix: lint
@@ -1409,23 +1409,23 @@ Section_22
 ==========
 
 Added
-~~~~~
+-----
 - New feature: cb_wait_topic_message, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success (#81)
 - New feature: cb_wait_nav2_nodes, a client behavior for nav2 that subscribes to the /bond topic and waits for nodes to be alive, with optional node selection (#82)
 - New feature: cb_pause_slam, a client behavior for pausing SLAM (#98)
 - New feature: sm_dance_bot_lite gazebo fixes, including showing the robot and lidar (#104)
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters for consistency (#82)
 
 Fixed
-~~~~
+----
 - Fixed navigation parameters on sm_dance_bot (#93)
 - Removed some compile warnings (#96)
 
 Authors
-~~~~~~~
+-------
 - Pablo Iñigo Blasco
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
@@ -1999,18 +1999,18 @@ Version 0.1.0 (Date: TBD)
 -------------------------
 
 Added
-~~~~~
+-----
 - Build-status table
 - Detailed install instructions ([source](https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver#readme))
 - `setupTracing.sh` script for installing necessary packages and configuring tracing group
 
 Changed
-~~~~~~~
+-------
 - Default build type set to `Release` for faster build and smaller executables
 - Updated examples section
 
 Fixed
-~~~~~
+-----
 - Resolved missing dependency in `smacc_msgs` and reorganized for better overview
 - Fixed bug in `smacc2` component
 - Cleaned up formatting in `sm_respira_1` and `sm_atomic_24hr`
@@ -2022,11 +2022,11 @@ Fixed
 - Used Galactic branches in `.repos-file`
 
 Removed
-~~~~~~~
+-------
 - Manual installation of `ros-rolling-ros2trace`, now automated in `setupTracing.sh`
 
 Other Changes
-~~~~~~~~~~~~~
+-------------
 - Reorganized project structure
 - Removed test phase from CMake and dependencies from package.xml
 - Compiled with navigation and slam_toolbox
@@ -2042,7 +2042,7 @@ Other Changes
 - More cleanup on `sm_atomic_24hr`
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Denis Štogl
 - Pablo Iñigo Blasco
 ```

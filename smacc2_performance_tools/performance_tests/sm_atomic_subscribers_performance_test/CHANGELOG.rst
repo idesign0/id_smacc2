@@ -671,7 +671,7 @@ Section_12
 ==========
 
 Added
-~~~~~
+-----
 - Feature/aws navigation sm dance bot (#174)
   - Added multistage modes and sequences for sm_multi_stage_1 reworking.
   - Included repo dependency and husky launch file in sm_dance_bot.
@@ -687,7 +687,7 @@ Added
   - Merged changes and fixed default values.
 
 Changed
-~~~~~~~
+-------
 - SrConditional fixes and formatting (#168)
   - Improved formatting and templating on SrConditional.
   - Moved trigger logic into headers.
@@ -710,7 +710,7 @@ Changed
   - Tuned and fixed minor issues.
 
 Fixed
-~~~~~
+-----
 - Fix code generators (#221)
   - Resolved build issues.
   - Updated SM template and example code visibility.
@@ -720,7 +720,7 @@ Fixed
   - Updated sm_name.hpp.
 
 Removed
-~~~~~~~
+-------
 - Foxy backport (#206)
   - Removed trailing spaces.
   - Corrected codespell and Python linters warnings.
@@ -732,7 +732,7 @@ Removed
   - Ignored further packages.
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
@@ -829,14 +829,14 @@ Section_14
 ==========
 
 Added
-~~~~~
+-----
 - New feature: cb_wait_topic_message, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success (#81, #91, #92, #93, #94, #95, #98)
 - New client behavior for nav2: wait nav2 nodes subscribing to the /bond topic and waiting for them to be alive, with optional node selection (#82, #92, #93, #94, #95, #98)
 - New client behavior: cb_pause_slam (#98)
 - New client behavior: sm_dance_bot_lite (#99)
 
 Changed
-~~~~~~~
+-------
 - Updated launch command in README.md
 - Corrected all linters and formatters (#82)
 - Minor format improvements in navigation progress and demo (#92, #93, #94, #95, #98)
@@ -844,7 +844,7 @@ Changed
 - Cleaning and lidar show/hide option in dance bot launch gz lidar choice (#102)
 
 Fixed
-~~~~
+----
 - Fixed precommit issues (#90, #91, #99)
 - Removed some compile warnings (#96)
 - Minor hotfix in doxygen deployment workflow (#100)
@@ -1100,13 +1100,13 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - New feature: cb_wait_topic_message, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior: add for nav2, wait nav2 nodes subscribing to the /bond topic and waiting for them to be alive. Nodes to wait can be optionally selected.
 - Progress in aws navigation demo.
 
 Changed
-~~~~~~~
+-------
 - Several core improvements during navigation testing.
 - Formatting improvements.
 - Progress in aws navigation demo.
@@ -1114,16 +1114,16 @@ Changed
 - Corrected all linters and formatters.
 
 Fixed
-~~~~
+----
 - Fix pre-commit issues.
 - Remove some compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Minor format changes.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
@@ -1722,7 +1722,7 @@ Section_26
 ==========
 
 Added
-~~~~~
+-----
 - Performance tests improvements.
 - Do not execute clang-format on smacc2_sm_reference_library package.
 - Renaming of event generator library.
@@ -1735,25 +1735,25 @@ Added
 - Navigation parameters fixes on sm_dance_bot.
 
 Changed
-~~~~~~~
+-------
 - Updated smacc2_rta command across readmes.
 - Changed launch command to ros2 launch sm_respira_1 sm_respira_1.launch (#69).
 - Updated README.md with launch command.
 - Corrected all linters and formatters.
 
 Fixed
-~~~~
+----
 - Correct trailing spaces.
 - Several core improvements during navigation testing.
 - Minor formatting fixes.
 - Attempted pre-commit fixes.
 
 Removed
-~~~~~~~
+-------
 - Removed redundant entries related to aws navigation progress and format improvements.
 
 Authors
-~~~~~~~
+-------
 - Pablo Iñigo Blasco (@pabloinigoblasco)
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
@@ -1765,13 +1765,13 @@ Section_27
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success
 - New client behavior for nav2: `add` for waiting nav2 nodes subscribing to the `/bond` topic and ensuring they are alive; optional node selection
 - New gazebo fixes for `sm_dance_bot_strikes_back`
 
 Changed
-~~~~~~~
+-------
 - Progress in AWS navigation demo
 - Minor format improvements
 - Navigation parameters fixes on `sm_dance_bot`
@@ -1779,7 +1779,7 @@ Changed
 - More refinement in `sm_dance_bot` S-pattern
 
 Fixed
-~~~~
+----
 - Remove some compile warnings
 - Correct formatting in removing `neo_simulation2` package
 - Adjust build packages of source CI
@@ -1787,11 +1787,11 @@ Fixed
 - Noticed typo correction: "Finnaly" to "Finally"
 
 Removed
-~~~~~~~
+-------
 - Removed `neo_simulation2` package
 
 Other
-~~~~~
+-----
 - Several core improvements during navigation testing
 - Formatting improvements
 - Merge and progress
@@ -2136,7 +2136,7 @@ Section_30
 0.0.0 (2022-11-09)
 ------------------
 Added
-~~~~~
+-----
 - Feature/galactic rolling merge (#288)
 - Update description table
 - Update table
@@ -2188,7 +2188,7 @@ Added
 - Attempting precommit fixes
 
 Changed
-~~~~~~~
+-------
 - Changed wording "smacc application" to "SMACC2 library"
 - Reactivated smacc2 nav clients for rolling via submodules
 - Renamed tracing events
@@ -2199,7 +2199,7 @@ Changed
 - Cleaned up sm_atomic_24hr
 
 Removed
-~~~~~~~
+-------
 - Manual installation of ros-rolling-ros2trace, now automated in setupTracing.sh
 - Tracing.md file
 - Deleted tracing directory
@@ -2931,13 +2931,13 @@ Section_39
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: wait for `nav2` nodes subscribing to the `/bond` topic and wait for them to be alive. Optionally select the nodes to wait.
 - Base for the `sm_aws_warehouse` navigation.
 
 Changed
-~~~~~~~
+-------
 - Minor format improvements.
 - Several core improvements during navigation testing.
 - Navigation parameters fixes on `sm_dance_bot`.
@@ -2948,22 +2948,22 @@ Changed
 - Gazebo fixes for `sm_dance_bot_strikes_back`.
 
 Fixed
-~~~~
+----
 - Corrected all linters and formatters.
 - Removed some compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Redundant format improvements.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 
 Commits
-~~~~~~~
+-------
 - Feature/aws demo progress (#92)
 - Feature/sm dance bot fixes (#93)
 - Feature/sm aws warehouse (#94)
@@ -3108,7 +3108,7 @@ Version 0.1.0 (Fecha por determinar)
 ------------------------------------
 
 Added
-~~~~~
+-----
 
 - Ensure the necessary package is installed before running the command:
   ```
@@ -3194,7 +3194,7 @@ Added
 - Waited for topic message client behavior (#81).
 
 Changed
-~~~~~~~
+-------
 
 - Updated launch command from 'ros2 launch sm_three_some sm_three_some' to 'ros2 launch sm_three_some sm_three_some.launch'.
 ```
@@ -3332,7 +3332,7 @@ Section_45
 ==========
 
 Added
-~~~~~
+-----
 - Added more testing on moveit behaviors.
 - Added husky launch file in sm_dance_bot.
 - Added dependencies for husky simulation.
@@ -3368,7 +3368,7 @@ Added
 - Added correcting Focal-Rolling builds by fixing the version of rosdep yaml.
 
 Changed
-~~~~~~~
+-------
 - Changed minor configuration.
 - Changed progress on aws navigation and some other refactorings on navigation clients and behaviors.
 - Changed tuning and fixes.
@@ -3379,7 +3379,7 @@ Changed
 - Changed minor tune.
 
 Fixed
-~~~~
+----
 - Fixed pipeline error.
 - Fixed broken master build.
 - Fixed broken build.
@@ -3465,7 +3465,7 @@ Section_47
 ==========
 
 Added
-~~~~~
+-----
 - Introduce more sm_advanced_recovery_1 work (#84)
 - Implement sm_atomic_performance_test_a_2 and sm_atomic_performance_test_a_1
 - Develop sm_atomic_performance_test_c_1 (#88)
@@ -3478,15 +3478,15 @@ Added
 - Introduce cb pause slam feature (#98)
 
 Changed
-~~~~~~~
+-------
 - Correct all linters and formaters for Feature/wait nav2 nodes client behavior (#82)
 
 Removed
-~~~~~~~
+-------
 - Remove some compile warnings (#96)
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Denis Štogl <denis@stogl.de>
@@ -3543,7 +3543,7 @@ Section_49
 ==========
 
 Added
-~~~~~
+-----
 - Added dependency to ur5 client.
 - Added .reps dependencies and fixed build errors.
 - Added QOS durability to SmaccPublisherClient.
@@ -3553,7 +3553,7 @@ Added
 - Added default values for various features.
 
 Changed
-~~~~~~~
+-------
 - Updated format.
 - Improved dockerfile for building local tests.
 - Refactored docker.
@@ -3567,7 +3567,7 @@ Changed
 - Backported to foxy.
 
 Fixed
-~~~~
+----
 - Fixed compiling issues.
 - Fixed pipeline error.
 - Fixed broken master build.
@@ -3578,11 +3578,11 @@ Fixed
 - Fixed various errors and issues.
 
 Removed
-~~~~~~~
+-------
 - Removed test from main moveit cmake.
 
 Other
-~~~~~
+-----
 - Progressed in moveit migration testing.
 - Pre-commit cleanup.
 - Minor configuration changes.
@@ -3736,7 +3736,7 @@ Version 1.0.0 (2022-01-01)
 ---------------------------
 
 Added
-~~~~~
+-----
 
 - Created new sm from sm_respira_1 (#76)
 - Feature/core and navigation fixes (#78)
@@ -3753,7 +3753,7 @@ Added
 - Merge and progress
 
 Changed
-~~~~~~~
+-------
 
 - Sm_advanced_recovery_1 reworked (#83)
 - More sm_advanced_recovery_1 (#84)
@@ -3769,19 +3769,19 @@ Changed
 - Correct all linters and formatters
 
 Fixed
-~~~~~
+-----
 
 - Fix pre-commit
 - Trying to fix Pre-Commit
 - Fixing precommit
 
 Removed
-~~~~~~~
+-------
 
 - Update README.md updated launch command
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
@@ -4871,12 +4871,12 @@ Section_64
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: `add` for waiting for `nav2` nodes subscribing to the `/bond` topic and ensuring they are alive.
 
 Changed
-~~~~~~~
+-------
 - Navigation parameters fixes on `sm_dance_bot`.
 - Progress in AWS navigation demo.
 - Gazebo fixes for showing the robot and the lidar.
@@ -4888,7 +4888,7 @@ Changed
 - Using local action messages.
 
 Fixed
-~~~~
+----
 - Remove some compile warnings. (#96)
 - Remove `neo_simulation2` package.
 - Correct formatting.
@@ -4898,12 +4898,12 @@ Fixed
 - Resolve compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Remove `neo_simulation2` package.
 - Remove `sm_dance_bot_msgs`.
 
 Other
-~~~~~
+-----
 - Precommit cleanup run.
 - Updates `yaml`.
 - Cleaning and lidar show/hide option.
@@ -5318,31 +5318,31 @@ Section_71
 ==========
 
 Added
-~~~~~
+-----
 - Added galactic CI setup and renamed rolling files. (#58)
 - Added new feature, cb_wait_topic_message: asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - Added new client behavior for nav2, wait nav2 nodes subscribing to the /bond topic and waiting for them to be alive. You can optionally select the nodes to wait for.
 - Added navigation parameters fixes on sm_dance_bot.
 
 Changed
-~~~~~~~
+-------
 - Changed launch command to ros2 launch sm_respira_1 sm_respira_1.launch (#69).
 - Updated doxygen links (#70).
 - Updated README.md with launch command.
 - Corrected all linters and formatters.
 
 Fixed
-~~~~
+----
 - Fixed source CI and corrected README overview. (#62).
 - Fixed trailing spaces.
 - Fixed pre-commit issues.
 
 Removed
-~~~~~~~
+-------
 - Removed execution of clang-format on smacc2_sm_reference_library package.
 
 Authors
-~~~~~~~
+-------
 - Pablo Iñigo Blasco
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
@@ -5354,7 +5354,7 @@ Section_72
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: `add` for waiting for `nav2` nodes subscribing to the `/bond` topic and ensuring they are alive. Optional node selection available.
 - Base for the `sm_aws_warehouse` navigation.
@@ -5369,7 +5369,7 @@ Added
 - First working version of `sm` template and template generator.
 
 Changed
-~~~~~~~
+-------
 - Minor format improvements.
 - Navigation parameters fixes on `sm_dance_bot`.
 - `sm_dance_bot` visualizing `turtlebot3` improvements.
@@ -5377,7 +5377,7 @@ Changed
 - Gazebo fixes for showing the robot and the lidar.
 
 Fixed
-~~~~
+----
 - Remove some compile warnings.
 - Remove `neo_simulation2` package.
 - Correct formatting issues.
@@ -5386,11 +5386,11 @@ Fixed
 - Move method after the method it calls to prevent recursion.
 
 Removed
-~~~~~~~
+-------
 - `neo_simulation2` package removal.
 
 Other
-~~~~~
+-----
 - Precommit cleanup run.
 - Additional linting and formatting.
 - Noticed typo correction.
@@ -5398,7 +5398,7 @@ Other
 - Minor tweaks.
 
 Commits
-~~~~~~~
+-------
 - Feature/sm dance bot fixes (#95).
 - Feature/cb pause slam (#98).
 - Feature/dance bot launch gz lidar choice (#102).
@@ -5490,7 +5490,7 @@ Commits
 - More changes in sm_dance_bot.
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>.
 - Co-authored-by: pabloinigoblasco <pablo@ibrobotics.com>.
 ```
@@ -6089,7 +6089,7 @@ Section_76
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success
 - New client behavior for nav2: `add` for waiting nav2 nodes subscribing to the `/bond` topic and ensuring they are alive, with optional node selection
 - New client behavior: `cb_pause_slam` for pausing SLAM
@@ -6099,7 +6099,7 @@ Added
 - New client behavior: `smacc2::deep_history` syntax for deep history management
 
 Changed
-~~~~~~~
+-------
 - Formatting improvements throughout the changelog
 - Navigation parameters fixes on `sm_dance_bot`
 - Minor format adjustments
@@ -6112,7 +6112,7 @@ Changed
 - Diverse improvements in navigation and performance
 
 Fixed
-~~~~
+----
 - Removed some compile warnings
 - Removed `neo_simulation2` package
 - Corrected formatting issues
@@ -6530,13 +6530,13 @@ Section_80
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: `add`, which waits for `nav2` nodes to subscribe to the `/bond` topic and ensures they are alive. Optional node selection available.
 - `cb_pause_slam` client behavior.
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters.
 - Minor format fixes.
 - Navigation parameters fixes on `sm_dance_bot`.
@@ -6545,21 +6545,21 @@ Changed
 - Gazebo fixes to show the robot and lidar for various dance bot versions.
 
 Fixed
-~~~~
+----
 - Removed some compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Unused code related to `sm_multi_stage_1`.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 
 Commits
-~~~~~~~
+-------
 - Feature/aws demo progress (#92)
 - Feature/sm dance bot fixes (#93)
 - Feature/sm aws warehouse (#94)

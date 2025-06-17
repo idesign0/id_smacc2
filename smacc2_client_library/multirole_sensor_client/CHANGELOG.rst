@@ -909,7 +909,7 @@ Section_13
 ==========
 
 Added
-~~~~~
+-----
 - Reactivated smacc2 nav clients for rolling via submodules.
 - Added README tutorial for Dockerfile.
 - Added smacc2_performance_tools.
@@ -917,7 +917,7 @@ Added
 - Added new client behavior for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You optionally can select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Changed wording "smacc application" to "SMACC2 library".
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed tracing events.
@@ -930,7 +930,7 @@ Changed
 - Minor formatting improvements.
 
 Fixed
-~~~~
+----
 - Bug in smacc2 component.
 - Reverted markdowns to html.
 - Do not execute clang-format on smacc2_sm_reference_library package.
@@ -940,13 +940,13 @@ Fixed
 - Attempting pre-commit fixes.
 
 Removed
-~~~~~~~
+-------
 - Removed galactic builds from master and kept only rolling.
 - Removed submodules and use .repos file.
 - Deleted tracing.md.
 
 Other
-~~~~~
+-----
 - Some progress on navigation rolling.
 - More changes on performance tests.
 - Several core improvements during navigation testing.

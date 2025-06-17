@@ -206,7 +206,7 @@ Version 0.1.0 (2022-01-01)
 ---------------------------
 
 Added
-~~~~~
+-----
 
 - First ensure you have the necessary package installed:
   ```
@@ -228,17 +228,17 @@ Added
 - Update changelogs.
 
 Changed
-~~~~~~~
+-------
 
 - ros2 launch sm_three_some sm_three_some to ros2 launch sm_three_some sm_three_some.launch.
 
 Removed
-~~~~~~~
+-------
 
 - Revert "Ignore all packages except smacc2 and smacc2_msgs" (commit f603166a4b3ccdfe96c64d9f9fb9d8b49fbf0e61).
 
 Fixed
-~~~~~
+-----
 
 - Fix trailing spaces.
 - Correct codespell.
@@ -274,7 +274,7 @@ Version 0.1.0 (2022-01-01)
 ---------------------------
 
 Added
-~~~~~
+-----
 
 - Feature/sm warehouse 2 13 dec 2 (#182): format, more changes and headless, merge, headless and other fixes, default values.
 - Brettpac branch (#184): sm_dance_bot_warehouse_3, redoing sm_dance_bot_warehouse_3 waypoints, more waypoints.
@@ -905,7 +905,7 @@ Section 9
 ----------
 
 Added
-~~~~~
+-----
 - Enable build of missing rolling repositories.
 - Enable Navigation2 for semi-binary build.
 - Added smacc2_performance_tools.
@@ -913,7 +913,7 @@ Added
 - Adding new client behavior add for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You optionally can select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed folders, deleted tracing.md, edited README.md.
 - Updated launch command to ros2 launch sm_respira_1 sm_respira_1.launch.
@@ -925,18 +925,18 @@ Changed
 - Corrected all linters and formatters.
 
 Fixed
-~~~~
+----
 - Do not execute clang-format on smacc2_sm_reference_library package.
 - Fixed source CI and corrected README overview.
 - Fixed pre-commit issues.
 - Attempted pre-commit fixes.
 
 Removed
-~~~~~~~
+-------
 - Removed galactic builds from master and kept only rolling. Removed submodules and used .repos file.
 
 Other
-~~~~
+----
 - Some progress on navigation rolling.
 - More changes on performance tests.
 - Minor formatting improvements.
@@ -948,7 +948,7 @@ Other
 - Minor format adjustments.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Denis Štogl <denis@stogl.de>
@@ -1885,7 +1885,7 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: `add` behavior waits for nav2 nodes to subscribe to the `/bond` topic and ensures they are alive. Optional node selection available.
 - Base for the `sm_aws_aarehouse` navigation.
@@ -1899,7 +1899,7 @@ Added
 - Gazebo fixes for `sm_dance_bot_strikes_back`.
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters.
 - Navigation parameters fixes on `sm_dance_bot`.
 - Minor formatting improvements.
@@ -1907,15 +1907,15 @@ Changed
 - Hotfix for minor issues.
 
 Fixed
-~~~~
+----
 - Removed some compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Redundant formatting improvements.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
