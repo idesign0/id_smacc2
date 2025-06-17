@@ -2,8 +2,8 @@
 Changelog for package http_client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.3.19 (2025-06-17)
+-------------------
 * OpenAI example client ported to SMACC (`#557 <https://github.com/robosoft-ai/SMACC2/issues/557>`_)
   * initial commit for openAI example
   * Replaced get with post, added key fetch logic

@@ -2,8 +2,8 @@
 Changelog for package sm_simple_action_client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.3.19 (2025-06-17)
+-------------------
 * simple state machine with an action client and a topic subscriber (`#543 <https://github.com/robosoft-ai/SMACC2/issues/543>`_)
   * create a simple state machine with two states, one action server client and one subscriber client
   * added the template copyright and license info to all code files
