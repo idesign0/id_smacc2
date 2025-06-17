@@ -1,4 +1,4 @@
-name: jazzy bloom-release
+name: Jazzy bloom-release
 
 on:
   push:

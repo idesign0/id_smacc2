@@ -1,4 +1,4 @@
-name: jazzy Semi-Binary Build
+name: Jazzy Semi-Binary Build
 on:
    pull_request:
       branches:
