@@ -625,7 +625,7 @@ Section_10
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success
 - New client behavior for nav2: `add` for waiting nav2 nodes subscribing to the `/bond` topic and ensuring they are alive; optional node selection
 - Base for the `sm_aws_aarehouse` navigation
@@ -639,7 +639,7 @@ Added
 - First working version of `sm` template and template generator
 
 Changed
-~~~~~~~
+-------
 - Minor format improvements
 - Navigation parameters fixes on `sm_dance_bot`
 - `sm_dance_bot_lite` updates
@@ -648,7 +648,7 @@ Changed
 - `sm_dance_bot` refinement
 
 Fixed
-~~~~
+----
 - Remove some compile warnings
 - Remove `neo_simulation2` package
 - Correct formatting in various files
@@ -658,11 +658,11 @@ Fixed
 - Move method after the method it calls to prevent recursion
 
 Removed
-~~~~~~~
+-------
 - `neo_simulation2` package
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Pablo Iñigo Blasco
 - Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 ```
@@ -1552,7 +1552,7 @@ Section_19
 -----------
 
 Added
-~~~~~
+-----
 - Enable source build on PR for testing.
 - Adjust build packages of source CI.
 - Diverse improvements in navigation and performance.
@@ -1569,7 +1569,7 @@ Added
 - Update dependencies for husky in rolling and galactic.
 
 Changed
-~~~~~~~
+-------
 - Move method after the method it calls to prevent recursion.
 - Resolve compile warnings.
 - Remove node creation and create only a logger.
@@ -1577,7 +1577,7 @@ Changed
 - Minor configuration changes.
 
 Fixed
-~~~~
+----
 - Remove merge markers from a python file.
 - Fix CI: format fix python version.
 - Noticed launch command was incorrect in README.md.
@@ -1585,13 +1585,13 @@ Fixed
 - Fixing broken build.
 
 Removed
-~~~~~~~
+-------
 - Removing sm_dance_bot_msgs.
 - Removing parameters smacc.
 - Removing test from main moveit cmake.
 
 Authors
-~~~~~~~
+-------
 - Pablo Iñigo Blasco
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: pabloinigoblasco <pablo@ibrobotics.com>
@@ -1914,7 +1914,7 @@ Section_24
 -----------
 
 Added
-~~~~~
+-----
 - Added `sm_pubsub_1` (#169) with minor configuration and pipeline error fixes.
 - Added `sm_pubsub_1 part 2` with progress on moveit behaviors.
 - Added `sm_advanced_recovery_1 renaming` (#171).

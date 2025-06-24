@@ -1391,7 +1391,7 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: `add` behavior waits for nav2 nodes subscribing to the `/bond` topic and ensures they are alive. Optional node selection available.
 - Base for the `sm_aws_aarehouse` navigation.
@@ -1405,21 +1405,21 @@ Added
 - AWS demo progress.
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters.
 - Several core improvements during navigation testing.
 - Formatting improvements.
 
 Fixed
-~~~~
+----
 - Removed some compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Minor hotfix.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>

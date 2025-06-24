@@ -202,7 +202,7 @@ Section 4
 ----------
 
 Added
-~~~~~
+-----
 - Added default values.
 - Added BrettPac branch (#184).
 - Added redoing sm_dance_bot_warehouse_3 waypoints.
@@ -239,25 +239,25 @@ Added
 - Added foxy backport (#206).
 
 Changed
-~~~~~~~
+-------
 - Changed ros2 launch sm_three_some sm_three_some to ros2 launch sm_three_some sm_three_some.launch.
 
 Added
-~~~~~
+-----
 - Added instructions to ensure the necessary package is installed before running a command.
 
 Fixed
-~~~~~
+-----
 - Fixed trailing spaces.
 - Fixed codespell.
 - Fixed python linters warnings.
 
 Removed
-~~~~~~~
+-------
 - Removed manual installation of ros-rolling-ros2trace, now automated in setupTracing.sh.
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>.
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>.
 
@@ -490,7 +490,7 @@ Version 0.1.0 (2021-12-23)
 ---------------------------
 
 Added
-~~~~~
+-----
 
 - Feature/replanning 16 dec (#193): Replanning for all examples.
 - Feature/undo motion 20 12 (#196): Improving undo motion navigation in warehouse2.
@@ -508,7 +508,7 @@ Added
 - Performance tests improvements.
 
 Changed
-~~~~~~~
+-------
 
 - Corrected various formatting issues.
 - Updated subscriber publisher components.
@@ -534,7 +534,7 @@ Changed
 - Various cleanup actions.
 
 Removed
-~~~~~~~
+-------
 
 - Deleted tracing directory.
 - Removed manual installation of ros-rolling-ros2trace.
@@ -818,7 +818,7 @@ Section_13
 ==========
 
 Added
-~~~~~
+-----
 - Reactivated smacc2 nav clients for rolling via submodules.
 - Added README tutorial for Dockerfile.
 - Added smacc2_performance_tools.
@@ -826,7 +826,7 @@ Added
 - Added new client behavior for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You can optionally select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Renamed tracing events.
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed folders, deleted tracing.md, and edited README.md.
@@ -842,7 +842,7 @@ Changed
 - Updated README.md.
 
 Fixed
-~~~~
+----
 - Bug in smacc2 component.
 - Do not execute clang-format on smacc2_sm_reference_library package.
 - Cleaned up sm_atomic_24hr.
@@ -850,11 +850,11 @@ Fixed
 - Corrected all linters and formatters.
 
 Removed
-~~~~~~~
+-------
 - Removed galactic builds from master and kept only rolling. Removed submodules and used .repos file.
 
 Authors
-~~~~~~~
+-------
 - Pablo Iñigo Blasco
 - Denis Štogl <destogl@users.noreply.github.com>
 - Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
@@ -1107,7 +1107,7 @@ Section_19
 -----------
 
 Added
-~~~~~
+-----
 - Enable source build on PR for testing.
 - Adjust build packages of source CI.
 - Added diverse improvements in navigation and performance.
@@ -1127,7 +1127,7 @@ Added
 - Added more on aws demo.
 
 Changed
-~~~~~~~
+-------
 - Moved method after the method it calls to prevent recursion.
 - Renamed sm_advanced_recovery_1.
 - Reworked sm_multi_stage_1 with multistage modes, sequences, steps, and finishing touches.
@@ -1141,7 +1141,7 @@ Changed
 - Updated dependencies for husky in rolling and galactic.
 
 Fixed
-~~~~
+----
 - Removed merge markers from a python file.
 - Fixed launch command for sm_dance_bot_strikes_back.
 - Fixed CI format for python version.
@@ -1153,7 +1153,7 @@ Fixed
 - Fixed broken build.
 
 Removed
-~~~~~~~
+-------
 - Removed merge markers from a python file.
 - Removed parameters smacc.
 - Removed test from main moveit cmake.
@@ -1162,7 +1162,7 @@ Removed
 - Removed some comments in the past.
 
 Authors
-~~~~~~~
+-------
 - Pablo Iñigo Blasco
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: pabloinigoblasco <pablo@ibrobotics.com>
@@ -1350,7 +1350,7 @@ Section_22
 ==========
 
 Added
-~~~~~
+-----
 - New feature: cb_wait_topic_message, an asynchronous client behavior that waits for a topic message and optionally verifies its contents for success (#81, #82, #92, #93, #94, #95, #98)
   Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
   Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
@@ -1364,11 +1364,11 @@ Added
 - Added sm_multi_stage_1 doubling (#103)
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters (#82)
 
 Fixed
-~~~~
+----
 - Removed some compile warnings (#96)
 - Minor hotfix for doxygen deployment workflow (#100)
 ```

@@ -1272,7 +1272,7 @@ Section_13
 ==========
 
 Added
-~~~~~
+-----
 - Enable build of missing rolling repositories.
 - Enable Navigation2 for semi-binary build.
 - Added README tutorial for Dockerfile.
@@ -1281,7 +1281,7 @@ Added
 - Added new client behavior add for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You optionally can select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Changed wording "smacc application" to "SMACC2 library".
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed tracing events.
@@ -1294,7 +1294,7 @@ Changed
 - Minor formatting improvements.
 
 Fixed
-~~~~
+----
 - Bug in smacc2 component.
 - Reverted markdowns to html.
 - Do not execute clang-format on smacc2_sm_reference_library package.
@@ -1303,12 +1303,12 @@ Fixed
 - Corrected all linters and formatters.
 
 Removed
-~~~~~~~
+-------
 - Removed galactic builds from master and kept only rolling. Removed submodules and used .repos file.
 - Deleted tracing.md.
 
 Other
-~~~~~
+-----
 - Reactivated smacc2 nav clients for rolling via submodules.
 - Some progress on navigation rolling.
 - More changes on performance tests.
@@ -1337,7 +1337,7 @@ Other
 - More on navigation.
 
 Commits
-~~~~~~~
+-------
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <denis@stogl.de>
@@ -1608,14 +1608,14 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - Introduce new feature: `cb_wait_topic_message`, an asynchronous client behavior that waits for a topic message and optionally verifies its contents for success.
 - Implement new client behavior for `nav2`, allowing waiting for nav2 nodes subscribing to the `/bond` topic and ensuring they are alive. Node selection is optional.
 - Add base for the `sm_aws_aarehouse` navigation.
 - Introduce `cb_pause_slam` client behavior.
 
 Changed
-~~~~~~~
+-------
 - Correct all linters and formatters.
 - Fix navigation parameters on `sm_dance_bot`.
 - Minor format improvements.
@@ -1623,15 +1623,15 @@ Changed
 - Rename doxygen deployment workflow.
 
 Fixed
-~~~~
+----
 - Resolve compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Eliminate some compile warnings.
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
@@ -2284,7 +2284,7 @@ Section_24
 ==========
 
 Added
-~~~~~
+-----
 - Initial state machine transition timestamp (#165)
 - QOS durability to SmaccPublisherClient (#163)
 - Feature: testing moveit behaviors (#167)
@@ -2308,7 +2308,7 @@ Added
 - Added missing file from warehouse2 (#205)
 
 Changed
-~~~~~~~
+-------
 - Moved reference library SMs to smacc2_performance_tools
 - Added reliability QOS config
 - Progress on moveit
@@ -2327,7 +2327,7 @@ Changed
 - Progress in barrel demo
 
 Fixed
-~~~~~
+-----
 - Add a missing colon
 - Fixing pipeline error
 - Fixing broken master build

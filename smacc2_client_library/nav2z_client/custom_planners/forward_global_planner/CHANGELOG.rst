@@ -982,34 +982,34 @@ Section_10
 ==========
 
 Added
-~~~~~
+-----
 - New client behavior for nav2: waits for nav2 nodes to subscribe to the /bond topic and confirms they are alive. Optional node selection available.
 - New feature: cb_wait_topic_message, an asynchronous client behavior that waits for a topic message and optionally verifies its contents for success.
 
 Changed
-~~~~~~~
+-------
 - Progress in AWS navigation demo.
 - Navigation parameters fixes on sm_dance_bot.
 
 Fixed
-~~~~
+----
 - Removed some compile warnings.
 - Minor hotfixes.
 - Format fixes.
 
 Removed
-~~~~~~~
+-------
 - Removed neo_simulation2 package.
 
 Other
-~~~~~
+-----
 - Several core improvements during navigation testing.
 - Formatting and minor improvements.
 - Merge and progress in development.
 - Precommit cleanup run.
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: pabloinigoblasco <pablo@ibrobotics.com>
 ```
@@ -1122,7 +1122,7 @@ Section_13
 ==========
 
 Added
-~~~~~
+-----
 - Reactivated smacc2 nav clients for rolling via submodules.
 - Added README tutorial for Dockerfile.
 - Added smacc2_performance_tools.
@@ -1130,7 +1130,7 @@ Added
 - Added new client behavior add for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You optionally can select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Changed wording "smacc application" to "SMACC2 library".
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed tracing events.
@@ -1145,15 +1145,15 @@ Changed
 - Corrected all linters and formatters.
 
 Fixed
-~~~~
+----
 - Bug in smacc2 component.
 
 Removed
-~~~~~~~
+-------
 - Removed galactic builds from master and kept only rolling. Removed submodules and used .repos file.
 
 Other
-~~~~~
+-----
 - Some progress on navigation rolling.
 - More changes on performance tests.
 - Several core improvements during navigation testing.
@@ -1713,7 +1713,7 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: `add` behavior waits for nav2 nodes subscribing to the `/bond` topic and ensures they are alive. Optional node selection available.
 - Base for the `sm_aws_aarehouse` navigation.
@@ -1726,7 +1726,7 @@ Added
 - Gazebo fixes for `sm_dance_bot_strikes_back`.
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters.
 - Navigation parameters fixes on `sm_dance_bot`.
 - Minor formatting improvements.
@@ -1734,15 +1734,15 @@ Changed
 - Hotfixes and minor improvements.
 
 Fixed
-~~~~
+----
 - Removed some compile warnings.
 
 Removed
-~~~~~~~
+-------
 - Redundant formatting improvements.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>

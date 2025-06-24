@@ -1253,29 +1253,29 @@ Section_10
 ==========
 
 Added
-~~~~~
+-----
 - New client behavior for nav2: Waits for nav2 nodes to subscribe to the /bond topic and confirm they are alive. Optional node selection available.
 - New feature: `cb_wait_topic_message`: Asynchronous client behavior that waits for a topic message and optionally verifies its contents for success.
 
 Changed
-~~~~~~~
+-------
 - Progress in AWS navigation demo.
 - Navigation parameters fixes on `sm_dance_bot`.
 - Core improvements during navigation testing.
 - Formatting improvements.
 
 Fixed
-~~~~
+----
 - Removed some compile warnings.
 - Minor hotfix.
 - Fixed format issues.
 
 Removed
-~~~~~~~
+-------
 - Removed `neo_simulation2` package.
 
 Other
-~~~~~
+-----
 - Various improvements in navigation and performance.
 - Precommit cleanup run.
 - Source build enabled on PR for testing.
@@ -1471,7 +1471,7 @@ Section_13
 ==========
 
 Added
-~~~~~
+-----
 - Enable build of missing rolling repositories.
 - Enable Navigation2 for semi-binary build.
 - Added README tutorial for Dockerfile.
@@ -1480,7 +1480,7 @@ Added
 - Adding new client behavior add for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You optionally can select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Changed wording "smacc application" to "SMACC2 library".
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed tracing events.
@@ -1493,7 +1493,7 @@ Changed
 - Minor formatting improvements.
 
 Fixed
-~~~~
+----
 - Bug in smacc2 component.
 - Reverted markdowns to html.
 - Do not execute clang-format on smacc2_sm_reference_library package.
@@ -1502,12 +1502,12 @@ Fixed
 - Correct all linters and formatters.
 
 Removed
-~~~~~~~
+-------
 - Removed galactic builds from master and kept only rolling. Removed submodules and use .repos file.
 - Deleted tracing.md.
 
 Other
-~~~~~
+-----
 - Reactivated smacc2 nav clients for rolling via submodules.
 - Some progress on navigation rolling.
 - More changes on performance tests.
@@ -1533,7 +1533,7 @@ Other
 - More on navigation.
 
 Commits
-~~~~~~~
+-------
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <denis@stogl.de>
@@ -1546,25 +1546,25 @@ Section_14
 ==========
 
 Added
-~~~~~
+-----
 - Introduce new feature, cb_wait_topic_message: asynchronous client behavior that waits for a topic message and optionally verifies its contents for success.
 - Implement new client behavior for nav2, waiting for nav2 nodes to subscribe to the /bond topic and ensuring they are operational. Users can select specific nodes to wait for.
 - Progress in AWS navigation demo.
 
 Changed
-~~~~~~~
+-------
 - Minor formatting improvements.
 
 Fixed
-~~~~
+----
 - Resolve navigation parameters issues on sm_dance_bot.
 
 Removed
-~~~~~~~
+-------
 - Eliminate some compile warnings.
 
 Other
-~~~~
+----
 - Implement cb pause slam client behavior.
 - Update yaml configuration.
 - Rename doxygen deployment workflow.
@@ -1742,7 +1742,7 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for `nav2`: `add`, which waits for nav2 nodes subscribing to the `/bond` topic and ensures they are alive. Optional selection of nodes to wait for.
 - Base for the `sm_aws_aarehouse` navigation.
@@ -1756,22 +1756,22 @@ Added
 - Gazebo fixes for `sm_dance_bot_strikes_back`.
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters.
 - Formatting improvements.
 
 Fixed
-~~~~
+----
 - Navigation parameters fixes on `sm_dance_bot`.
 - Minor fixes.
 - Compile warnings removed.
 
 Removed
-~~~~~~
+------
 - Some compile warnings.
 
 Contributors
-~~~~~~~~~~~~
+------------
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
@@ -1820,7 +1820,7 @@ Section_20
 ==========
 
 Added
-~~~~~
+-----
 - Update dependencies for husky in rolling and galactic.
 - Progress on aws navigation and refactorings on navigation clients and behaviors.
 - More on aws demo.
@@ -1891,7 +1891,7 @@ Added
 - Add tf2_ros as dependency to find include.
 
 Changed
-~~~~~~~
+-------
 - Fix formatting.
 - Minor changes.
 - Finetuning waypoints.
@@ -1913,7 +1913,7 @@ Changed
 - Correct python linters warnings.
 
 Removed
-~~~~~~~
+-------
 - Some reordering fixes.
 - Warnings removal and more testing on navigation.
 ```

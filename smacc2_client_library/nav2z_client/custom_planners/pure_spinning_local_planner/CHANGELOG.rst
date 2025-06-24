@@ -124,7 +124,7 @@ Version 0.1.0 (2022-01-01)
 --------------------------
 
 Added
-~~~~~
+-----
 
 - Diverse improvements in navigation and performance (#116)
 - Feature: diverse improvements in navigation performance (#117)
@@ -196,19 +196,19 @@ Added
 - Added sm_dance_bot_warehouse_3 (#181)
 
 Changed
-~~~~~~~
+-------
 
 - Moved method after the method it calls to prevent recursion (#126)
 - Moved reference library SMs to smacc2_performance_tools (#166)
 
 Removed
-~~~~~~~
+-------
 
 - Merge markers from a python file (#119)
 - Removed test from main moveit cmake
 
 Fixed
-~~~~~
+-----
 
 - Minor format issues (#134)
 - Fixed compiling issues
@@ -1156,7 +1156,7 @@ Section_13
 ==========
 
 Added
-~~~~~
+-----
 - Enable build of missing rolling repositories.
 - Enable Navigation2 for semi-binary build.
 - Added README tutorial for Dockerfile.
@@ -1165,7 +1165,7 @@ Added
 - Added new client behavior add for nav2, wait nav2 nodes subscribing to the /bond topic and waiting they are alive. You optionally can select the nodes to wait.
 
 Changed
-~~~~~~~
+-------
 - Changed wording "smacc application" to "SMACC2 library".
 - Updated mentions of SMACC/ROS to SMACC2/ROS2.
 - Renamed tracing events.
@@ -1173,7 +1173,7 @@ Changed
 - Renamed event generator library.
 
 Fixed
-~~~~
+----
 - Bug in smacc2 component.
 - Do not execute clang-format on smacc2_sm_reference_library package.
 - Correct trailing spaces.
@@ -1184,12 +1184,12 @@ Fixed
 - Corrected all linters and formatters.
 
 Removed
-~~~~~~~
+-------
 - Removed galactic builds from master and kept only rolling. Removed submodules and used .repos file.
 - Deleted tracing.md.
 
 Other
-~~~~~
+-----
 - Reactivated smacc2 nav clients for rolling via submodules.
 - Reverted markdowns to html.
 - Edited tracing.md to reflect new tracing event names.
@@ -1302,7 +1302,7 @@ Other
 - More on navigation.
 
 Commits
-~~~~~~~
+-------
 - Update smacc2_ci/docker/ros_rollingAndGalactic_ubuntu_20.04/buildGalactic.sh (Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>).
 - Update tracing/ManualTracing.md (Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>).
 - Update smacc_sm_reference_library/sm_atomic/README.md (Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>).
@@ -1569,13 +1569,13 @@ Section_18
 ==========
 
 Added
-~~~~~
+-----
 - New feature: `cb_wait_topic_message`: asynchronous client behavior that waits for a topic message and optionally checks its contents for success
 - New client behavior for nav2: `add` behavior waits for nav2 nodes subscribing to the `/bond` topic and ensures they are alive; optional node selection
 - `cb_pause_slam` client behavior
 
 Changed
-~~~~~~~
+-------
 - Corrected all linters and formatters
 - Navigation parameters fixes on `sm_dance_bot`
 - Minor formatting improvements
@@ -1584,21 +1584,21 @@ Changed
 - Gazebo fixes for showing the robot and lidar in `sm_dance_bot` and `sm_dance_bot_strikes_back`
 
 Fixed
-~~~~
+----
 - Removed some compile warnings
 
 Removed
-~~~~~~~
+-------
 - Redundant entries for `cb_wait_topic_message` and client behavior addition for nav2
 
 Collaborators
-~~~~~~~~~~~~~
+-------------
 - Co-authored-by: Denis Štogl <denis@stogl.de>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 
 Commits
-~~~~~~~
+-------
 - Feature/aws demo progress (#92)
 - Feature/sm dance bot fixes (#93)
 - Feature/sm aws warehouse (#94)
@@ -1621,7 +1621,7 @@ Section 19
 -----------
 
 Added
-~~~~~
+-----
 
 - Added multistage modes to sm_multi_stage_1 (#172)
 - Added sequences and steps to sm_multi_stage_1 reworking (#172)
@@ -1631,7 +1631,7 @@ Added
 - Added QOS durability to SmaccPublisherClient (#163)
 
 Changed
-~~~~~~~
+-------
 
 - Changed method order to prevent recursion in sm_dance_bot (#125)
 - Changed launch command in README.md for sm_dance_bot_strikes_back (#147)
@@ -1642,7 +1642,7 @@ Changed
 - Changed moveit client to smacc2 (#151)
 
 Fixed
-~~~~
+----
 
 - Fixed source build on PR for testing (#113)
 - Fixed formatting in neo_simulation2 package removal (#112)
@@ -1655,7 +1655,7 @@ Fixed
 - Fixed broken master build (#167)
 
 Removed
-~~~~~~~
+-------
 
 - Removed neo_simulation2 package (#112)
 - Removed merge markers from a Python file (#119)
@@ -1665,7 +1665,7 @@ Removed
 - Removed sm_dance_bot_msgs package (#144)
 
 Authors
-~~~~~~~
+-------
 
 - Pablo Iñigo Blasco
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
@@ -2263,26 +2263,26 @@ Section_22
 ==========
 
 Added
-~~~~~
+-----
 - New feature: cb_wait_topic_message, an asynchronous client behavior that waits for a topic message and optionally checks its contents for success.
 - New client behavior for nav2: wait nav2 nodes subscribing to the /bond topic and waiting for them to be alive, with optional node selection.
 - New feature: cb pause slam client behavior.
 - New feature: sm_dance_bot_lite.
 
 Changed
-~~~~~~~
+-------
 - Updated launch command.
 - Corrected all linters and formatters.
 - Navigation parameters fixes on sm_dance_bot.
 - Minor hotfixes.
 
 Fixed
-~~~~
+----
 - Fixed precommit issues.
 - Removed some compile warnings.
 
 Authors
-~~~~~~~
+-------
 - Pablo Iñigo Blasco
 - Co-authored-by: Ubuntu 20-04-02-amd64 <brett@robosoft.ai>
 - Co-authored-by: Denis Štogl <destogl@users.noreply.github.com>
