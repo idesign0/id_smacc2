@@ -737,6 +737,7 @@ private:
     enum class SlamToolboxState { Resumed, Paused };
 
     inline SlamToolboxState getState() { return state_; }
+
     void toogleState();  // State transition logic
 
   private:
