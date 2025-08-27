@@ -440,7 +440,7 @@ private:
   file:///src/SMACC2/smacc2_client_library/lifecyclenode_client/include/lifecyclenode_client/client_behaviors/cb_activate.hpp#L28
   - Signal-based result handling (success/failure events)
   file:///src/SMACC2/smacc2_client_library/lifecyclenode_client/include/lifecyclenode_client/client_behaviors/cb_activate.hpp#L41
-  
+
   - Lifecycle client references
   - Standard postSuccessEvent()/postFailureEvent() methods
   
@@ -488,7 +488,7 @@ private:
   - Motion parameter members (angles, distances, speeds)
   file:///src/SMACC2/smacc2_client_library/nav2z_client/nav2z_client/include/nav2z_client/client_behaviors/cb_rotate.hpp#L31
   - Optional planner/controller selection file:///src/SMACC2/smacc2_client_library/nav2z_client/nav2z_client/include/nav2z_client/client_behaviors/cb_rotate.hpp#L35
- 
+
   - Transform buffer access for coordinate calculations
   - Goal checker configuration options
   - Immediate motion execution in onEntry()
@@ -621,6 +621,7 @@ private:
   - CpTopicPublisher<MessageType> (smacc2/core)
     - ROS topic publishing infrastructure
     - Features: Template-based message publishing, periodic publishing support
+
 
 ###  2. STATE TRACKING PATTERN COMPONENTS
 
