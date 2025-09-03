@@ -14,6 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# *****************************************************************************************************************
+# *
+# * 	 Authors: Pablo Inigo Blasco, Brett Aldrich
+# *
+# ******************************************************************************************************************/
+
 import sys
 import select
 import termios
@@ -51,6 +57,7 @@ class KeyboardPublisher(Node):
             msg = UInt16()
             msg.data = ord(key)
 
+            self.get_logger().info(f"key: {msg.data}")
             self.pub.publish(msg)
 
         except Exception as e:
@@ -76,46 +83,3 @@ def main(args=None):
 
 if __name__ == "__main__":
     main()
-
-
-# ---------------------------------
-
-# import std_msgs
-#
-
-
-# class KeyboardPublisher(Node):
-#     def __init__(self):
-#         super().__init__('keyboard_node')
-#         self.pub = self.create_publisher(UInt16, 'keyboard_unicode', 1)
-#         timer_period = 0.20  # seconds
-#         self.timer = self.create_timer(timer_period, self.timer_update)
-#         self.i = 0
-
-#     def timer_update(self):
-#         try:
-#             key = getKey()
-#             #rospy.loginfo(type(key))
-#             msg = UInt16()
-#             msg.data = ord(key)
-
-#             self.pub.publish(msg)
-
-#         except Exception as e:
-#             print(e)
-
-#         finally:
-#             termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
-
-# def main(args=None):
-#     rclpy.init(args=args)
-#     node = KeyboardPublisher()
-
-#     rclpy.spin(node)
-
-#     node.destroy_node()
-#     rclpy.shutdown()
-
-
-# if __name__ == '__main__':
-#     main()

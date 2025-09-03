@@ -84,6 +84,14 @@ public:
     //client_->wait_for_action_server();
   }
 
+  void waitForServer()
+  {
+    RCLCPP_INFO_STREAM(
+      this->getLogger(),
+      "Waiting for action server '" << name_ << "' of type: " << demangledTypeName<ActionType>());
+    client_->wait_for_action_server();
+  }
+
   static std::string getEventLabel()
   {
     auto type = TypeInfo::getTypeInfoFromType<ActionType>();
@@ -92,6 +100,7 @@ public:
 
   std::optional<std::shared_future<typename GoalHandle::SharedPtr>> lastRequest_;
   // typename GoalHandle::SharedPtr goalHandle_;
+  std::optional<std::shared_future<typename CancelResponse::SharedPtr>> lastCancelResponse_;
 
   SmaccActionResultSignal onSucceeded_;
   SmaccActionResultSignal onAborted_;
@@ -209,8 +218,7 @@ public:
 
   virtual bool cancelGoal() override
   {
-    auto fut = this->client_->async_cancel_all_goals();
-    fut.wait();
+    lastCancelResponse_ = this->client_->async_cancel_all_goals();
 
     // if (lastRequest_ && lastRequest_->valid())
     // {
@@ -327,13 +335,11 @@ public:
     this->lastRequest_ = lastRequest;
 
     RCLCPP_INFO_STREAM(
-      getLogger(),
-      "["
-        << getName()
-        << "] Action request "
-        // << rclcpp_action::to_string(this->goalHandle_->get_goal_id()) <<". Goal sent to " << this->action_endpoint_
-        << "\": " << std::endl
-        << goal);
+      getLogger(), "[" << getName() << "] Action request "
+      // << rclcpp_action::to_string(this->goalHandle_->get_goal_id()) <<". Goal sent to " << this->action_endpoint_
+      // << "\": " << std::endl
+      // << goal
+    );
 
     // if (client_->isServerConnected())
     // {

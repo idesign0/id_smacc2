@@ -1,9 +1,6 @@
  <h2>Build Instructions</h2>
 
-First, source your chosen ros2 distro.
-```
-source /opt/ros/rolling/setup.bash
-```
+First, source your ros2 installation.
 ```
 source /opt/ros/humble/setup.bash
 ```
@@ -26,16 +23,16 @@ After you built the project don't forget to setup your environment: First source
 ```
 source /opt/ros/humble/share/gazebo_ros/local_setup.bash
 ```
-Then source the proper install folder...
+Then source the proper workspace...
 
 ```
-source ~/<ros2_ws>/install/setup.bash
+source ~/workspace/humble_ws/install/setup.sh
 ```
 
 And then run the launch file...
 
 ```
-ros2 launch sm_panda_moveit2z_cb_inventory sm_panda_moveit2z_cb_inventory.launch
+ros2 launch sm_panda_moveit2z_cb_inventory sm_panda_moveit2z_cb_inventory.launch.py
 ```
 
 If the simulation is not starting up properly check if your GAZEBO_RESOURCE_PATH is set correctly (echo $GAZEBO_RESOURCE_PATH). Otherwise simply set it with:

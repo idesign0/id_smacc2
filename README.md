@@ -8,10 +8,8 @@ SMACC was inspired by Harel's statecharts and the [SMACH ROS package](http://wik
 
 ROS 2 Distro | Branch | Build status | Documentation | Released packages
 :---------: | :----: | :----------: | :-----------: | :---------------:
-**Foxy** | [`foxy`](https://github.com/robosoft-ai/SMACC2/tree/foxy) | [![Foxy Binary Build](https://github.com/robosoft-ai/SMACC2/actions/workflows/foxy-binary-build.yml/badge.svg?branch=foxy)](https://github.com/robosoft-ai/SMACC2/actions/workflows/foxy-binary-build.yml?branch=foxy) <br /> [![Foxy Semi-Binary Build](https://github.com/robosoft-ai/SMACC2/actions/workflows/foxy-semi-binary-build.yml/badge.svg?branch=foxy)](https://github.com/robosoft-ai/SMACC2/actions/workflows/foxy-semi-binary-build.yml?branch=foxy) | [![Doxygen Doc Deployment](https://github.com/robosoft-ai/SMACC2/actions/workflows/doxygen-deploy.yml/badge.svg)](https://github.com/robosoft-ai/SMACC2/actions/workflows/doxygen-deploy.yml) <br /> [Generated Doc](https://robosoft-ai.github.io/smacc2_doxygen/foxy/html/namespaces.html) | [![ROS Build Farm](https://build.ros2.org/job/Fdev__smacc2__ubuntu_focal_amd64/badge/icon?subject=ros-buildfarm)](https://build.ros2.org/job/Fdev__smacc2__ubuntu_focal_amd64/) <br/>[SMACC2](https://index.ros.org/p/smacc2/github-robosoft-ai-SMACC2/#foxy)
-**Galactic** | [`galactic`](https://github.com/robosoft-ai/SMACC2/tree/galactic) | [![Galactic Binary Build](https://github.com/robosoft-ai/SMACC2/actions/workflows/galactic-binary-build.yml/badge.svg?branch=galactic)](https://github.com/robosoft-ai/SMACC2/actions/workflows/galactic-binary-build.yml?branch=galactic) <br /> [![Galactic Semi-Binary Build](https://github.com/robosoft-ai/SMACC2/actions/workflows/galactic-semi-binary-build.yml/badge.svg?branch=galactic)](https://github.com/robosoft-ai/SMACC2/actions/workflows/galactic-semi-binary-build.yml?branch=galactic) | [![Doxygen Doc Deployment](https://github.com/robosoft-ai/SMACC2/actions/workflows/doxygen-deploy.yml/badge.svg)](https://github.com/robosoft-ai/SMACC2/actions/workflows/doxygen-deploy.yml) <br /> [Generated Doc](https://robosoft-ai.github.io/smacc2_doxygen/galactic/html/namespaces.html) |  [![Build Status](https://build.ros2.org/job/Hsrc_uJ__smacc2__ubuntu_jammy__source/badge/icon?style=plastic&subject=ros-buildfarm&status=E.O.L&color=lightgray)](http://docs.ros.org/en/galactic/Releases/End-of-Life.html)<br/> [SMACC2](https://index.ros.org/p/smacc2/github-robosoft-ai-SMACC2/#galactic)
+**Foxy** | [`foxy`](https://github.com/robosoft-ai/SMACC2/tree/foxy) | [![Foxy Binary Build](https://github.com/robosoft-ai/SMACC2/actions/workflows/foxy-binary-build.yml/badge.svg?branch=foxy)](https://github.com/robosoft-ai/SMACC2/actions/workflows/foxy-binary-build.yml?branch=foxy) <br /> [![Foxy Semi-Binary Build](https://github.com/robosoft-ai/SMACC2/actions/workflows/foxy-semi-binary-build.yml/badge.svg?branch=foxy)](https://github.com/robosoft-ai/SMACC2/actions/workflows/foxy-semi-binary-build.yml?branch=foxy) | [![Doxygen Doc Deployment](https://github.com/robosoft-ai/SMACC2/actions/workflows/doxygen-deploy.yml/badge.svg)](https://github.com/robosoft-ai/SMACC2/actions/workflows/doxygen-deploy.yml) <br /> [Generated Doc](https://robosoft-ai.github.io/smacc2_doxygen/foxy/html/namespaces.html) | [![ROS Build Farm](https://build.ros2.org/job/Hsrc_uJ__smacc2__ubuntu_jammy__source/badge/icon?style=plastic&subject=ros-buildfarm&status=E.O.L&color=lightgray)](http://docs.ros.org/en/humble/Releases/End-of-Life.html) <br/>[SMACC2](https://index.ros.org/p/smacc2/github-robosoft-ai-SMACC2/#foxy)
 **Humble** | [`humble`](https://github.com/robosoft-ai/SMACC2/tree/humble) | [![Humble Binary Build](https://github.com/robosoft-ai/SMACC2/actions/workflows/humble-binary-build.yml/badge.svg?branch=humble)](https://github.com/robosoft-ai/SMACC2/actions/workflows/humble-binary-build.yml?branch=humble)<br/> [![Humble Semi-Binary Build](https://github.com/robosoft-ai/SMACC2/actions/workflows/humble-semi-binary-build.yml/badge.svg?branch=humble)](https://github.com/robosoft-ai/SMACC2/actions/workflows/humble-semi-binary-build.yml?branch=humble) | [![Doxygen Deployment](https://github.com/robosoft-ai/SMACC2/actions/workflows/doxygen-deploy.yml/badge.svg?branch=humble)](https://github.com/robosoft-ai/SMACC2/actions/workflows/doxygen-deploy.yml) <br /> [Generated Doc](https://robosoft-ai.github.io/smacc2_doxygen/humble/html/namespaces.html)| [![Build Status](https://build.ros2.org/job/Hsrc_uJ__smacc2__ubuntu_jammy__source/badge/icon?subject=ros-buildfarm)](https://build.ros2.org/job/Hsrc_uJ__smacc2__ubuntu_jammy__source/)<br/> [SMACC2](https://index.ros.org/p/smacc2/github-robosoft-ai-SMACC2/#humble)
-**Rolling** | [`rolling`](https://github.com/robosoft-ai/SMACC2/tree/rolling) | [![Rolling Binary Build](https://github.com/robosoft-ai/SMACC2/actions/workflows/rolling-binary-build.yml/badge.svg?branch=rolling)](https://github.com/robosoft-ai/SMACC2/actions/workflows/rolling-binary-build.yml?branch=rolling) <br /> [![Rolling Semi-Binary Build](https://github.com/robosoft-ai/SMACC2/actions/workflows/rolling-semi-binary-build.yml/badge.svg?branch=rolling)](https://github.com/robosoft-ai/SMACC2/actions/workflows/rolling-semi-binary-build.yml?branch=rolling) | [![Doxygen Doc Deployment](https://github.com/robosoft-ai/SMACC2/actions/workflows/doxygen-deploy.yml/badge.svg)](https://github.com/robosoft-ai/SMACC2/actions/workflows/doxygen-deploy.yml) <br /> [Generated Doc](https://robosoft-ai.github.io/smacc2_doxygen/master/html/namespaces.html) |  [![Build Status](https://build.ros2.org/job/Rdev__SMACC2__ubuntu_jammy_amd64/badge/icon?subject=ros-buildfarm)](https://build.ros2.org/job/Rdev__SMACC2__ubuntu_jammy_amd64/)
 
 **NOTE**: There are three build stages checking current and future compatibility of the package.
 
@@ -79,59 +77,6 @@ ROS 2 Distro | Branch | Build status | Documentation | Released packages
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
    ```
 
-## Getting started - ROS Galactic
-
-1. [Install ROS 2 Galactic](https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html).
-
-2. Make sure that `colcon`, its extensions and `vcs` are installed:
-   ```
-   sudo apt install python3-colcon-common-extensions python3-vcstool
-   ```
-3. Create a new ROS 2 workspace if necessary:
-   ```
-   export COLCON_WS=~/workspace/galactic_ws
-   mkdir -p $COLCON_WS/src
-   ```
-4. Or just navigate to your workspace source folder:
-   ```
-   cd ~/workspace/galactic_ws/src
-   ```
-5. Clone the repo:
-   ```
-   git clone https://github.com/robosoft-ai/SMACC2.git
-   ```
-6. Checkout the Galactic branch:
-   ```
-   cd ~/workspace/galactic_ws/src/SMACC2
-   git checkout galactic
-   ```
-7. Navigate to the workspace:
-   ```
-   cd ~/workspace/galactic_ws
-   ```
-8. Update System:
-   ```
-   sudo apt update
-   sudo apt upgrade
-   ```
-9. Source the workspace:
-   ```
-   source /opt/ros/galactic/setup.bash
-   ```
-10. Update dependencies:
-   ```
-   rosdep update
-   ```
-11. Pull relevant packages and install dependencies:
-   ```
-   vcs import src --skip-existing --input src/SMACC2/.github/SMACC2.galactic.repos
-   rosdep install --ignore-src --from-paths src -y -r
-   ```
-12. Compile:
-   ```
-   colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
-   ```
-
 ## Getting started - ROS Foxy
 
 1. [Install ROS 2 Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html).
@@ -185,54 +130,6 @@ ROS 2 Distro | Branch | Build status | Documentation | Released packages
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
    ```
 
-## Getting started - ROS Rolling
-
-1. [Install ROS 2 Rolling](https://index.ros.org/doc/ros2/Installation/Rolling/Linux-Install-Debians/).
-
-2. Make sure that `colcon`, its extensions and `vcs` are installed:
-   ```
-   sudo apt install python3-colcon-common-extensions python3-vcstool
-   ```
-3. Create a new ROS 2 workspace if necessary:
-   ```
-   export COLCON_WS=~/workspace/rolling_ws
-   mkdir -p $COLCON_WS/src
-   ```
-4. Or just navigate to your workspace source folder:
-   ```
-   cd ~/workspace/rolling_ws/src
-   ```
-5. Clone the repo:
-   ```
-   git clone https://github.com/robosoft-ai/SMACC2.git
-   ```
-6. Navigate to the workspace:
-   ```
-   cd ~/workspace/rolling_ws
-   ```
-7. Update System:
-   ```
-   sudo apt update
-   sudo apt upgrade
-   ```
-8. Source the workspace:
-   ```
-   source /opt/ros/rolling/setup.bash
-   ```
-9. Update dependencies:
-   ```
-   rosdep update
-   ```
-10. Pull relevant packages and install dependencies:
-   ```
-   vcs import src --skip-existing --input src/SMACC2/SMACC2-not-released.rolling.repos
-   rosdep install --ignore-src --from-paths src -y -r
-   ```
-11. Compile:
-   ```
-   colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
-   ```
-
 ## Features
  *  ***Powered by ROS 2:*** SMACC2 has been developed specifically to work with ROS 2. It supports ROS 2 topics, services and actions, right out of the box.
  *   ***Written in C++:*** Until now, ROS 2 has lacked a library to develop task-level behavioral state machines in C++. Although libraries have been developed in scripting languages such as python, these are unsuitable for real-world industrial environments where real-time requirements are demanded.
@@ -248,7 +145,7 @@ ROS 2 Distro | Branch | Build status | Documentation | Released packages
 - `smacc2_client_library` - client libraries for SMACC2, e.g., Navigation2 (`nav2z_client`), MoveIt2 (`moveit2z_client`).
 - `smacc2_event_generators` - ...
 - `smacc2_msgs` - ROS 2 messages for SMACC2 framework.
-- `smacc2_sm_reference_library` - libraries with reference implementations of state-machines used for demonstaration and testing of functionalities.
+- `smacc2_sm_reference_library` - libraries with reference implementations of state-machines used for demonstration and testing of functionalities.
 - `↓smacc2_state_reactor_library` - ...
 - `smacc2_performance_tools` - ...
 
@@ -265,9 +162,7 @@ Each state machine in the reference library comes with it's own README.md file, 
 
   *  If you are looking for a minimal example but with a looping superstate, try [sm_three_some](smacc2_sm_reference_library/sm_three_some).
 
-  *  If you want to get started with the ROS Navigation stack right away, try [sm_dance_bot](smacc2_sm_reference_library/sm_dance_bot).
-
-  *  If you want to get started with ROS Navigation and exploring the orthogonal read-write cycle, then try [sm_dance_bot_strikes_back](smacc2_sm_reference_library/sm_dance_bot_strikes_back).
+  *  If you want to get started with the ROS Navigation stack right away, try [sm_nav2_test_7](https://github.com/robosoft-ai/nova_carter_sm_library/tree/main/sm_nav2_test_7).
 
 Operating instructions can be found in each reference state machines readme file.
 
