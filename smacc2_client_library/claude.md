@@ -699,7 +699,6 @@ private:
     - Publisher: goal_checker_selector topic
   - CpCostmapSwitch (nav2z_client)
     - Costmap layer enable/disable control
-    - Features: Dynamic costmap layer management, standard layer presets
     - Includes: CpCostmapProxy helper class for dynamic reconfigure
 	
 #### Core C++ Design Patterns of Configuration Management Components:
@@ -734,13 +733,7 @@ private:
   ```
 
   Common C++ Patterns:
-  - Builder Pattern: Multiple setters for configuration assembly
-  - Deferred Execution: commit parameter for batched configuration updates
-  - String-Based Configuration: String identifiers for runtime configuration
-  - Multiple Publisher Pattern: Separate publishers for different configuration aspects
-  - Boolean Control Parameters: bool commit for execution control
-  - Method Chaining Support: Fluent interface design
-  - QoS Configuration: Transient local, reliable QoS for configuration persistence
+  - Deferred Execution: commit parameter for batched configuration updates (TODO)
 
 ###  5. DATA BUFFER PATTERN COMPONENTS
 
@@ -980,3 +973,4 @@ https://robosoft-ai.github.io/smacc2_doxygen/humble/html/index.html
 
 ## Documentation
 https://smacc2.robosoft.ai/
+
