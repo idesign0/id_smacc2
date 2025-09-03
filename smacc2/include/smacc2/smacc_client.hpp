@@ -85,6 +85,10 @@ public:
   void postEvent();
 
 protected:
+  // Called when the orthogonal creates this client - used to initialize components
+  template <typename TOrthogonal>
+  void onComponentInitialization() {}
+
   // it is called after the client initialization, provides information about the orthogonal it is located in
   template <typename TOrthogonal, typename TSourceObject>
   void onOrthogonalAllocation()
