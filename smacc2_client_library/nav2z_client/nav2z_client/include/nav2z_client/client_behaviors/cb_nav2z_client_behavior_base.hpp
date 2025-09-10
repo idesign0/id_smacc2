@@ -30,11 +30,24 @@ class CbNav2ZClientBehaviorBase : public smacc2::SmaccAsyncClientBehavior
 public:
   virtual ~CbNav2ZClientBehaviorBase();
 
+  // DEPRECATED: For third-party compatibility only. Third-party developers should migrate to onStateOrthogonalAllocation
+  // This method exists to support existing third-party classes that inherit from this base class
+  // and call CbNav2ZClientBehaviorBase::onOrthogonalAllocation<TOrthogonal, TSourceObject>()
   template <typename TOrthogonal, typename TSourceObject>
-  void onOrthogonalAllocation()
+  [[deprecated(
+    "Use onStateOrthogonalAllocation instead. This method exists only for third-party "
+    "compatibility.")]] void
+  onOrthogonalAllocation()
+  {
+    // Call the new method to maintain functionality for third-party inheritors
+    onStateOrthogonalAllocation<TOrthogonal, TSourceObject>();
+  }
+
+  template <typename TOrthogonal, typename TSourceObject>
+  void onStateOrthogonalAllocation()
   {
     this->requiresClient(nav2zClient_);
-    smacc2::SmaccAsyncClientBehavior::onOrthogonalAllocation<TOrthogonal, TSourceObject>();
+    smacc2::SmaccAsyncClientBehavior::onStateOrthogonalAllocation<TOrthogonal, TSourceObject>();
   }
 
 protected:

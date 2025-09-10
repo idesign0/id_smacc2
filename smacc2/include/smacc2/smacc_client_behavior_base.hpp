@@ -72,7 +72,14 @@ protected:
 
 private:
   template <typename TOrthogonal, typename TSourceObject>
-  void onOrthogonalAllocation();
+  [[deprecated(
+    "Use onStateOrthogonalAllocation instead. onOrthogonalAllocation will be removed in future "
+    "versions.")]] void
+  onOrthogonalAllocation();
+
+  // New method: called when the client behavior is allocated to a state (replaces onOrthogonalAllocation)
+  template <typename TOrthogonal, typename TSourceObject>
+  void onStateOrthogonalAllocation();
 
   // a reference to the owner state machine
   ISmaccStateMachine * stateMachine_;

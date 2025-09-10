@@ -48,7 +48,16 @@ protected:
   void postEvent();
 
   template <typename TOrthogonal, typename TSourceObject>
-  void onOrthogonalAllocation()
+  [[deprecated(
+    "Use onStateOrthogonalAllocation instead. onOrthogonalAllocation will be removed in future "
+    "versions.")]] void
+  onOrthogonalAllocation()
+  {
+  }
+
+  // New method: called when the component is allocated to a state (replaces onOrthogonalAllocation)
+  template <typename TOrthogonal, typename TSourceObject>
+  void onStateOrthogonalAllocation()
   {
   }
 

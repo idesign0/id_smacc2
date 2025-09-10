@@ -30,7 +30,7 @@ public:
   void onEntry();
 
   template <typename TOrthogonal, typename TSourceObject>
-  void onOrthogonalAllocation()
+  void onStateOrthogonalAllocation()
   {
     postEventKeyPress = [=](char character)
     {

@@ -123,6 +123,7 @@ SmaccComponentType * ISmaccClient::createNamedComponent(std::string name, TArgs.
   }
 
   ret->template onOrthogonalAllocation<TOrthogonal, TClient>();
+  ret->template onStateOrthogonalAllocation<TOrthogonal, TClient>();
 
   return ret.get();
 }
