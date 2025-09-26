@@ -25,7 +25,7 @@
 #include <sensor_msgs/msg/laser_scan.hpp>
 namespace cl_nav2z
 {
-
+using namespace smacc2;
 CbPureSpinning::CbPureSpinning(double targetYaw_rads, double max_angular_yaw_speed)
 : targetYaw__rads(targetYaw_rads),
   k_betta_(1.0),
@@ -41,8 +41,8 @@ void CbPureSpinning::onEntry()
   auto nh = this->getNode();
   cmd_vel_pub_ = nh->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", rclcpp::QoS(1));
 
-  cl_nav2z::Pose * pose;
-  this->requiresComponent(pose);
+  cl_nav2z::CpPose * pose;
+  this->requiresComponent(pose, ComponentRequirement::HARD);
 
   geometry_msgs::msg::Twist cmd_vel;
   goalReached_ = false;

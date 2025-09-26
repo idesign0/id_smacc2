@@ -26,14 +26,16 @@
 
 namespace cl_nav2z
 {
+using namespace smacc2;
+
 CbWaitPose::CbWaitPose() {}
 
 CbWaitPose::~CbWaitPose() {}
 
 void CbWaitPose::onEntry()
 {
-  cl_nav2z::Pose * pose = nullptr;
-  this->requiresComponent(pose);
+  cl_nav2z::CpPose * pose = nullptr;
+  this->requiresComponent(pose, ComponentRequirement::SOFT);
   try
   {
     pose->waitTransformUpdate(rclcpp::Rate(20));

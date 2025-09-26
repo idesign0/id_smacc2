@@ -21,6 +21,7 @@
 
 namespace cl_nav2z
 {
+using namespace smacc2;
 
 CbNavigateNextWaypointFree::CbNavigateNextWaypointFree() {}
 
@@ -28,7 +29,7 @@ CbNavigateNextWaypointFree::~CbNavigateNextWaypointFree() {}
 
 void CbNavigateNextWaypointFree::onEntry()
 {
-  requiresComponent(this->waypointsNavigator_);
+  requiresComponent(this->waypointsNavigator_, ComponentRequirement::HARD);
   this->target_pose_ = this->waypointsNavigator_->getCurrentPose();
 
   this->onSuccess(&CbNavigateNextWaypointFree::CbNavigateNextWaypointFree::onSucessCallback, this);

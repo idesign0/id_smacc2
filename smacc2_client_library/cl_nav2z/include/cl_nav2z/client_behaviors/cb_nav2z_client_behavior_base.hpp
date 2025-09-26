@@ -27,6 +27,7 @@
 
 namespace cl_nav2z
 {
+using namespace smacc2;
 class CbNav2ZClientBehaviorBase : public smacc2::SmaccAsyncClientBehavior
 {
 public:
@@ -36,8 +37,8 @@ public:
   void onStateOrthogonalAllocation()
   {
     // NEW: Pure component-based approach - no client dependencies
-    this->requiresComponent(nav2ActionInterface_);
-    this->requiresComponent(actionClient_);
+    this->requiresComponent(nav2ActionInterface_, ComponentRequirement::HARD);
+    this->requiresComponent(actionClient_, ComponentRequirement::HARD);
 
     smacc2::SmaccAsyncClientBehavior::onStateOrthogonalAllocation<TOrthogonal, TSourceObject>();
   }
@@ -102,19 +103,6 @@ protected:
       return nav2ActionInterface_->onNavigationCancelled(callback, object);
     }
     return boost::signals2::connection();
-  }
-
-  // Helper method to get the client for accessing other components
-  template <typename ComponentType>
-  ComponentType * getComponent()
-  {
-    ClNav2Z * client = nullptr;
-    this->requiresClient(client);
-    if (client)
-    {
-      return client->getComponent<ComponentType>();
-    }
-    return nullptr;
   }
 
   // NEW: Component references instead of client reference

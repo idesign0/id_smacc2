@@ -25,6 +25,7 @@
 namespace cl_nav2z
 {
 
+using namespace smacc2;
 CbLoadWaypointsFile::CbLoadWaypointsFile(std::string filepath) : filepath_(filepath) {}
 
 CbLoadWaypointsFile::CbLoadWaypointsFile(std::string parameter_name, std::string packagenamespace)
@@ -34,8 +35,9 @@ CbLoadWaypointsFile::CbLoadWaypointsFile(std::string parameter_name, std::string
 
 void CbLoadWaypointsFile::onEntry()
 {
-  requiresComponent(waypointsNavigator_);  // this is a component from the
-                                           // nav2z_client library
+  requiresComponent(
+    waypointsNavigator_, ComponentRequirement::HARD);  // this is a component from the
+                                                       // nav2z_client library
 
   if (filepath_)
   {

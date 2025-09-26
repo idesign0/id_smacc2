@@ -32,25 +32,56 @@ using namespace smacc2::client_bases;
 using namespace smacc2::client_core_components;
 
 // waits the action server is available in the current orthogonal
-class CbWaitActionServer : public smacc2::SmaccAsyncClientBehavior
+template <typename ActionT>
+class CbWaitActionServer2 : public smacc2::SmaccAsyncClientBehavior
 {
 public:
-  CbWaitActionServer(std::chrono::milliseconds timeout);
-  virtual ~CbWaitActionServer();
-
   template <typename TOrthogonal, typename TSourceObject>
-  void onOrthogonalAllocation()
+  void onStateOrthogonalAllocation()
   {
-    SmaccAsyncClientBehavior::onOrthogonalAllocation<TOrthogonal, TSourceObject>();
+    SmaccAsyncClientBehavior::onStateOrthogonalAllocation<TOrthogonal, TSourceObject>();
 
-    // requires an action client
-    this->requiresClient(client_);
+    this->requiresComponent(cp_action_client_, ComponentRequirement::SOFT);
   }
 
-  void onEntry() override;
+  CbWaitActionServer2(std::chrono::milliseconds timeout) : timeout_(timeout) {}
+
+  virtual ~CbWaitActionServer2() {}
+
+  void onEntry()
+  {
+    if (cp_action_client_ != nullptr)
+    {
+      RCLCPP_INFO(
+        getLogger(), "[CbWaitActionServer] waiting for action server (using CpActionClient)...");
+      bool found = false;
+      auto starttime = getNode()->now();
+      while (!this->isShutdownRequested() && !found && (getNode()->now() - starttime) < timeout_)
+      {
+        auto client_base = cp_action_client_->getActionClient();
+        found = client_base->wait_for_action_server(std::chrono::milliseconds(1000));
+      }
+
+      if (found)
+      {
+        RCLCPP_INFO(getLogger(), "[CbWaitActionServer] action server already available");
+        this->postSuccessEvent();
+      }
+      else
+      {
+        RCLCPP_INFO(getLogger(), "[CbWaitActionServer] action server not found, timeout");
+        this->postFailureEvent();
+      }
+    }
+    else
+    {
+      RCLCPP_INFO(getLogger(), "[CbWaitActionServer] there is no action client in this orthogonal");
+      this->postFailureEvent();
+    }
+  }
 
 private:
-  ISmaccActionClient * client_;
+  CpActionClient<ActionT> * cp_action_client_;
 
   std::chrono::milliseconds timeout_;
 };

@@ -27,6 +27,7 @@ namespace cl_nav2z
 {
 namespace components
 {
+using namespace smacc2;
 
 class CpNav2ActionInterface : public smacc2::ISmaccComponent
 {
@@ -65,7 +66,14 @@ public:
       throw std::runtime_error("Action client not initialized");
     }
 
-    auto goal = createNavigationGoal(target);
+    Goal goal;
+    goal.pose = target;
+
+    // Set default behavior_tree if not specified
+    if (goal.behavior_tree.empty())
+    {
+      goal.behavior_tree = "";  // Let Nav2 use default behavior tree
+    }
 
     RCLCPP_INFO_STREAM(
       getLogger(), "[CpNav2ActionInterface] Sending navigation goal to: "
@@ -109,35 +117,32 @@ public:
   }
 
   // Component lifecycle
-  template <typename TOrthogonal, typename TSourceObject>
+  template <typename TOrthogonal, typename TClient>
   void onComponentInitialization()
   {
-    // Require the underlying action client component
-    this->requiresComponent(actionClient_);
-
     // Set up nav2-specific event posting functions
     postNavigationSuccessEvent = [this](const WrappedResult & result)
     {
-      auto * ev = new smacc2::default_events::EvActionSucceeded<TSourceObject, TOrthogonal>();
+      auto * ev = new smacc2::default_events::EvActionSucceeded<TClient, TOrthogonal>();
       this->postEvent(ev);
     };
 
     postNavigationAbortedEvent = [this](const WrappedResult & result)
     {
-      auto * ev = new smacc2::default_events::EvActionAborted<TSourceObject, TOrthogonal>();
+      auto * ev = new smacc2::default_events::EvActionAborted<TClient, TOrthogonal>();
       this->postEvent(ev);
     };
 
     postNavigationCancelledEvent = [this](const WrappedResult & result)
     {
-      auto * ev = new smacc2::default_events::EvActionCancelled<TSourceObject, TOrthogonal>();
+      auto * ev = new smacc2::default_events::EvActionCancelled<TClient, TOrthogonal>();
       this->postEvent(ev);
     };
 
     postNavigationFeedbackEvent = [this](const Feedback & feedback)
     {
-      auto * ev = new smacc2::default_events::EvActionFeedback<Feedback, TOrthogonal>();
-      ev->feedbackMessage = feedback;
+      auto * ev = new smacc2::default_events::EvActionFeedback<TClient, TOrthogonal>();
+      //ev->feedbackMessage = feedback;
       this->postEvent(ev);
     };
 
@@ -146,14 +151,21 @@ public:
 
   void onInitialize() override
   {
+    RCLCPP_INFO(getLogger(), "[CpNav2ActionInterface] Component initializing");
+
+    // Require the underlying action client component
+    this->requiresComponent(actionClient_, ComponentRequirement::HARD);
+
     // Wire up signal connections from action client to nav2-specific signals
     if (actionClient_)
     {
       // Connect action client signals to our nav2-specific signals and event posting using method pointers
-      actionClient_->onSucceeded(&CpNav2ActionInterface::onNavigationSuccess, this);
-      actionClient_->onAborted(&CpNav2ActionInterface::onNavigationAborted, this);
-      actionClient_->onCancelled(&CpNav2ActionInterface::onNavigationCancelled, this);
-      actionClient_->onFeedback(&CpNav2ActionInterface::onNavigationFeedback, this);
+      // these are the main smacc signals in the action client, our navigation client behavior subscribes to them and reacts accordingly
+      // each derived behavior do something different in reaction to these signals
+      actionClient_->onSucceeded(&CpNav2ActionInterface::onNavigationSuccessCallback, this);
+      actionClient_->onAborted(&CpNav2ActionInterface::onNavigationAbortedCallback, this);
+      actionClient_->onCancelled(&CpNav2ActionInterface::onNavigationCancelledCallback, this);
+      actionClient_->onFeedback(&CpNav2ActionInterface::onNavigationFeedbackCallback, this);
 
       RCLCPP_INFO(getLogger(), "[CpNav2ActionInterface] Signal connections established");
     }
@@ -164,7 +176,10 @@ public:
     }
   }
 
-  // Signal connection methods for external subscribers
+  // Access to underlying action client for advanced usage
+  ActionClient * getActionClient() const { return actionClient_; }
+
+  // These methods are used by other client behavior and components that want to react to navigation events.
   template <typename T>
   boost::signals2::connection onNavigationSucceeded(
     void (T::*callback)(const WrappedResult &), T * object)
@@ -195,14 +210,11 @@ public:
     return this->getStateMachine()->createSignalConnection(onNavigationFeedback_, callback, object);
   }
 
-  // Access to underlying action client for advanced usage
-  ActionClient * getActionClient() const { return actionClient_; }
-
 private:
-  ActionClient * actionClient_ = nullptr;
+  smacc2::client_core_components::CpActionClient<ActionType> * actionClient_ = nullptr;
 
   // Event translation callbacks
-  void onNavigationSuccess(const WrappedResult & result)
+  void onNavigationSuccessCallback(const WrappedResult & result)
   {
     RCLCPP_INFO(getLogger(), "[CpNav2ActionInterface] Navigation succeeded");
     onNavigationSucceeded_(result);
@@ -212,7 +224,7 @@ private:
     }
   }
 
-  void onNavigationAborted(const WrappedResult & result)
+  void onNavigationAbortedCallback(const WrappedResult & result)
   {
     RCLCPP_WARN(getLogger(), "[CpNav2ActionInterface] Navigation aborted");
     onNavigationAborted_(result);
@@ -222,7 +234,7 @@ private:
     }
   }
 
-  void onNavigationCancelled(const WrappedResult & result)
+  void onNavigationCancelledCallback(const WrappedResult & result)
   {
     RCLCPP_INFO(getLogger(), "[CpNav2ActionInterface] Navigation cancelled");
     onNavigationCancelled_(result);
@@ -232,7 +244,7 @@ private:
     }
   }
 
-  void onNavigationFeedback(const Feedback & feedback)
+  void onNavigationFeedbackCallback(const Feedback & feedback)
   {
     RCLCPP_DEBUG(getLogger(), "[CpNav2ActionInterface] Navigation feedback received");
     onNavigationFeedback_(feedback);
@@ -240,21 +252,6 @@ private:
     {
       postNavigationFeedbackEvent(feedback);
     }
-  }
-
-  // Nav2-specific goal construction
-  Goal createNavigationGoal(const geometry_msgs::msg::PoseStamped & target)
-  {
-    Goal goal;
-    goal.pose = target;
-
-    // Set default behavior_tree if not specified
-    if (goal.behavior_tree.empty())
-    {
-      goal.behavior_tree = "";  // Let Nav2 use default behavior tree
-    }
-
-    return goal;
   }
 };
 
