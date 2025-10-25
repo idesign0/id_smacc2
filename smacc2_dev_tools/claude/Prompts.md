@@ -16,3 +16,49 @@ The logic found in ClRos2Timer::onInitialize() should be moved to smacc2::client
 Use the keyboard_client as the example, and compile and test frequently using the sm_cl_ros2_timer_unit_test_1 package and the run command:ros2 launch
  sm_cl_ros2_timer_unit_test_1 
  sm_cl_ros2_timer_unit_test_1.launch
+
+Perform a test running the sm_panda_moveit2z_cb_inventory package, following the Runtime Test Procedures described in the sm_reference_library CLAUDE.md file. Perfrom the test 5 times.
+
+cd src/smacc2
+
+Load the following files into context:
+src/SMACC2/.claude/settings.json
+src/SMACC2/CLAUDE.md
+src/SMACC2/smacc2_client_library/CLAUDE.md
+src/SMACC2/smacc2_sm_reference_library/CLAUDE.md
+
+Perform a test running the sm_panda_moveit2z_cb_inventory package, following
+  the Runtime Test Procedures described in the smacc2_sm_reference_library/CLAUDE.md
+  file. Perform the test 3 times in a row, in all tests the state machine
+  should at least transition out of StKnownState1, before closing it Check this by looking at the transition_log topic. 
+  
+   #### ⚠️ CRITICAL: Test Completion Requirements
+  **When instructed to perform multiple tests (e.g., "3 tests"), Claude MUST
+  complete ALL tests as specified. No exceptions.**
+
+  **Enforcement rules:**
+  - Use TodoWrite tool to track all test completions and enforce accountability
+
+  Follow the test procedures exactly. Take no shortcuts. 
+  Focus only on test results and errors. Ignore routine ROS node startup messages, background process outputs, and standard system logs unless they indicate failures.
+
+
+yes, but first please suggest some edits to the sm_reference_library
+  CLAUDE.md file Runtime Test Procedures section so that this never happens
+  again.
+
+  add the bash command i approved to the src/SMACC2/.claude/settings.json file
+
+In claude code, im performing runtime tests that launch ros nodes, and I using way too many tokens on system reminders related to background processes. How can i modify my prompts, claude.md files, and project settings to reduce token usage related to this issue?
+
+
+source install/setup.bash && ros2 topic echo /SmPandaMoveit2zCbInventory/smacc/transition_log
+
+lets run and debug the sm_panda_moveit2z_cb_inventory package. Use the launch command ros2 launch sm_panda_moveit2z_cb_inventory sm_panda_moveit2z_cb_inventory.launch.py and monitor the topic using the command: 
+source install/setup.bash && ros2 topic echo /SmPandaMoveit2zCbInventory/smacc/transition_log
+
+The following states aren't working in the sense that they show no movement:
+StMoveCartesianRelative2
+StMoveCartesianRelative
+StPouringMotion
+StCircularPivotMotion
