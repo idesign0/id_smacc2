@@ -26,12 +26,66 @@
 
 namespace cl_moveit2z
 {
-// releases the current attached object
+/**
+ * @brief Client behavior that detaches the currently attached collision object
+ *
+ * This behavior detaches whatever object is currently attached to the robot's
+ * gripper (tracked in CpGraspingComponent::currentAttachedObjectName) and
+ * removes it from the planning scene. Posts success or failure event based
+ * on the detach operation result.
+ */
 class CbDetachObject : public smacc2::SmaccAsyncClientBehavior
 {
 public:
-  virtual void onEntry() override;
+  /**
+   * @brief Called when the behavior is entered
+   *
+   * Retrieves the currently attached object name from CpGraspingComponent,
+   * detaches it from the gripper, and removes it from the planning scene.
+   */
+  inline void onEntry() override
+  {
+    cl_moveit2z::CpGraspingComponent * graspingComponent;
+    this->requiresComponent(graspingComponent);
 
-  virtual void onExit() override;
+    cl_moveit2z::ClMoveit2z * moveGroupClient;
+    this->requiresClient(moveGroupClient);
+
+    if (graspingComponent->currentAttachedObjectName)
+    {
+      RCLCPP_INFO_STREAM(
+        getLogger(),
+        "[CbDetachObject] Detaching object: " << *(graspingComponent->currentAttachedObjectName));
+
+      auto & planningSceneInterface = moveGroupClient->planningSceneInterface;
+      auto res = moveGroupClient->moveGroupClientInterface->detachObject(
+        *(graspingComponent->currentAttachedObjectName));
+
+      planningSceneInterface->removeCollisionObjects(
+        {*(graspingComponent->currentAttachedObjectName)});
+
+      if (res)
+      {
+        RCLCPP_INFO(getLogger(), "[CbDetachObject] Detach succeeded");
+        this->postSuccessEvent();
+      }
+      else
+      {
+        RCLCPP_ERROR(getLogger(), "[CbDetachObject] Detach failed");
+        this->postFailureEvent();
+      }
+    }
+    else
+    {
+      RCLCPP_ERROR(getLogger(), "[CbDetachObject] No object currently attached");
+      this->postFailureEvent();
+    }
+  }
+
+  /**
+   * @brief Called when the behavior is exited
+   */
+  inline void onExit() override {}
 };
+
 }  // namespace cl_moveit2z

@@ -18,46 +18,19 @@
  *
  ******************************************************************************************************************/
 
-#include <tf2/impl/utils.h>
-#include <tf2/utils.h>
 #include <cl_moveit2z/cl_moveit2z.hpp>
-#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
-
-using namespace std::chrono_literals;
-using namespace moveit::planning_interface;
 
 namespace cl_moveit2z
 {
+// Declare the Client's constructors.
+ClMoveit2z::ClMoveit2z(std::string groupName) : options_(groupName) {}
+
 ClMoveit2z::ClMoveit2z(const moveit::planning_interface::MoveGroupInterface::Options & options)
 : options_(options)
 {
 }
 
-ClMoveit2z::ClMoveit2z(std::string groupName) : options_(groupName) {}
-
+// Declare the Client's destructor.
 ClMoveit2z::~ClMoveit2z() {}
-
-void ClMoveit2z::onInitialize()
-{
-  moveGroupClientInterface = std::make_shared<MoveGroupInterface>(getNode(), options_);
-  planningSceneInterface = std::make_shared<PlanningSceneInterface>(options_.move_group_namespace_);
-}
-
-void ClMoveit2z::postEventMotionExecutionSucceded()
-{
-  RCLCPP_INFO(getLogger(), "[ClMoveit2z] Post Motion Success Event");
-  postEventMotionExecutionSucceded_();
-}
-
-void ClMoveit2z::postEventMotionExecutionFailed()
-{
-  RCLCPP_INFO(getLogger(), "[ClMoveit2z] Post Motion Failure Event");
-  postEventMotionExecutionFailed_();
-}
-
-const moveit::planning_interface::MoveGroupInterface::Options & ClMoveit2z::getOptions() const
-{
-  return options_;
-}
 
 }  // namespace cl_moveit2z

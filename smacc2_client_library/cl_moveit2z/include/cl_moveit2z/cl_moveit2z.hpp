@@ -91,11 +91,25 @@ public:
 
   virtual ~ClMoveit2z();
 
-  void onInitialize() override;
+  inline void onInitialize() override
+  {
+    moveGroupClientInterface =
+      std::make_shared<moveit::planning_interface::MoveGroupInterface>(getNode(), options_);
+    planningSceneInterface = std::make_shared<moveit::planning_interface::PlanningSceneInterface>(
+      options_.move_group_namespace_);
+  }
 
-  void postEventMotionExecutionSucceded();
+  inline void postEventMotionExecutionSucceded()
+  {
+    RCLCPP_INFO(getLogger(), "[ClMoveit2z] Post Motion Success Event");
+    postEventMotionExecutionSucceded_();
+  }
 
-  void postEventMotionExecutionFailed();
+  inline void postEventMotionExecutionFailed()
+  {
+    RCLCPP_INFO(getLogger(), "[ClMoveit2z] Post Motion Failure Event");
+    postEventMotionExecutionFailed_();
+  }
 
   template <typename TOrthogonal, typename TSourceObject>
   void onOrthogonalAllocation()
@@ -125,7 +139,10 @@ public:
     return this->getStateMachine()->createSignalConnection(onFailed_, callback, object);
   }
 
-  const moveit::planning_interface::MoveGroupInterface::Options & getOptions() const;
+  inline const moveit::planning_interface::MoveGroupInterface::Options & getOptions() const
+  {
+    return options_;
+  }
 
 private:
   std::function<void()> postEventMotionExecutionSucceded_;
