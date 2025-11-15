@@ -29,6 +29,7 @@
   <depend>moveit</depend>
   <depend>cl_keyboard</depend>
   <depend>rclcpp</depend>
+  <depend>yaml-cpp</depend>
 
 
   <exec_depend>joint_trajectory_controller</exec_depend>

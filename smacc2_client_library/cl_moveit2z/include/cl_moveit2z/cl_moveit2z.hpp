@@ -96,7 +96,7 @@ public:
     moveGroupClientInterface =
       std::make_shared<moveit::planning_interface::MoveGroupInterface>(getNode(), options_);
     planningSceneInterface = std::make_shared<moveit::planning_interface::PlanningSceneInterface>(
-      options_.move_group_namespace_);
+      options_.move_group_namespace);
   }
 
   inline void postEventMotionExecutionSucceded()

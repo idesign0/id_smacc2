@@ -188,7 +188,7 @@ public:
     const moveit::planning_interface::MoveGroupInterface::Plan & plan,
     const ExecutionOptions & options = {})
   {
-    return execute(plan.trajectory_, options);
+    return execute(plan.trajectory, options);
   }
 
   /**

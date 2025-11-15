@@ -184,7 +184,7 @@ private:
 
 - [ClAprilTagDetector/CpAprilVisualization](https://github.com/robosoft-ai/nova_carter_sm_library/blob/main/sm_nav2_test_7/include/sm_nav2_test_7/clients/cl_april_tag_detector/components/cp_april_visualization.hpp)
 
-- [ClNav2Z/CpWaypointsVisualizer](https://github.com/robosoft-ai/SMACC2/blob/humble/smacc2_client_library/nav2z_client/nav2z_client/include/nav2z_client/components/waypoints_navigator/cp_waypoints_visualizer.hpp)
+- [ClNav2Z/CpWaypointsVisualizer](https://github.com/robosoft-ai/SMACC2/blob/jazzy/smacc2_client_library/nav2z_client/nav2z_client/include/nav2z_client/components/waypoints_navigator/cp_waypoints_visualizer.hpp)
 
 
 ### 3. SERVICE-BASED CLIENTS
@@ -232,7 +232,7 @@ private:
 **Used for:** Wrapping an API
 **Example:** `cl_moveit2z` 
 
-- [ClMoveit2Z](https://github.com/robosoft-ai/SMACC2/blob/humble/smacc2_client_library/cl_moveit2z/include/cl_moveit2z/cl_moveit2z.hpp)
+- [ClMoveit2Z](https://github.com/robosoft-ai/SMACC2/blob/jazzy/smacc2_client_library/cl_moveit2z/include/cl_moveit2z/cl_moveit2z.hpp)
 
 
 
@@ -1014,7 +1014,7 @@ https://github.com/robosoft-ai/SMACC2
 https://github.com/robosoft-ai/nova_carter_sm_library
 
 ## Doxygen
-https://robosoft-ai.github.io/smacc2_doxygen/humble/html/index.html
+https://robosoft-ai.github.io/smacc2_doxygen/jazzy/html/index.html
 
 ## Documentation
 https://smacc2.robosoft.ai/

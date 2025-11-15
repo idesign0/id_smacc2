@@ -261,8 +261,8 @@ void SignalDetector::pollOnce()
 {
   // precondition: smaccStateMachine_ != nullptr
 
-  //TRACEPOINT( spinOnce);
-  TRACEPOINT(spinOnce);
+  //TRACETOOLS_TRACEPOINT( spinOnce);
+  TRACETOOLS_TRACEPOINT(spinOnce);
 
   std::lock_guard<std::recursive_mutex> lock(smaccStateMachine_->m_mutex_);
   try
@@ -284,9 +284,9 @@ void SignalDetector::pollOnce()
             node->get_logger(),
             "[PollOnce] update client call:  " << demangleType(typeid(*updatableClient)));
 
-          TRACEPOINT(smacc2_state_update_start, updatableElementName);
+          TRACETOOLS_TRACEPOINT(smacc2_state_update_start, updatableElementName);
           updatableClient->executeUpdate(smaccStateMachine_->getNode());
-          TRACEPOINT(smacc2_state_update_start, updatableElementName);
+          TRACETOOLS_TRACEPOINT(smacc2_state_update_start, updatableElementName);
         }
         catch (const std::exception & e)
         {
@@ -321,10 +321,10 @@ void SignalDetector::pollOnce()
           RCLCPP_DEBUG_STREAM(
             getLogger(), "pollOnce update client behavior call: "
                            << demangleType(typeid(*udpatableStateElement)));
-          TRACEPOINT(smacc2_state_update_start, updatableElementNameCstr);
+          TRACETOOLS_TRACEPOINT(smacc2_state_update_start, updatableElementNameCstr);
 
           udpatableStateElement->executeUpdate(smaccStateMachine_->getNode());
-          TRACEPOINT(smacc2_state_update_start, updatableElementNameCstr);
+          TRACETOOLS_TRACEPOINT(smacc2_state_update_start, updatableElementNameCstr);
         }
       }
     }

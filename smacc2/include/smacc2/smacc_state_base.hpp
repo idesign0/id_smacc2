@@ -129,10 +129,10 @@ public:
       this->getStateMachine().notifyOnStateExitting(derivedThis);
       try
       {
-        TRACEPOINT(smacc2_state_onExit_start, STATE_NAME);
+        TRACETOOLS_TRACEPOINT(smacc2_state_onExit_start, STATE_NAME);
         // static_cast<MostDerived *>(this)->onExit();
         standardOnExit(*derivedThis);
-        TRACEPOINT(smacc2_state_onExit_end, STATE_NAME);
+        TRACETOOLS_TRACEPOINT(smacc2_state_onExit_end, STATE_NAME);
       }
       catch (...)
       {
@@ -382,9 +382,9 @@ public:
       SmaccState<MostDerived, Context, InnerInitial, historyMode>::my_context(pContext));
     const inner_context_ptr_type pInnerContext(state);
 
-    TRACEPOINT(smacc2_state_onEntry_start, STATE_NAME);
+    TRACETOOLS_TRACEPOINT(smacc2_state_onEntry_start, STATE_NAME);
     state->entryStateInternal();
-    TRACEPOINT(smacc2_state_onEntry_end, STATE_NAME);
+    TRACETOOLS_TRACEPOINT(smacc2_state_onEntry_end, STATE_NAME);
 
     outermostContextBase.add(pInnerContext);
     return pInnerContext;
@@ -493,10 +493,10 @@ private:
     // second the orthogonals are internally configured
     this->getStateMachine().notifyOnRuntimeConfigured(derivedthis);
 
-    TRACEPOINT(smacc2_state_onRuntimeConfigure_start, STATE_NAME);
+    TRACETOOLS_TRACEPOINT(smacc2_state_onRuntimeConfigure_start, STATE_NAME);
     // first we runtime configure the state, where we create client behaviors
     static_cast<MostDerived *>(this)->runtimeConfigure();
-    TRACEPOINT(smacc2_state_onRuntimeConfigure_end, STATE_NAME);
+    TRACETOOLS_TRACEPOINT(smacc2_state_onRuntimeConfigure_end, STATE_NAME);
 
     this->getStateMachine().notifyOnRuntimeConfigurationFinished(derivedthis);
 

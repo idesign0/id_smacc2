@@ -8,7 +8,7 @@
 
 First, source your ros2 installation.
 ```
-source /opt/ros/humble/setup.bash
+source /opt/ros/jazzy/setup.bash
 ```
 
 Before you build, make sure you've installed all the dependencies...
@@ -26,7 +26,7 @@ colcon build
 After you build, remember to source the proper install folder...
 
 ```
-source ~/workspace/humble_ws/install/setup.sh
+source ~/workspace/jazzy_ws/install/setup.sh
 ```
 
 And then run the launch file...

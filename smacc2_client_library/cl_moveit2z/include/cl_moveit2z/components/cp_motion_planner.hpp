@@ -272,7 +272,7 @@ public:
       double fractionAchieved = moveGroup->computeCartesianPath(
         waypoints, maxStep, jumpThreshold, trajectory, avoidCollisions);
 
-      result.plan.trajectory_ = trajectory;
+      result.plan.trajectory = trajectory;
 
       // Consider successful if we achieved at least 95% of the path
       result.success = (fractionAchieved >= 0.95);

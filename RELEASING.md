@@ -101,11 +101,11 @@ git log X.Y.Z --oneline | grep "critical-commit-hash"
 git push origin your-branch-name
 git push origin X.Y.Z
 
-# Create PR to humble branch on GitHub
+# Create PR to jazzy branch on GitHub
 # Review and merge PR
 ```
 
-**Important:** After PR is merged, ensure the tag X.Y.Z is on the humble branch. You may need to re-create the tag after merge if it was on a feature branch.
+**Important:** After PR is merged, ensure the tag X.Y.Z is on the jazzy branch. You may need to re-create the tag after merge if it was on a feature branch.
 
 ### Phase 4: Bloom Release Process (Human on Host)
 
@@ -139,7 +139,7 @@ git add tracks.yaml
 git commit -m "Update tracks.yaml to version X.Y.Z"
 
 # Run bloom release
-bloom-release smacc2 --rosdistro humble --track humble --unsafe
+bloom-release smacc2 --rosdistro jazzy --track jazzy --unsafe
 
 # When prompted about missing dependencies:
 # - Type 'y' if dependency is optional (e.g., demo packages)
@@ -152,9 +152,9 @@ bloom-release smacc2 --rosdistro humble --track humble --unsafe
 
 **Expected Output:**
 ```
-Releasing package 'smacc2' for 'humble' to: 'release/humble/smacc2'
+Releasing package 'smacc2' for 'jazzy' to: 'release/jazzy/smacc2'
 [... many package releases ...]
-==> git-bloom-generate -y rosdebian --prefix release/humble humble -i 1
+==> git-bloom-generate -y rosdebian --prefix release/jazzy jazzy -i 1
 [... debian branch generation ...]
 
 Open a pull request from 'username/rosdistro:bloom-smacc2-0' into 'ros/rosdistro:master'?
@@ -181,18 +181,18 @@ git fetch upstream
 git checkout -b smacc2-X.Y.Z-release upstream/master
 
 # Find the smacc2 entry
-grep -n "smacc2:" humble/distribution.yaml
+grep -n "smacc2:" jazzy/distribution.yaml
 # Output: 10934:  smacc2:
 
 # Update the version (Claude will provide the sed command)
-sed -i 's/version: OLD_VERSION-REV/version: X.Y.Z-REV/g' humble/distribution.yaml
+sed -i 's/version: OLD_VERSION-REV/version: X.Y.Z-REV/g' jazzy/distribution.yaml
 
 # Verify the change
-sed -n 'LINE_NUMBER,LINE_NUMBER+15p' humble/distribution.yaml | grep version
+sed -n 'LINE_NUMBER,LINE_NUMBER+15p' jazzy/distribution.yaml | grep version
 
 # Commit and push
-git add humble/distribution.yaml
-git commit -m "smacc2: X.Y.Z-REV in 'humble/distribution.yaml' [bloom]"
+git add jazzy/distribution.yaml
+git commit -m "smacc2: X.Y.Z-REV in 'jazzy/distribution.yaml' [bloom]"
 git push origin smacc2-X.Y.Z-release
 ```
 
@@ -200,14 +200,14 @@ git push origin smacc2-X.Y.Z-release
 - Go to your fork: `https://github.com/YOUR_USERNAME/rosdistro`
 - Click "Compare & pull request"
 - **Base:** `ros/rosdistro:master`
-- **Title:** `smacc2: X.Y.Z-REV in 'humble/distribution.yaml' [bloom]`
+- **Title:** `smacc2: X.Y.Z-REV in 'jazzy/distribution.yaml' [bloom]`
 - **Description:**
   ```markdown
   Increasing version of package(s) in repository `smacc2` to `X.Y.Z-REV`:
 
   - upstream repository: https://github.com/robosoft-ai/SMACC2.git
   - release repository: https://github.com/robosoft-ai/SMACC2-release.git
-  - distro file: `humble/distribution.yaml`
+  - distro file: `jazzy/distribution.yaml`
   - bloom version: `0.13.0`
   - previous version for package: `OLD_VERSION-REV`
   ```
@@ -248,14 +248,14 @@ git push origin smacc2-X.Y.Z-release
 # Visit: https://build.ros2.org/job/Hbin_uJ64__smacc2__ubuntu_jammy_amd64__binary/
 
 # Check apt package availability
-apt-cache policy ros-humble-smacc2
+apt-cache policy ros-jazzy-smacc2
 # Should eventually show: Version: X.Y.Z-REVjammy...
 
 # Verify on clean system
-docker run -it ros:humble-ros-base bash
+docker run -it ros:jazzy-ros-base bash
 apt update
-apt install ros-humble-smacc2
-apt show ros-humble-smacc2 | grep Version
+apt install ros-jazzy-smacc2
+apt show ros-jazzy-smacc2 | grep Version
 ```
 
 **Final Steps:**
@@ -269,8 +269,8 @@ apt show ros-humble-smacc2 | grep Version
 
 **Symptom:**
 ```
-Releasing package 'smacc2' for 'humble' to: 'release/humble/smacc2'
-ros-humble-smacc2 (2.3.18-1jammy) jammy; urgency=high  # <-- OLD VERSION!
+Releasing package 'smacc2' for 'jazzy' to: 'release/jazzy/smacc2'
+ros-jazzy-smacc2 (2.3.18-1jammy) jammy; urgency=high  # <-- OLD VERSION!
 ```
 
 **Solution:**
@@ -281,7 +281,7 @@ sed -i 's/last_version: OLD_VERSION/last_version: X.Y.Z/g' tracks.yaml
 git add tracks.yaml
 git commit -m "Update tracks.yaml to version X.Y.Z"
 # Re-run bloom-release
-bloom-release smacc2 --rosdistro humble --track humble --unsafe
+bloom-release smacc2 --rosdistro jazzy --track jazzy --unsafe
 ```
 
 ### Issue 2: rosdep Update Fails
@@ -319,23 +319,23 @@ Failed to resolve some_package on ubuntu:jammy
 ### Issue 4: Tag Not on Correct Branch
 
 **Symptom:**
-Tag was created on feature branch, then PR was merged to humble, but tag isn't on humble branch.
+Tag was created on feature branch, then PR was merged to jazzy, but tag isn't on jazzy branch.
 
 **Solution:**
 ```bash
-# After PR is merged to humble
-git checkout humble
-git pull origin humble
+# After PR is merged to jazzy
+git checkout jazzy
+git pull origin jazzy
 
-# Re-create tag on humble branch
+# Re-create tag on jazzy branch
 git tag -d X.Y.Z  # Delete local tag
 git push origin :refs/tags/X.Y.Z  # Delete remote tag
 git tag -a X.Y.Z -m "Release X.Y.Z - [description]"
 git push origin X.Y.Z
 
-# Verify tag is on humble
+# Verify tag is on jazzy
 git branch --contains X.Y.Z
-# Should show: humble
+# Should show: jazzy
 ```
 
 ### Issue 5: GitHub Authentication Fails
@@ -398,7 +398,7 @@ git push  # Will prompt for username and token
 - [ ] Claude updates package.xml files (42 packages)
 - [ ] Claude generates CHANGELOG entry
 - [ ] Human commits and pushes changes
-- [ ] Human creates and merges PR to humble branch
+- [ ] Human creates and merges PR to jazzy branch
 - [ ] Human creates and pushes release tag
 - [ ] Human fixes rosdep issues (if any)
 - [ ] Human runs bloom-release
@@ -424,11 +424,11 @@ git push  # Will prompt for username and token
 **Documentation:**
 - Main CHANGELOG: `smacc2/CHANGELOG.rst`
 - Release tracks: `https://github.com/robosoft-ai/SMACC2-release/blob/master/tracks.yaml`
-- rosdistro entry: `https://github.com/ros/rosdistro/blob/master/humble/distribution.yaml`
+- rosdistro entry: `https://github.com/ros/rosdistro/blob/master/jazzy/distribution.yaml`
 
 **Monitoring:**
 - Buildfarm: `https://build.ros2.org/`
-- Apt packages: `http://packages.ros.org/ros2/ubuntu/pool/main/r/ros-humble-smacc2/`
+- Apt packages: `http://packages.ros.org/ros2/ubuntu/pool/main/r/ros-jazzy-smacc2/`
 - rosdistro PRs: `https://github.com/ros/rosdistro/pulls`
 
 ## Example: Release 2.3.20 Process
@@ -474,8 +474,8 @@ git commit -m "Prepare release 2.3.20..."
 # Created tag
 git tag -a 2.3.20 -m "Release 2.3.20 - Fix double onExit() calls (#556)"
 
-# Pushed (after PR merge to humble)
-git push origin humble
+# Pushed (after PR merge to jazzy)
+git push origin jazzy
 git push origin 2.3.20
 ```
 
@@ -493,7 +493,7 @@ git add tracks.yaml
 git commit -m "Update tracks.yaml to version 2.3.20"
 
 # Ran bloom
-bloom-release smacc2 --rosdistro humble --track humble --unsafe
+bloom-release smacc2 --rosdistro jazzy --track jazzy --unsafe
 # Answered 'y' to missing ros_publisher_client dependency (optional demo package)
 # Automatic PR failed with 403 error
 ```
@@ -510,13 +510,13 @@ git fetch upstream
 git checkout -b smacc2-2.3.20-release upstream/master
 
 # Updated version
-grep -n "smacc2:" humble/distribution.yaml
+grep -n "smacc2:" jazzy/distribution.yaml
 # Output: 10934:  smacc2:
-sed -i 's/version: 2\.3\.18-1/version: 2.3.20-2/g' humble/distribution.yaml
+sed -i 's/version: 2\.3\.18-1/version: 2.3.20-2/g' jazzy/distribution.yaml
 
 # Committed and pushed
-git add humble/distribution.yaml
-git commit -m "smacc2: 2.3.20-2 in 'humble/distribution.yaml' [bloom]"
+git add jazzy/distribution.yaml
+git commit -m "smacc2: 2.3.20-2 in 'jazzy/distribution.yaml' [bloom]"
 git push origin smacc2-2.3.20-release
 
 # Created PR on GitHub

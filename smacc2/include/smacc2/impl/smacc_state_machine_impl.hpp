@@ -181,7 +181,7 @@ void ISmaccStateMachine::postEvent(EventType * ev, EventLifeTime evlifetime)
 
 #define eventtypename demangleSymbol<EventType>().c_str()
 
-  TRACEPOINT(smacc2_event, eventtypename);
+  TRACETOOLS_TRACEPOINT(smacc2_event, eventtypename);
 
   {
     auto evinfo = SmaccEventInfo(TypeInfo::getTypeInfoFromType<EventType>());

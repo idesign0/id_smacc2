@@ -345,7 +345,7 @@ class CbTimerWithWorkSimulation : public smacc2::SmaccClientBehavior
 
 ### Prerequisites
 
-- ROS 2 (Humble or later)
+- ROS 2 (jazzy or later)
 - SMACC2 framework installed
 - `cl_ros2_timer` client library
 
@@ -409,8 +409,8 @@ If you see "single-threaded mode", you launched the wrong variant.
 - [GitHub Issue #571](https://github.com/robosoft-ai/SMACC2/issues/571) - Original request for multithread executor documentation
 
 ### ROS 2 Documentation
-- [ROS 2 Executors](https://docs.ros.org/en/humble/Concepts/About-Executors.html)
-- [MultiThreadedExecutor API](https://docs.ros.org/en/humble/p/rclcpp/generated/classrclcpp_1_1executors_1_1MultiThreadedExecutor.html)
+- [ROS 2 Executors](https://docs.ros.org/en/jazzy/Concepts/About-Executors.html)
+- [MultiThreadedExecutor API](https://docs.ros.org/en/jazzy/p/rclcpp/generated/classrclcpp_1_1executors_1_1MultiThreadedExecutor.html)
 
 ### Code Files
 - `sm_multithread_test_1_node.cpp` - Multi-threaded entry point
