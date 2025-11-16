@@ -21,7 +21,7 @@ colcon build
 Then source the proper workspace...
 
 ```
-source ~/workspace/jazzy_ws/install/setup.sh
+source install/setup.bash
 ```
 
 And then run the launch file...
