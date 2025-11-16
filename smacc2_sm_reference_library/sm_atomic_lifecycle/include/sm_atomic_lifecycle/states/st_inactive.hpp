@@ -41,6 +41,7 @@ struct StInactive : smacc2::SmaccState<StInactive, SmAtomicLifecycle>
   // STATE FUNCTIONS
   static void staticConfigure()
   {
+    configure_orthogonal<OrLifecycleNode, CbActivate>();
   }
 
   void runtimeConfigure()

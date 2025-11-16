@@ -40,6 +40,7 @@ struct StUnconfigured : smacc2::SmaccState<StUnconfigured, SmAtomicLifecycle>
   // STATE FUNCTIONS
   static void staticConfigure()
   {
+    configure_orthogonal<OrLifecycleNode, CbConfigure>();
   }
 
   void runtimeConfigure()

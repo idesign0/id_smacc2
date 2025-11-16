@@ -41,6 +41,8 @@ struct StActive : smacc2::SmaccState<StActive, SmAtomicLifecycle>
   // STATE FUNCTIONS
   static void staticConfigure()
   {
+    // Configure timer to demonstrate the active state for a few seconds
+    configure_orthogonal<OrTimer, cl_ros2_timer::CbTimerCountdownOnce>(5);
   }
 
   void runtimeConfigure()
