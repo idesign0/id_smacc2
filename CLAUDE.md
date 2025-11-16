@@ -72,14 +72,14 @@ SmaccSignal is a communication mechanism (template wrapper around boost::signals
 
   ### Example usage in Clients:
   - smacc2_client_library/lifecyclenode_client/include/lifecyclenode_client/lifecyclenode_client.hpp
-  - smacc2_client_library/ros_timer_client/include/ros_timer_client/cl_ros_timer.hpp
+  - smacc2_client_library/cl_ros2_timer/include/cl_ros2_timer/cl_ros_timer.hpp
   - smacc2_client_library/moveit2z_client/include/moveit2z_client/cl_moveit2z.hpp
   - smacc2_client_library/nav2z_client/nav2z_client/include/nav2z_client/nav2z_client.hpp
   - smacc2_client_library/http_client/include/http_client/cl_http_client.hpp
-  - smacc2_client_library/keyboard_client/include/keyboard_client/cl_keyboard.hpp
+  - smacc2_client_library/cl_keyboard/include/cl_keyboard/cl_keyboard.hpp
 
   ### Example usage in Client Behaviors:
-  - smacc2_client_library/ros_timer_client/include/ros_timer_client/client_behaviors/cb_timer_countdown_once.hpp
+  - smacc2_client_library/cl_ros2_timer/include/cl_ros2_timer/client_behaviors/cb_timer_countdown_once.hpp
 
   ### Example usage in Components:
   - smacc2_client_library/nav2z_client/nav2z_client/include/nav2z_client/components/waypoints_navigator/cp_waypoints_navigator.hpp

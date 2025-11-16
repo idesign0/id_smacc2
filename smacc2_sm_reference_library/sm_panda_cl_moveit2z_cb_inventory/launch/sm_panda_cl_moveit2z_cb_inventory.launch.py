@@ -188,15 +188,15 @@ def launch_setup(context, *args, **kwargs):
 
     # Construct logging prefix for keyboard client node
     if log_dir:
-        keyboard_log = os.path.join(log_dir, f"keyboard_client_{timestamp}.log")
+        keyboard_log = os.path.join(log_dir, f"cl_keyboard_{timestamp}.log")
         keyboard_prefix = f"konsole --hold -p tabtitle='Keyboard Client' -e bash -c 'RCUTILS_COLORIZED_OUTPUT=1 \"$@\" 2>&1 | tee {keyboard_log}; exec bash' -- "
     else:
         keyboard_prefix = "konsole --hold -p tabtitle='Keyboard Client' -e"
 
-    keyboard_client_node = Node(
+    cl_keyboard_node = Node(
         package="cl_keyboard",
         executable="keyboard_server_node.py",
-        name="keyboard_client",
+        name="cl_keyboard",
         output="screen",
         prefix=keyboard_prefix,
         arguments=["--ros-args", "--log-level", "INFO"],
@@ -217,7 +217,7 @@ def launch_setup(context, *args, **kwargs):
         joint_state_broadcaster_spawner,
         arm_controller_spawner,
         hand_controller_spawner,
-        keyboard_client_node,
+        cl_keyboard_node,
     ]
 
     return nodes_to_start

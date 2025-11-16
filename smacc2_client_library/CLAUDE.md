@@ -147,7 +147,7 @@ Publishing is easy. Subscribing to topics, and throwing events based on that sub
 
 #### Creating a subscriber client using the CpTopicSubscriber
 
-**Example:** `keyboard_client` subscribing to key events
+**Example:** `cl_keyboard` subscribing to key events
 
 The key point of this approach is using the CpTopicSubscriber that essentially is a SMACC2 Component that wraps a ROS2 subscriber and provides a signal-based callback mechanism and also posts SMACC2 events.
 
