@@ -5,7 +5,7 @@ on:
 jobs:
   ament_lint:
     name: ament_${{ matrix.linter }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -50,7 +50,6 @@ jobs:
           sm_multi_stage_1
           sm_pack_ml
           sm_panda_cl_moveit2z_cb_inventory
-          sm_panda_moveit2z_cb_inventory
           sm_simple_action_client
           sm_three_some
 
