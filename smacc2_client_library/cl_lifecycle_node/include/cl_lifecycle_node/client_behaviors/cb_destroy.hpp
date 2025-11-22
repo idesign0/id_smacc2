@@ -20,11 +20,11 @@
 
 #pragma once
 
-#include <lifecyclenode_client/components/cp_lifecycle_event_monitor.hpp>
-#include <lifecyclenode_client/lifecyclenode_client.hpp>
+#include <cl_lifecycle_node/cl_lifecycle_node.hpp>
+#include <cl_lifecycle_node/components/cp_lifecycle_event_monitor.hpp>
 #include <smacc2/smacc_asynchronous_client_behavior.hpp>
 
-namespace cl_lifecyclenode
+namespace cl_lifecycle_node
 {
 class CbDestroy : public smacc2::SmaccAsyncClientBehavior
 {
@@ -51,4 +51,4 @@ private:
   ClLifecycleNode * lifecycleNodeClient_;
   CpLifecycleEventMonitor * eventMonitor_;
 };
-}  // namespace cl_lifecyclenode
+}  // namespace cl_lifecycle_node

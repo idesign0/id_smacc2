@@ -20,35 +20,35 @@
 
 #pragma once
 
-#include <lifecyclenode_client/components/cp_lifecycle_event_monitor.hpp>
-#include <lifecyclenode_client/lifecyclenode_client.hpp>
+#include <cl_lifecycle_node/cl_lifecycle_node.hpp>
+#include <cl_lifecycle_node/components/cp_lifecycle_event_monitor.hpp>
 #include <smacc2/smacc_asynchronous_client_behavior.hpp>
 
-namespace cl_lifecyclenode
+namespace cl_lifecycle_node
 {
-class CbActivate : public smacc2::SmaccAsyncClientBehavior
+class CbCleanup : public smacc2::SmaccAsyncClientBehavior
 {
 public:
-  CbActivate() {}
-  virtual ~CbActivate() {}
+  CbCleanup() {}
+  virtual ~CbCleanup() {}
 
   template <typename TOrthogonal, typename TSourceObject>
   void onStateOrthogonalAllocation()
   {
     smacc2::SmaccAsyncClientBehavior::onStateOrthogonalAllocation<TOrthogonal, TSourceObject>();
 
-    this->requiresClient(lifecycleNodeClient_);
+    this->requiresClient(this->lifecycleNodeClient_);
     this->requiresComponent(eventMonitor_);
 
-    eventMonitor_->onTransitionOnActivateSuccess_.connect([this]() { this->postSuccessEvent(); });
-    eventMonitor_->onTransitionOnActivateFailure_.connect([this]() { this->postFailureEvent(); });
-    eventMonitor_->onTransitionOnActivateError_.connect([this]() { this->postFailureEvent(); });
+    eventMonitor_->onTransitionOnCleanupSuccess_.connect([this]() { this->postSuccessEvent(); });
+    eventMonitor_->onTransitionOnCleanupFailure_.connect([this]() { this->postFailureEvent(); });
+    eventMonitor_->onTransitionOnCleanupError_.connect([this]() { this->postFailureEvent(); });
   }
 
-  virtual void onEntry() override { lifecycleNodeClient_->activate(); }
+  virtual void onEntry() override { lifecycleNodeClient_->cleanup(); }
 
 private:
   ClLifecycleNode * lifecycleNodeClient_;
   CpLifecycleEventMonitor * eventMonitor_;
 };
-}  // namespace cl_lifecyclenode
+}  // namespace cl_lifecycle_node

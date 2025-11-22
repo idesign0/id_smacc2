@@ -20,17 +20,17 @@
 
 #pragma once
 
-#include <lifecyclenode_client/components/cp_lifecycle_event_monitor.hpp>
-#include <lifecyclenode_client/lifecyclenode_client.hpp>
+#include <cl_lifecycle_node/cl_lifecycle_node.hpp>
+#include <cl_lifecycle_node/components/cp_lifecycle_event_monitor.hpp>
 #include <smacc2/smacc_asynchronous_client_behavior.hpp>
 
-namespace cl_lifecyclenode
+namespace cl_lifecycle_node
 {
-class CbDeactivateOnExit : public smacc2::SmaccAsyncClientBehavior
+class CbConfigure : public smacc2::SmaccAsyncClientBehavior
 {
 public:
-  CbDeactivateOnExit() {}
-  virtual ~CbDeactivateOnExit() {}
+  CbConfigure() {}
+  virtual ~CbConfigure() {}
 
   template <typename TOrthogonal, typename TSourceObject>
   void onStateOrthogonalAllocation()
@@ -40,15 +40,20 @@ public:
     this->requiresClient(lifecycleNodeClient_);
     this->requiresComponent(eventMonitor_);
 
-    eventMonitor_->onTransitionOnDeactivateSuccess_.connect([this]() { this->postSuccessEvent(); });
-    eventMonitor_->onTransitionOnDeactivateFailure_.connect([this]() { this->postFailureEvent(); });
-    eventMonitor_->onTransitionOnDeactivateError_.connect([this]() { this->postFailureEvent(); });
+    eventMonitor_->onTransitionOnConfigureSuccess_.connect(
+      [this]()
+      {
+        RCLCPP_INFO(getLogger(), "CbConfigure: onTransitionOnConfigureSuccess_");
+        this->postSuccessEvent();
+      });
+    eventMonitor_->onTransitionOnConfigureFailure_.connect([this]() { this->postFailureEvent(); });
+    eventMonitor_->onTransitionOnConfigureError_.connect([this]() { this->postFailureEvent(); });
   }
 
-  virtual void onExit() override { lifecycleNodeClient_->deactivate(); }
+  virtual void onEntry() override { lifecycleNodeClient_->configure(); }
 
 private:
   ClLifecycleNode * lifecycleNodeClient_;
   CpLifecycleEventMonitor * eventMonitor_;
 };
-}  // namespace cl_lifecyclenode
+}  // namespace cl_lifecycle_node
