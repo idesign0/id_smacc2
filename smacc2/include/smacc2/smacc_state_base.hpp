@@ -112,25 +112,18 @@ public:
 
   std::string getShortName() { return smacc2::utils::cleanShortTypeName(typeid(MostDerived)); }
 
-  virtual ISmaccState * getParentState()
-  {
-    // auto* ctx = dynamic_cast<ISmaccState*>(this->template context<Context *>());
-
-    return parentState_;
-  }
+  virtual ISmaccState * getParentState() { return parentState_; }
 
   // this function is called by boot statechart before the destructor call
   void exit()
   {
     auto * derivedThis = static_cast<MostDerived *>(this);
-    // this->getStateMachine().notifyOnStateExiting(derivedThis);
     {
       std::lock_guard<std::recursive_mutex> lock(this->getStateMachine().getMutex());
       this->getStateMachine().notifyOnStateExiting(derivedThis);
       try
       {
         TRACETOOLS_TRACEPOINT(smacc2_state_onExit_start, STATE_NAME);
-        // static_cast<MostDerived *>(this)->onExit();
         standardOnExit(*derivedThis);
         TRACETOOLS_TRACEPOINT(smacc2_state_onExit_end, STATE_NAME);
       }
@@ -182,7 +175,6 @@ public:
     configure_orthogonal_internal<TOrthogonal, TBehavior>(
       [=](ISmaccState * state)
       {
-        // auto bh = std::make_shared<TBehavior>(args...);
         auto bh = state->configure<TOrthogonal, TBehavior>();
         initializationFunction(*bh, *(static_cast<MostDerived *>(state)));
       });
@@ -195,7 +187,6 @@ public:
     configure_orthogonal_internal<TOrthogonal, TBehavior>(
       [=](ISmaccState * state)
       {
-        // auto bh = std::make_shared<TBehavior>(args...);
         auto bh = state->configure<TOrthogonal, TBehavior>();
         initializationFunction(*bh);
       });
@@ -205,11 +196,7 @@ public:
   static void configure_orthogonal(Args &&... args)
   {
     configure_orthogonal_internal<TOrthogonal, TBehavior>(
-      [=](ISmaccState * state)
-      {
-        // auto bh = std::make_shared<TBehavior>(args...);
-        state->configure<TOrthogonal, TBehavior>(args...);
-      });
+      [=](ISmaccState * state) { state->configure<TOrthogonal, TBehavior>(args...); });
   }
 
   template <
