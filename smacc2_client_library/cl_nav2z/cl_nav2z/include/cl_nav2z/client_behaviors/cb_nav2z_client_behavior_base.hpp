@@ -40,18 +40,26 @@ public:
     this->requiresComponent(nav2ActionInterface_, ComponentRequirement::HARD);
     this->requiresComponent(actionClient_, ComponentRequirement::HARD);
 
+    // Connect the action result signals here, on the state machine thread during
+    // state configuration: connecting from the behavior's asynchronous onEntry
+    // thread (as sendGoal used to) contends for the state machine mutex and can
+    // deadlock against a concurrent state transition.
+    if (!resultConnectionsInitialized_ && nav2ActionInterface_)
+    {
+      this->onNavigationSucceeded(&CbNav2ZClientBehaviorBase::onNavigationActionSuccess, this);
+      this->onNavigationAborted(&CbNav2ZClientBehaviorBase::onNavigationActionAbort, this);
+      this->onNavigationCancelled(&CbNav2ZClientBehaviorBase::onNavigationActionAbort, this);
+      resultConnectionsInitialized_ = true;
+    }
+
     smacc2::SmaccAsyncClientBehavior::onStateOrthogonalAllocation<TOrthogonal, TSourceObject>();
   }
 
 protected:
-  // NEW: Component-based API - uses components directly
-  void sendGoal(nav2_msgs::action::NavigateToPose::Goal & goal)
-  {
-    if (nav2ActionInterface_)
-    {
-      nav2ActionInterface_->sendGoal(goal);
-    }
-  }
+  // Sends the goal through CpNav2ActionInterface and connects the action result
+  // signals (once) so that navigationResult_ is updated and EvCbSuccess/EvCbFailure
+  // are posted when the navigation finishes.
+  void sendGoal(nav2_msgs::action::NavigateToPose::Goal & goal);
 
   void cancelGoal()
   {
@@ -100,14 +108,16 @@ protected:
   smacc2::client_core_components::CpActionClient<nav2_msgs::action::NavigateToPose> *
     actionClient_ = nullptr;
 
-  rclcpp_action::ResultCode navigationResult_;
+  rclcpp_action::ResultCode navigationResult_ = rclcpp_action::ResultCode::UNKNOWN;
 
-  // Virtual methods for derived classes - now use component types
-  virtual void onNavigationResult(const components::CpNav2ActionInterface::WrappedResult &) {}
-  virtual void onNavigationActionSuccess(const components::CpNav2ActionInterface::WrappedResult &)
-  {
-  }
-  virtual void onNavigationActionAbort(const components::CpNav2ActionInterface::WrappedResult &) {}
+  // Result handlers connected by sendGoal(). The base implementations store the
+  // result code and post the behavior success/failure events; derived classes may
+  // override to customize result handling (see CbNavigateNextWaypointUntilReached).
+  virtual void onNavigationActionSuccess(const components::CpNav2ActionInterface::WrappedResult &);
+  virtual void onNavigationActionAbort(const components::CpNav2ActionInterface::WrappedResult &);
+
+private:
+  bool resultConnectionsInitialized_ = false;
 };
 
 enum class SpinningPlanner

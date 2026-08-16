@@ -24,11 +24,35 @@ namespace cl_nav2z
 {
 CbNav2ZClientBehaviorBase::~CbNav2ZClientBehaviorBase() {}
 
-// REMOVED: All legacy implementation - behaviors now use component APIs directly
-// The base class provides component access but no complex logic
-// Individual behaviors should use:
-//   nav2ActionInterface_->sendGoal(goal)
-//   nav2ActionInterface_->onNavigationSucceeded(&Behavior::onSuccess, this)
-//   etc.
+void CbNav2ZClientBehaviorBase::sendGoal(nav2_msgs::action::NavigateToPose::Goal & goal)
+{
+  if (!nav2ActionInterface_)
+  {
+    RCLCPP_ERROR(
+      getLogger(), "[%s] Cannot send goal, CpNav2ActionInterface not available", getName().c_str());
+    return;
+  }
+
+  // result signal connections are established in onStateOrthogonalAllocation
+  // (state machine thread) - see the header for the threading rationale
+  RCLCPP_INFO_STREAM(getLogger(), "[" << getName() << "] Sending goal");
+  nav2ActionInterface_->sendGoal(goal);
+}
+
+void CbNav2ZClientBehaviorBase::onNavigationActionSuccess(
+  const components::CpNav2ActionInterface::WrappedResult & r)
+{
+  navigationResult_ = r.code;
+  RCLCPP_INFO(getLogger(), "[%s] Propagating success event from action server", getName().c_str());
+  this->postSuccessEvent();
+}
+
+void CbNav2ZClientBehaviorBase::onNavigationActionAbort(
+  const components::CpNav2ActionInterface::WrappedResult & r)
+{
+  navigationResult_ = r.code;
+  RCLCPP_INFO(getLogger(), "[%s] Propagating failure event from action server", getName().c_str());
+  this->postFailureEvent();
+}
 
 }  // namespace cl_nav2z

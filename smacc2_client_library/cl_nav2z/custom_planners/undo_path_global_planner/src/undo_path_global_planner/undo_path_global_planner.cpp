@@ -345,9 +345,33 @@ void UndoPathGlobalPlanner::createDefaultUndoPathPlan(
                            << mindistindex << " (linear min dist " << linear_mindist << ")");
 
     // copy the path at the inverse direction, but only up to the closest point to the goal in the path  (for partial undoing)
-    for (int i = transformedPlan.poses.size() - 1; i >= mindistindex; i--)
+    // NOTE: mindistindex lives in reverse-index space (passes above iterate with i counting
+    // down while walking the array forward: reverse index m maps to array index N-1-m).
+    // The emitted plan must start at the pose closest to the robot (array index
+    // N-1-mindistindex) and walk back to the start of the recorded trail (array index 0),
+    // which is the undo goal. When mindistindex == 0 (robot exactly at the trail tail)
+    // this is identical to emitting the whole path reversed.
+    //
+    // Same-position rotation clusters at the goal end (the poses recorded while the
+    // robot rotated in place before starting the forward motion) are pruned down to
+    // the final goal pose: they carry no positional information for the backward
+    // controller and destabilize the carrot/goal-checker endgame.
+    const double SAME_POSITION_PRUNE_DISTANCE = 0.02;
+    const auto & goalPosition = transformedPlan.poses.front().pose.position;
+    for (int i = (int)transformedPlan.poses.size() - 1 - mindistindex; i >= 0; i--)
     {
       auto & pose = transformedPlan.poses[i];
+
+      if (i != 0)
+      {
+        double gdx = pose.pose.position.x - goalPosition.x;
+        double gdy = pose.pose.position.y - goalPosition.y;
+        if (sqrt(gdx * gdx + gdy * gdy) < SAME_POSITION_PRUNE_DISTANCE)
+        {
+          // part of the in-place rotation cluster at the goal: skip, keep only i == 0
+          continue;
+        }
+      }
 
       rclcpp::Time t(pose.header.stamp);
 
@@ -385,6 +409,15 @@ nav_msgs::msg::Path UndoPathGlobalPlanner::createPlan(
     nh_->get_logger(),
     "[UndoPathGlobalPlanner] last forward path msg size: " << lastForwardPathMsg_.poses.size());
 
+  if (lastForwardPathMsg_.poses.size() == 0)
+  {
+    RCLCPP_WARN_STREAM(
+      nh_->get_logger(),
+      "[UndoPathGlobalPlanner] no forward path received yet (odom_tracker_path), returning "
+      "empty plan");
+    return planMsg;
+  }
+
   RCLCPP_INFO_STREAM(
     nh_->get_logger(), "[UndoPathGlobalPlanner] last forward path frame id: "
                          << lastForwardPathMsg_.poses.front().header.frame_id);
@@ -392,11 +425,6 @@ nav_msgs::msg::Path UndoPathGlobalPlanner::createPlan(
     nh_->get_logger(), "[UndoPathGlobalPlanner] start pose frame id: " << start.header.frame_id);
   RCLCPP_INFO_STREAM(
     nh_->get_logger(), "[UndoPathGlobalPlanner] goal pose frame id: " << goal.header.frame_id);
-
-  if (lastForwardPathMsg_.poses.size() == 0)
-  {
-    return planMsg;
-  }
 
   // ---------- INPUTS ACCOMMODATION -------------------
   RCLCPP_INFO_STREAM(nh_->get_logger(), "[UndoPathGlobalPlanner] Inputs accommodation");
