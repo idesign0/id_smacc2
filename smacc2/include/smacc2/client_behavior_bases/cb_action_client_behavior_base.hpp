@@ -60,14 +60,23 @@ public:
   template <typename TOrthogonal, typename TSourceObject>
   void onStateOrthogonalAllocation()
   {
-    this->requiresComponent(actionClient_, ComponentRequirement::HARD);
+    if (actionClientName_.empty())
+    {
+      this->requiresComponent(actionClient_, ComponentRequirement::HARD);
+    }
+    else
+    {
+      // target a specific named instance when the client holds several
+      // CpActionClient components of the same action type
+      this->requiresComponent(actionClientName_, actionClient_, ComponentRequirement::HARD);
+    }
 
     if (!resultConnectionsInitialized_ && actionClient_ != nullptr)
     {
-      actionClient_->onSucceeded(&CbActionClientBehaviorBase::onActionSuccess, this);
-      actionClient_->onAborted(&CbActionClientBehaviorBase::onActionAbort, this);
-      actionClient_->onCancelled(&CbActionClientBehaviorBase::onActionAbort, this);
-      actionClient_->onFeedback(&CbActionClientBehaviorBase::onActionFeedback, this);
+      actionClient_->onSucceeded(&CbActionClientBehaviorBase::dispatchActionSuccess, this);
+      actionClient_->onAborted(&CbActionClientBehaviorBase::dispatchActionAbort, this);
+      actionClient_->onCancelled(&CbActionClientBehaviorBase::dispatchActionAbort, this);
+      actionClient_->onFeedback(&CbActionClientBehaviorBase::dispatchActionFeedback, this);
       resultConnectionsInitialized_ = true;
     }
 
@@ -110,12 +119,25 @@ protected:
       return false;
     }
 
+    goalActivitySeen_ = false;
     auto goalHandleFuture = actionClient_->sendGoal(goal);
 
     // wait for goal acceptance in short slices so a state exit is honored
     auto deadline = std::chrono::steady_clock::now() + goalResponseTimeout_;
     while (!this->isShutdownRequested() && std::chrono::steady_clock::now() < deadline)
     {
+      // Feedback or a result arriving proves the goal was accepted even if
+      // the goal-response future hasn't been serviced yet: under spin_some, a
+      // high-rate feedback stream (NavigateToPose feeds back continuously
+      // from acceptance) can starve the action client's response processing
+      // for the whole execution. Rejected goals produce no feedback, so their
+      // response resolves the future promptly.
+      if (goalActivitySeen_)
+      {
+        goalInFlight_ = true;
+        return true;
+      }
+
       if (goalHandleFuture.wait_for(std::chrono::milliseconds(50)) == std::future_status::ready)
       {
         if (goalHandleFuture.get() != nullptr)
@@ -132,12 +154,20 @@ protected:
 
     if (!this->isShutdownRequested())
     {
-      RCLCPP_ERROR(
-        getLogger(), "[%s] Timed out waiting for the action server goal response",
-        getName().c_str());
-      this->postFailureEvent();
+      // No response, no feedback, no result within the window: ambiguous, and
+      // observed only under executor starvation with an accepted goal - a
+      // genuine rejection resolves the future in milliseconds. Assume the
+      // goal is running and let the result signals finish the behavior
+      // (fire-and-forget, the pre-template behavior), rather than failing a
+      // healthy mission.
+      RCLCPP_WARN(
+        getLogger(),
+        "[%s] No goal response from the action server after %ld ms; assuming the goal was "
+        "accepted (a rejection responds promptly) - result signals will finish this behavior",
+        getName().c_str(), static_cast<long>(goalResponseTimeout_.count()));
+      goalInFlight_ = true;
     }
-    return false;
+    return true;
   }
 
   void cancelGoal()
@@ -153,7 +183,6 @@ protected:
   // derived classes may override to customize result handling.
   virtual void onActionSuccess(const WrappedResult & result)
   {
-    goalInFlight_ = false;
     actionResult_ = result.code;
     RCLCPP_INFO(getLogger(), "[%s] Action succeeded, propagating success event", getName().c_str());
     this->postSuccessEvent();
@@ -161,7 +190,6 @@ protected:
 
   virtual void onActionAbort(const WrappedResult & result)
   {
-    goalInFlight_ = false;
     actionResult_ = result.code;
     RCLCPP_INFO(getLogger(), "[%s] Action failed, propagating failure event", getName().c_str());
     this->postFailureEvent();
@@ -170,7 +198,14 @@ protected:
   // optional: override to consume action feedback (distance traveled etc.)
   virtual void onActionFeedback(const Feedback & /*feedback*/) {}
 
+  // set from the derived constructor to bind to a named CpActionClient
+  // instance; empty binds the first of matching type. Must be set before
+  // onStateOrthogonalAllocation runs (i.e. NOT in runtimeConfigure, which
+  // executes after allocation)
+  void setActionClientName(std::string name) { actionClientName_ = std::move(name); }
+
   ActionClientComponent * actionClient_ = nullptr;
+  std::string actionClientName_;
 
   rclcpp_action::ResultCode actionResult_ = rclcpp_action::ResultCode::UNKNOWN;
 
@@ -178,8 +213,32 @@ protected:
   std::chrono::milliseconds goalResponseTimeout_ = std::chrono::milliseconds(10000);
 
 private:
+  // trampolines wired to the component signals: clear the in-flight flag
+  // regardless of what a derived handler override does, then dispatch to the
+  // overridable virtuals
+  void dispatchActionSuccess(const WrappedResult & result)
+  {
+    goalActivitySeen_ = true;
+    goalInFlight_ = false;
+    this->onActionSuccess(result);
+  }
+
+  void dispatchActionAbort(const WrappedResult & result)
+  {
+    goalActivitySeen_ = true;
+    goalInFlight_ = false;
+    this->onActionAbort(result);
+  }
+
+  void dispatchActionFeedback(const Feedback & feedback)
+  {
+    goalActivitySeen_ = true;
+    this->onActionFeedback(feedback);
+  }
+
   bool resultConnectionsInitialized_ = false;
   std::atomic<bool> goalInFlight_{false};
+  std::atomic<bool> goalActivitySeen_{false};
 };
 
 }  // namespace client_behavior_bases
