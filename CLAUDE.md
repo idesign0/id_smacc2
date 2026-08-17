@@ -55,6 +55,26 @@ SmaccSignal is a communication mechanism (template wrapper around boost::signals
     - Coordinates signal connections/disconnections
     - Handles execution model (single-threaded vs multi-threaded)
 
+  ### ⚠️ Async Thread Locking Rule (hard-won, 2026-08)
+  Never call `requiresComponent()` or `createSignalConnection()` from an
+  asynchronous client behavior thread (the onEntry/onExit threads of
+  SmaccAsyncClientBehavior). Both lock the state machine's `m_mutex_`; the
+  state machine thread holds that mutex during state transitions/disposal
+  while joining those very threads — a circular wait that deadlocks the whole
+  state machine. Capture component pointers and wire signal connections in
+  `onStateOrthogonalAllocation()` (state machine thread) instead. Two such
+  deadlocks were found and fixed in cl_nav2z (CbUndoPathBackwards onExit,
+  CbNav2ZClientBehaviorBase sendGoal).
+
+  ### ⚠️ Event Lifetime Rule (hard-won, 2026-08)
+  Behavior events (`EvCbSuccess`/`EvCbFailure<TBehavior, TOrthogonal>`) are
+  state-scoped and are discarded on state transition. Component/client events
+  (`EvActionSucceeded<TClient, TOrthogonal>` etc.) are machine-scoped: they can
+  survive a transition sitting in the queue and fire spuriously in the NEXT
+  state, whose transition table may interpret them as its own navigation
+  result. Transition tables should react to `EvCb*` events; only use
+  `EvAction*` when no behavior-scoped equivalent exists.
+
   ### Signal Connection Lifetime Management
   Signal connections are managed through the state machine's
   createSignalConnection() which:
@@ -78,6 +98,7 @@ SmaccSignal is a communication mechanism (template wrapper around boost::signals
 
   ### Important Client Library Related Files
   - smacc2/include/smacc2/smacc_asynchronous_client_behavior.hpp
+  - smacc2/include/smacc2/client_behavior_bases/cb_action_client_behavior_base.hpp
   - smacc2/include/smacc2/client_core_components/cp_topic_subscriber.hpp
   - smacc2/include/smacc2/impl/smacc_asynchronous_client_behavior_impl.hpp
   - smacc2/include/smacc2/client_bases/smacc_action_client_base.hpp

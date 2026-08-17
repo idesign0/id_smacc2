@@ -32,9 +32,6 @@ CbOrbitLocation::CbOrbitLocation(
 
 void CbOrbitLocation::onEntry()
 {
-  this->requiresComponent(trajectorySetpoint_);
-  this->requiresComponent(localPosition_);
-
   // Compute starting angle from current position relative to center
   float dx = localPosition_->getX() - centerX_;
   float dy = localPosition_->getY() - centerY_;
@@ -59,6 +56,8 @@ void CbOrbitLocation::onExit() {}
 
 void CbOrbitLocation::update()
 {
+  CbPx4ClientBehaviorBase::update();
+
   auto now = std::chrono::steady_clock::now();
   double dt = std::chrono::duration<double>(now - lastUpdateTime_).count();
   lastUpdateTime_ = now;
@@ -81,7 +80,7 @@ void CbOrbitLocation::update()
   if (totalAngle >= requiredAngle)
   {
     RCLCPP_INFO(getLogger(), "CbOrbitLocation: %d orbits completed - posting success", numOrbits_);
-    this->postSuccessEvent();
+    this->postPx4Success();
   }
 }
 

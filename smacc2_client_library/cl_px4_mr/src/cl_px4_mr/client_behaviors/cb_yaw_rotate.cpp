@@ -26,9 +26,6 @@ CbYawRotate::CbYawRotate(float targetYawRad, bool relative)
 
 void CbYawRotate::onEntry()
 {
-  this->requiresComponent(trajectorySetpoint_);
-  this->requiresComponent(localPosition_);
-
   float currentYaw = localPosition_->getHeading();
 
   if (relative_)
@@ -58,6 +55,8 @@ void CbYawRotate::onExit() {}
 
 void CbYawRotate::update()
 {
+  CbPx4ClientBehaviorBase::update();
+
   float currentYaw = localPosition_->getHeading();
 
   // Compute shortest angular distance
@@ -69,7 +68,7 @@ void CbYawRotate::update()
     RCLCPP_INFO(
       getLogger(), "CbYawRotate: target yaw reached (error=%.3f rad) - posting success",
       std::abs(diff));
-    this->postSuccessEvent();
+    this->postPx4Success();
   }
 }
 

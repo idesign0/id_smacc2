@@ -192,6 +192,32 @@ Timer component for periodic or one-shot execution.
 
 //////////////////////////////////////////////////////////////////////////////
 
+# Client Behavior Base Classes (the completion-source discipline)
+
+Every async client behavior terminates through state-scoped `EvCbSuccess`/`EvCbFailure`,
+and every base enforces the same threading discipline: components are resolved and
+completion signals wired in `onStateOrthogonalAllocation()` (state machine thread),
+NEVER from the async onEntry/onExit threads (see the Async Thread Locking Rule in the
+root CLAUDE.md). `onEntry()` is pure work issuance. What differs is only where
+completion comes from — three sources, three bases:
+
+| Base | Package / Path | Completion Source |
+|------|----------------|-------------------|
+| `CbActionClientBehaviorBase<TAction>` | core: `smacc2/include/smacc2/client_behavior_bases/cb_action_client_behavior_base.hpp` | ROS action result (via `CpActionClient<TAction>` signals); guards server-not-ready and goal rejection (posts failure, never hangs); cancels in-flight goals on early state exit |
+| `CbMoveit2zClientBehaviorBase` | `cl_moveit2z/.../client_behaviors/cb_moveit2z_client_behavior_base.hpp` | blocking call return (MoveGroupInterface plan/execute); `postMotionSuccess()`/`postMotionFailure()` also emit the client's motion events |
+| `CbPx4ClientBehaviorBase` | `cl_px4_mr/.../client_behaviors/cb_px4_client_behavior_base.hpp` | component signal (`wireCompletionSignals()` hook) or update() predicate; `setTimeout()` arms a watchdog checked at ~20 Hz — the failure leg for signal-driven behaviors; `postPx4Success()`/`postPx4Failure()` latch so a timeout and a late signal never double-post |
+
+Rules that apply to all three:
+- A derived behavior that defines its own `onStateOrthogonalAllocation` MUST chain the
+  base's (hiding it breaks postSuccessEvent → std::bad_function_call at runtime).
+- Nav2 wrapper example: `CbSpin`/`CbBackUp`/`CbDriveOnHeading` in cl_nav2z are ~20-line
+  subclasses of the template; the SM's orthogonal supplies the component:
+  `createComponent<CpActionClient<nav2_msgs::action::Spin>>("/spin")`.
+- Validation SMs: `sm_nav2_gazebo_test_3` (template + wrappers, incl. rejection and
+  server-abort legs), `sm_cl_px4_mr_test_1` (px4 base, incl. timeout leg).
+
+//////////////////////////////////////////////////////////////////////////////
+
 # Client Behavior Patterns
 
 Behaviors access components via `requiresComponent()` and connect to component signals.
@@ -389,6 +415,40 @@ Behaviors access components via `requiresComponent()` and connect to component s
 | cb_save_slam_map | Save current SLAM map | [GitHub](https://github.com/robosoft-ai/SMACC2/blob/jazzy/smacc2_client_library/cl_nav2z/include/cl_nav2z/client_behaviors/cb_save_slam_map.hpp) / `src/SMACC2/smacc2_client_library/cl_nav2z/include/cl_nav2z/client_behaviors/cb_save_slam_map.hpp` |
 | cb_pause_object_tracking | Pause tracking operations | [GitHub](https://github.com/robosoft-ai/SMACC2/blob/jazzy/smacc2_client_library/cl_foundation_pose/include/cl_foundation_pose/client_behaviors/cb_pause_object_tracking.hpp) / `src/SMACC2/smacc2_client_library/cl_foundation_pose/include/cl_foundation_pose/client_behaviors/cb_pause_object_tracking.hpp` |
 
+
+//////////////////////////////////////////////////////////////////////////////
+
+# Undo Path Backwards Navigation (cl_nav2z)
+
+Working as of 2026-08 (validated in `sm_nav2_gazebo_test_2`, 10 undos/mission).
+Pipeline: `CpOdomTracker` records the trail (RECORD_PATH) and publishes
+`odom_tracker_path` → `UndoPathGlobalPlanner` (planner_server) replays it in
+reverse → `BackwardLocalPlanner` follows backwards while the tracker consumes
+the trail (CLEAR_PATH).
+
+Key facts:
+- Requires a custom nav2 config: SMACC2 planner/controller plugins registered,
+  goal checkers declared, and a BT with Planner/Controller/GoalChecker selector
+  nodes (no Spin/BackUp recoveries). Reference config:
+  `smacc2_sm_reference_library/sm_nav2_gazebo_test_2/config/`.
+- Curved trails: disable the odom tracker's angular clearing gate
+  (`clear_angular_distance_threshold: 3.14`, point threshold ~0.1) or trail
+  consumption stalls and the replanned plan flaps at bends; run the undo
+  controller instance in free navigation mode
+  (`pure_spinning_straight_line_mode: false`).
+- `BackwardLocalPlanner.initial_rotation_alpha_error_threshold` (rad): spin to
+  align before translating when the backward heading diverges — prevents
+  orbiting the goal on misaligned approaches.
+- Chained undo: navigations push the previous trail on the path stack;
+  `CbUndoPathBackwards` pops on success. The intermediate undo state of a
+  chain must NOT clearPath on exit (destroys the popped trail); only the final
+  one clears. A tight goal checker on the intermediate undo improves the
+  handoff (its end error becomes the next undo's initial tracking error).
+- Always pass STAMPED poses to `CpOdomTracker::setStartPoint` — the bare-Pose
+  overload mislabels map-frame coordinates as odom-frame (this displaced undo
+  goals by the whole map→odom offset for years).
+- `CbUndoPathBackwards` settles 500 ms before sendGoal: the remote planner's
+  topic cache can still hold the previous consumed trail right after a pop.
 
 //////////////////////////////////////////////////////////////////////////////
 

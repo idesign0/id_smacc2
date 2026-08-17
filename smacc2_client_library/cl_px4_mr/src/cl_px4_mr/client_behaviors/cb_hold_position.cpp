@@ -22,8 +22,6 @@ CbHoldPosition::CbHoldPosition(float durationSeconds) : durationSeconds_(duratio
 
 void CbHoldPosition::onEntry()
 {
-  this->requiresComponent(trajectorySetpoint_);
-
   RCLCPP_INFO(getLogger(), "CbHoldPosition: holding position for %.1f seconds", durationSeconds_);
 
   trajectorySetpoint_->hold();
@@ -34,6 +32,8 @@ void CbHoldPosition::onExit() {}
 
 void CbHoldPosition::update()
 {
+  CbPx4ClientBehaviorBase::update();
+
   auto now = std::chrono::steady_clock::now();
   double elapsed = std::chrono::duration<double>(now - startTime_).count();
 
@@ -41,7 +41,7 @@ void CbHoldPosition::update()
   {
     RCLCPP_INFO(
       getLogger(), "CbHoldPosition: duration reached (%.1f s) - posting success", elapsed);
-    this->postSuccessEvent();
+    this->postPx4Success();
   }
 }
 

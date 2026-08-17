@@ -81,10 +81,35 @@ public:
   {
     std::lock_guard<std::mutex> lock(actionMutex_);
 
+    if (client_ == nullptr)
+    {
+      RCLCPP_ERROR_STREAM(
+        getLogger(), "[" << this->getName()
+                         << "] Cannot send goal: action client not initialized (was the "
+                            "component created with an action server name?)");
+      return std::shared_future<typename GoalHandle::SharedPtr>();
+    }
+
     SendGoalOptions options;
 
     // Set up feedback callback
     options.feedback_callback = feedbackCallback_;
+
+    // Goal acceptance/rejection notification. Without this a rejected goal is
+    // silent: the result callback never fires and no signal is emitted.
+    options.goal_response_callback = [this](typename GoalHandle::SharedPtr goalHandle)
+    {
+      if (goalHandle != nullptr)
+      {
+        RCLCPP_INFO_STREAM(getLogger(), "[" << this->getName() << "] Goal accepted by server");
+        onGoalAccepted_();
+      }
+      else
+      {
+        RCLCPP_ERROR_STREAM(getLogger(), "[" << this->getName() << "] Goal rejected by server");
+        onGoalRejected_();
+      }
+    };
 
     // Set up result callback
     options.result_callback = [this, resultCallback](const WrappedResult & result)
@@ -123,7 +148,7 @@ public:
   {
     std::lock_guard<std::mutex> lock(actionMutex_);
 
-    if (lastRequest_ && lastRequest_->valid())
+    if (client_ != nullptr && lastRequest_ && lastRequest_->valid())
     {
       RCLCPP_INFO_STREAM(getLogger(), "[" << this->getName() << "] Cancelling current goal");
 
@@ -177,15 +202,20 @@ public:
   template <typename TOrthogonal, typename TSourceObject>
   void onComponentInitialization()
   {
-    // Set up event posting functions with proper template parameters
+    // Event source type is THIS COMPONENT, not the owning client: the event
+    // payload type is TSource::WrappedResult, and typing it on the client would
+    // wrongly assume the client's WrappedResult typedef matches this component's
+    // action - which breaks as soon as a client owns action clients of more than
+    // one action type. Nothing in-tree listens to client-typed events from this
+    // component (domain interfaces like CpNav2ActionInterface post those).
     postSuccessEvent = [this](const WrappedResult & result)
-    { this->postResultEvent<EvActionSucceeded<TSourceObject, TOrthogonal>>(result); };
+    { this->postResultEvent<EvActionSucceeded<CpActionClient<ActionType>, TOrthogonal>>(result); };
 
     postAbortedEvent = [this](const WrappedResult & result)
-    { this->postResultEvent<EvActionAborted<TSourceObject, TOrthogonal>>(result); };
+    { this->postResultEvent<EvActionAborted<CpActionClient<ActionType>, TOrthogonal>>(result); };
 
     postCancelledEvent = [this](const WrappedResult & result)
-    { this->postResultEvent<EvActionCancelled<TSourceObject, TOrthogonal>>(result); };
+    { this->postResultEvent<EvActionCancelled<CpActionClient<ActionType>, TOrthogonal>>(result); };
 
     postFeedbackEvent = [this](const Feedback & feedback)
     {
