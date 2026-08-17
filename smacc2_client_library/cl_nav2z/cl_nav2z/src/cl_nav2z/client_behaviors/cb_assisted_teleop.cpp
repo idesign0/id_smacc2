@@ -27,11 +27,38 @@ void CbAssistedTeleop::onEntry()
   Goal goal;
   goal.time_allowance = rclcpp::Duration(timeAllowance_);
 
-  RCLCPP_INFO(
-    getLogger(), "[%s] Assisted teleop for %ld s (collision-guarded, behavior server)",
-    getName().c_str(), static_cast<long>(timeAllowance_.count()));
+  if (timeAllowance_.count() > 0)
+  {
+    RCLCPP_INFO(
+      getLogger(), "[%s] Assisted teleop for %ld s (collision-guarded, behavior server)",
+      getName().c_str(), static_cast<long>(timeAllowance_.count()));
+  }
+  else
+  {
+    RCLCPP_INFO(
+      getLogger(),
+      "[%s] Assisted teleop, unlimited window (collision-guarded; ends on cancellation)",
+      getName().c_str());
+  }
 
   sendGoal(goal);
+}
+
+void CbAssistedTeleop::onActionAbort(const WrappedResult & result)
+{
+  if (
+    result.result != nullptr &&
+    result.result->error_code == nav2_msgs::action::AssistedTeleop::Result::TIMEOUT)
+  {
+    RCLCPP_INFO(
+      getLogger(), "[%s] Teleop window completed (time allowance expired) - success",
+      getName().c_str());
+    this->postSuccessEvent();
+    return;
+  }
+
+  smacc2::client_behavior_bases::CbActionClientBehaviorBase<
+    nav2_msgs::action::AssistedTeleop>::onActionAbort(result);
 }
 
 }  // namespace cl_nav2z

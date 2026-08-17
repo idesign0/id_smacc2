@@ -47,14 +47,26 @@ ros2 launch sm_nav2_gazebo_test_3 sm_nav2_gazebo_test_3.py
 via `runtimeConfigure`, exercising negative target yaw and runtime goal
 configuration.
 
-**Collision-abort finale**: after the loop the robot turns to face the pillar and
-commands a 2.5 m drive straight at it (obstacle at ~1.15 m). The behavior
-server's collision checking must abort the goal — the EXPECTED outcome is
-`EvCbFailure` (transition tag `COLLISION_ABORT_OK`), validating the genuine
-server-abort path. The mission then backs away and finishes.
+**Collision-abort demo**: after the loop the robot turns to face the south wall
+and commands a 3.5 m drive straight at it. The behavior server's collision
+checking must abort the goal — the EXPECTED outcome is `EvCbFailure`
+(transition tag `COLLISION_ABORT_OK`), validating the genuine server-abort
+path. The mission then backs away to a safe distance.
 
 **Early-exit cancellation**: pressing `N` while a primitive is executing cancels
 the in-flight goal (`CbActionClientBehaviorBase::onExit`) — the robot stops
 instead of continuing under an abandoned goal.
 
 Keyboard `N` advances any state manually.
+
+**Assisted-teleop finale** (`StAssistedTeleopGuard`): the mission ends with an
+unlimited collision-guarded teleop window in front of the south wall, driving
+the behavior server's `assisted_teleop` action (zero time allowance disables
+the server-side timeout). The robot waits for input: focus the Keyboard Server
+konsole and drive with the **arrow keys** (Up/Down = forward/reverse,
+Left/Right = rotate; hold to move, release to stop). Every command passes
+through the collision guard — try to ram the wall and watch it clamp,
+demonstrating *prevention* where the drive-at-wall leg demonstrated *abort*.
+Letter keys work simultaneously from the same terminal: `N` ends the teleop
+session, cancelling the action through the behavior base, and finishes the
+mission.

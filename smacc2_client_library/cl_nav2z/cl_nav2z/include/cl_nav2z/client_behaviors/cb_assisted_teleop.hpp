@@ -22,9 +22,12 @@ namespace cl_nav2z
 
 // Collision-guarded teleoperation via the Nav2 behavior server's
 // AssistedTeleop action: incoming teleop velocity commands are projected
-// through the local costmap and scaled/zeroed before a collision. The action
-// runs for the whole time allowance (success on expiry); leaving the state
-// early cancels it through the behavior base.
+// through the local costmap and scaled/zeroed before a collision. A positive
+// time allowance bounds the session (the server reports expiry as an abort
+// with the TIMEOUT code, which this wrapper maps to EvCbSuccess - the window
+// running its course is the normal ending). A zero allowance disables the
+// server-side timeout: the session runs until the state exits, which cancels
+// the action through the behavior base.
 class CbAssistedTeleop : public smacc2::client_behavior_bases::CbActionClientBehaviorBase<
                            nav2_msgs::action::AssistedTeleop>
 {
@@ -32,6 +35,12 @@ public:
   explicit CbAssistedTeleop(std::chrono::seconds timeAllowance = std::chrono::seconds(30));
 
   void onEntry() override;
+
+protected:
+  // The server reports time-allowance expiry as an abort (error code TIMEOUT)
+  // - but for this action the window running its course IS the normal ending,
+  // so map it to success. Genuine failures (TF_ERROR, rejection) keep failing.
+  void onActionAbort(const WrappedResult & result) override;
 
 private:
   std::chrono::seconds timeAllowance_;
