@@ -32,6 +32,13 @@ if(LTTNGUST_FOUND)
 endif()
 
 file(GLOB_RECURSE SRC_FILES src *.cpp)
+if(NOT LTTNGUST_FOUND)
+  # trace_provider.cpp is the LTTng CTF probe-definition TU: it #includes
+  # <lttng/tracepoint.h> unconditionally and is only referenced by the (guarded)
+  # TRACETOOLS_LTTNG_ENABLED path, so exclude it when LTTng is absent (e.g. macOS).
+  # Completes the LTTNGUST_FOUND gating already applied to linking/definitions below.
+  list(FILTER SRC_FILES EXCLUDE REGEX "trace_provider\\.cpp$")
+endif()
 add_library(smacc2 SHARED ${SRC_FILES})
 
 # removes unused parameters warning related with lttng, compiler warning
