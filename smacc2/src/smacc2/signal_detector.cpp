@@ -24,7 +24,12 @@
 #include <thread>
 #include <vector>
 
+#if __has_include(<lttng/tracepoint.h>)
+// Not actually used in this file (it only calls the portable TRACETOOLS_TRACEPOINT()
+// wrappers), but kept behind __has_include so it is dropped on platforms without
+// LTTng (e.g. macOS) where <lttng/tracepoint.h> does not exist.
 #include <lttng/tracepoint.h>
+#endif
 #include <smacc2/client_bases/smacc_action_client_base.hpp>
 #include <smacc2/smacc_signal_detector.hpp>
 #include <smacc2/smacc_state_machine.hpp>
