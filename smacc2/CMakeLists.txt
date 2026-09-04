@@ -17,7 +17,14 @@ find_package(rclcpp_action REQUIRED)
 find_package(smacc2_msgs REQUIRED)
 find_package(Boost COMPONENTS thread REQUIRED)
 find_package(tracetools)
-find_package(LTTngUST REQUIRED)
+find_package(LTTngUST QUIET)
+if(NOT LTTngUST_FOUND)
+  # LTTng userspace tracing is Linux-only (lttng-ust is depends_on :linux). FindLTTngUST leaves
+  # LTTNGUST_INCLUDE_DIRS/LIBRARIES = *-NOTFOUND on failure, which poisons include_directories()
+  # and target_link_libraries() below -> CMake generate error. Force them empty when absent.
+  set(LTTNGUST_INCLUDE_DIRS "")
+  set(LTTNGUST_LIBRARIES "")
+endif()
 
 set(dependencies
   rclcpp
@@ -29,6 +36,13 @@ set(dependencies
 include_directories(include ${LTTNGUST_INCLUDE_DIRS})
 
 file(GLOB_RECURSE SRC_FILES src *.cpp)
+if(NOT LTTngUST_FOUND)
+  # trace_provider.cpp is the LTTng CTF probe-definition TU; it unconditionally
+  # #includes <lttng/tracepoint.h>. Every other tracing TU no-ops via tracetools
+  # (TRACETOOLS_DISABLED on macOS) and guards its trace_provider.hpp include with
+  # #ifdef TRACETOOLS_LTTNG_ENABLED, so only this file needs excluding when LTTng is absent.
+  list(FILTER SRC_FILES EXCLUDE REGEX "trace_provider\\.cpp$")
+endif()
 add_library(smacc2 SHARED ${SRC_FILES})
 
 # removes unused parameters warning related with lttng, compiler warning
