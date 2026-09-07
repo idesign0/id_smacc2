@@ -146,8 +146,11 @@ std::future<std::string> ClRosLaunch2::executeRosLaunch(
         RCLCPP_ERROR(rclcpp::get_logger("smacc2"), "Error waiting for child process.");
       }
 
+      // pclose() already closes the underlying stream and file descriptor and
+      // reaps the child; the previous close(child.pipe->_fileno) was both a
+      // double-close and a use-after-free (child.pipe is invalid after pclose),
+      // and relied on the glibc-only `_fileno` field absent from macOS FILE.
       pclose(child.pipe);
-      close(child.pipe->_fileno);  // Close pipe file descriptor but not processes
 
       RCLCPP_WARN_STREAM(rclcpp::get_logger("smacc2"), "[ClRosLaunch2] RESULT:\n" << result);
 
