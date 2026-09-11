@@ -12,6 +12,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(visualization_msgs)
 
 find_package(nav2_core)
 find_package(nav_msgs)
@@ -27,6 +28,7 @@ find_package(nav_2d_utils)
 
 set(dependencies
   nav2_core
+  visualization_msgs
   nav_msgs
   nav2_costmap_2d
   geometry_msgs

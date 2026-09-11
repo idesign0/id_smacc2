@@ -12,6 +12,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(visualization_msgs)
 
 find_package(geometry_msgs)
 find_package(nav_msgs)
