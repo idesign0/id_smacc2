@@ -22,6 +22,7 @@ find_package(pluginlib)
 find_package(forward_global_planner)
 find_package(angles)
 find_package(nav_2d_utils)
+find_package(visualization_msgs)
 
 set(dependencies
   nav2_core
