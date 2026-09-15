@@ -20,6 +20,7 @@ find_package(tf2)
 find_package(nav2z_planners_common)
 find_package(pluginlib)
 find_package(nav_2d_utils)
+find_package(visualization_msgs)
 
 set(dependencies
   nav2_core
