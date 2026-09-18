@@ -39,11 +39,11 @@ CbRosLaunch::CbRosLaunch(std::string package, std::string launchfile, RosLaunchM
 
 CbRosLaunch::~CbRosLaunch() {}
 
-template <typename TOrthogonal, typename TSourceObject>
-void onOrthogonalAllocation()
-{
-  smacc2::SmaccAsyncClientBehavior::onOrthogonalAllocation<TOrthogonal, TSourceObject>();
-}
+// NOTE: the real CbRosLaunch::onOrthogonalAllocation<>() is the inline member template in
+// cb_ros_launch.hpp. This stray namespace-scope duplicate (missing the CbRosLaunch:: qualifier)
+// called SmaccAsyncClientBehavior::onOrthogonalAllocation<>() with no object -> clang error
+// "call to non-static member function without an object argument". It shadows nothing useful and
+// is never referenced, so it is removed.
 
 void CbRosLaunch::onEntry()
 {
