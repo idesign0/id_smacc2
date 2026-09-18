@@ -14,6 +14,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 find_package(geometry_msgs)
+find_package(visualization_msgs)
 find_package(nav_msgs)
 find_package(nav_2d_utils)
 find_package(nav2_core)

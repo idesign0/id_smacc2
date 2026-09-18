@@ -17,6 +17,7 @@ find_package(nav2_core)
 find_package(nav_msgs)
 find_package(nav2_costmap_2d)
 find_package(geometry_msgs)
+find_package(visualization_msgs)
 find_package(tf2)
 find_package(tf2_geometry_msgs)
 find_package(tf2_ros)
@@ -29,6 +30,7 @@ set(dependencies
   nav_msgs
   nav2_costmap_2d
   geometry_msgs
+  visualization_msgs
   tf2
   nav2z_planners_common
   pluginlib
