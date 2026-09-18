@@ -113,7 +113,6 @@ class ClientBehaviorHandler
 public:
   ClientBehaviorHandler() {}
 };
->>>>>>> humble
 //-------------------------------------------------------------
 // contains metainformation about some specific state reactor in the statechart
 struct SmaccStateReactorInfo

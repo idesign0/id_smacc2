@@ -292,7 +292,11 @@ void ISmaccStateMachine::mapBehavior()
     // of this component
     BehaviorType * behavior;
     this->requiresComponent(behavior);
-    globalreference = dynamic_cast<ISmaccClientBehavior *>(behavior);
+    // globalreference is a SmaccClientBehavior* (and SmaccClientBehavior derives from
+    // ISmaccClientBehavior), so cast to SmaccClientBehavior*; dynamic_cast to the base
+    // ISmaccClientBehavior* yielded a base pointer that does not convert back to the derived type
+    // -> "incompatible pointer types assigning to 'SmaccClientBehavior *' from 'ISmaccClientBehavior *'".
+    globalreference = dynamic_cast<SmaccClientBehavior *>(behavior);
 
     this->setGlobalSMData(stateFieldName, globalreference);
   }

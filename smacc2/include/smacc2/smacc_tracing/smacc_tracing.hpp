@@ -20,6 +20,15 @@
 
 #include <tracetools/tracetools.h>
 
+// Recent tracetools renamed the public DECLARE_TRACEPOINT() macro to the internal
+// _DECLARE_TRACEPOINT() and, unlike TRACEPOINT()/DO_TRACEPOINT(), did NOT keep a deprecated
+// DECLARE_TRACEPOINT alias -> "unknown type name 'DECLARE_TRACEPOINT'". Provide a compat shim so
+// these tracepoint declarations build against both old and new tracetools. (_DECLARE_TRACEPOINT
+// is a no-op when tracing is disabled, e.g. no LTTng on macOS.)
+#ifndef DECLARE_TRACEPOINT
+#define DECLARE_TRACEPOINT(...) _DECLARE_TRACEPOINT(__VA_ARGS__)
+#endif
+
 #ifdef __cplusplus
 extern "C"
 {
