@@ -28,6 +28,17 @@
 #ifndef DECLARE_TRACEPOINT
 #define DECLARE_TRACEPOINT(...) _DECLARE_TRACEPOINT(__VA_ARGS__)
 #endif
+// The same tracetools cleanup also removed the deprecated TRACEPOINT()/DO_TRACEPOINT() aliases
+// (renamed TRACETOOLS_TRACEPOINT()/TRACETOOLS_DO_TRACEPOINT()). smacc2 still calls the short
+// names (e.g. TRACEPOINT(smacc2_event, ...)); without them the call sites see an undefined macro
+// and fail with "use of undeclared identifier 'smacc2_event'". Shim them to the current names
+// (both are no-ops when tracepoints are excluded, e.g. no LTTng on macOS).
+#ifndef TRACEPOINT
+#define TRACEPOINT(...) TRACETOOLS_TRACEPOINT(__VA_ARGS__)
+#endif
+#ifndef DO_TRACEPOINT
+#define DO_TRACEPOINT(...) TRACETOOLS_DO_TRACEPOINT(__VA_ARGS__)
+#endif
 
 #ifdef __cplusplus
 extern "C"
