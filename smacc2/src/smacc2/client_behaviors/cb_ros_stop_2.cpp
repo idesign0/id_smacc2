@@ -31,11 +31,11 @@ CbRosStop2::CbRosStop2(pid_t launchPid) {}
 
 CbRosStop2::~CbRosStop2() {}
 
-template <typename TOrthogonal, typename TSourceObject>
-void onOrthogonalAllocation()
-{
-  smacc2::SmaccAsyncClientBehavior::onOrthogonalAllocation<TOrthogonal, TSourceObject>();
-}
+// NOTE: the real CbRosStop2::onOrthogonalAllocation<>() is the inline member template in
+// cb_ros_stop_2.hpp. This stray namespace-scope duplicate (missing the CbRosStop2::
+// qualifier) called SmaccAsyncClientBehavior::onOrthogonalAllocation<>() with no object ->
+// clang error "call to non-static member function without an object argument". It is never
+// referenced, so it is removed.
 
 void CbRosStop2::onEntry()
 {
