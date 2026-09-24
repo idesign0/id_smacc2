@@ -72,7 +72,13 @@ protected:
 
   rclcpp::Node::SharedPtr getNode();
 
-  rclcpp::Logger getLogger();
+  // const: the out-of-line definition in smacc_component.cpp is
+  // `rclcpp::Logger ISmaccComponent::getLogger() const`, and without const here the two do not
+  // match -> "out-of-line definition of 'getLogger' does not match any declaration in
+  // 'smacc2::ISmaccComponent'". const is the right side to align on: it only widens what callers
+  // may do, the body just forwards through the owner_ POINTER (whose constness is unaffected),
+  // and the sibling declaration in smacc_client_behavior_base.hpp is const too.
+  rclcpp::Logger getLogger() const;
 
   //inline
   ISmaccStateMachine * getStateMachine();
