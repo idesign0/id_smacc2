@@ -27,6 +27,24 @@
 #undef TRACEPOINT_INCLUDE
 #define TRACEPOINT_INCLUDE "smacc2/smacc_tracing/trace_provider.hpp"
 
+
+// LTTng is Linux-only; there is no lttng/tracepoint.h on macOS. This header is included
+// UNGUARDED by the public smacc2/smacc_state_base.hpp, so every downstream package
+// (cl_nav2z, cl_moveit2z, cl_keyboard, sm_*, ...) failed with
+//   install/include/smacc2/smacc_tracing/trace_provider.hpp:33:10:
+//   fatal error: 'lttng/tracepoint.h' file not found
+// even though smacc2 itself builds (its own .cpp guards the include with
+// TRACETOOLS_LTTNG_ENABLED). Guard the body here instead of at every include site: with no
+// LTTng there are simply no tracepoint definitions to emit, which is exactly what the rest of
+// the tracing layer already assumes when tracing is disabled.
+#if defined(__has_include)
+#  if !__has_include(<lttng/tracepoint.h>)
+#    define SMACC2_NO_LTTNG 1
+#  endif
+#endif
+
+#ifndef SMACC2_NO_LTTNG
+
 #if !defined(_TRACEPOINT_PROVIDER_PROVIDER_H) || defined(TRACEPOINT_HEADER_MULTI_READ)
 #define _TRACEPOINT_PROVIDER_PROVIDER_H
 
@@ -101,3 +119,5 @@ TRACEPOINT_EVENT(
 #endif /* _TRACEPOINT_PROVIDER_PROVIDER_H */
 
 #include <lttng/tracepoint-event.h>
+
+#endif  // SMACC2_NO_LTTNG
