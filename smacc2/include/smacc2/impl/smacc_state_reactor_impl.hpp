@@ -18,6 +18,13 @@
  *
  ******************************************************************************************************************/
 
+// NOTE (clang): `obj->member<T>()` where obj's type is DEPENDENT on a template parameter must be
+// spelled `obj->template member<T>()`, otherwise `<` is parsed as less-than. gcc accepts the sloppy
+// form, so this only breaks on clang/macOS -- and only in CONSUMERS, because these are headers:
+//   smacc_state_base.hpp:330: error: use 'template' keyword to treat 'postEvent' as a dependent
+//   template name
+// which took out keyboard_client, nav2z_client, ros_timer_client, move_group_interface_client,
+// multirole_sensor_client and sm_* in kilted run 36715448773.
 #pragma once
 #include <smacc2/introspection/introspection.hpp>
 #include <smacc2/smacc_state_reactor.hpp>
@@ -33,7 +40,7 @@ void StateReactor::postEvent(const EventType & ev)
 template <typename EventType>
 void StateReactor::postEvent()
 {
-  ownerState->postEvent<EventType>();
+  ownerState->template postEvent<EventType>();
 }
 
 template <typename TEv>

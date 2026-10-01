@@ -17,6 +17,13 @@
  * 	 Authors: Pablo Inigo Blasco, Brett Aldrich
  *
  ******************************************************************************************************************/
+// NOTE (clang): `obj->member<T>()` where obj's type is DEPENDENT on a template parameter must be
+// spelled `obj->template member<T>()`, otherwise `<` is parsed as less-than. gcc accepts the sloppy
+// form, so this only breaks on clang/macOS -- and only in CONSUMERS, because these are headers:
+//   smacc_state_base.hpp:330: error: use 'template' keyword to treat 'postEvent' as a dependent
+//   template name
+// which took out keyboard_client, nav2z_client, ros_timer_client, move_group_interface_client,
+// multirole_sensor_client and sm_* in kilted run 36715448773.
 #pragma once
 #include <smacc2/common.hpp>
 
@@ -72,7 +79,7 @@ public:
     this->onInitialize();
 
     RCLCPP_INFO(getLogger(), "[SmaccStateMachine] Introspecting state machine via typeWalker");
-    this->buildStateMachineInfo<InitialStateType>();
+    this->template buildStateMachineInfo<InitialStateType>();
 
     RCLCPP_INFO(getLogger(), "[SmaccStateMachine] initiate_impl");
     auto shortname = smacc2::utils::cleanShortTypeName(typeid(DerivedStateMachine));
@@ -84,7 +91,7 @@ public:
 
     // publish startup state machine transition info
     auto transitionInfo = std::make_shared<SmaccTransitionInfo>();
-    transitionInfo->destinyState = this->stateMachineInfo_->getState<InitialStateType>();
+    transitionInfo->destinyState = this->stateMachineInfo_->template getState<InitialStateType>();
     this->publishTransition(*transitionInfo);
 
     RCLCPP_INFO(getLogger(), "[SmaccStateMachine] Initializing state machine");
