@@ -209,13 +209,13 @@ public:
     // one action type. Nothing in-tree listens to client-typed events from this
     // component (domain interfaces like CpNav2ActionInterface post those).
     postSuccessEvent = [this](const WrappedResult & result)
-    { this->postResultEvent<EvActionSucceeded<CpActionClient<ActionType>, TOrthogonal>>(result); };
+    { this->template postResultEvent<EvActionSucceeded<CpActionClient<ActionType>, TOrthogonal>>(result); };
 
     postAbortedEvent = [this](const WrappedResult & result)
-    { this->postResultEvent<EvActionAborted<CpActionClient<ActionType>, TOrthogonal>>(result); };
+    { this->template postResultEvent<EvActionAborted<CpActionClient<ActionType>, TOrthogonal>>(result); };
 
     postCancelledEvent = [this](const WrappedResult & result)
-    { this->postResultEvent<EvActionCancelled<CpActionClient<ActionType>, TOrthogonal>>(result); };
+    { this->template postResultEvent<EvActionCancelled<CpActionClient<ActionType>, TOrthogonal>>(result); };
 
     postFeedbackEvent = [this](const Feedback & feedback)
     {
