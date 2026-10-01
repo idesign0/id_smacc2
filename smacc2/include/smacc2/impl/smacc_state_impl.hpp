@@ -40,7 +40,7 @@ std::shared_ptr<TBehavior> ISmaccState::configure(Args &&... args)
   RCLCPP_INFO(
     getLogger(), "[%s] Configuring orthogonal: %s", THIS_STATE_NAME, orthogonalkey.c_str());
 
-  TOrthogonal * orthogonal = this->getOrthogonal<TOrthogonal>();
+  TOrthogonal * orthogonal = this->template getOrthogonal<TOrthogonal>();
   if (orthogonal != nullptr)
   {
     auto clientBehavior =
@@ -147,7 +147,7 @@ struct AddTEventTypeStateReactor
   template <typename T>
   void operator()(T)
   {
-    sr_->addInputEvent<T>();
+    sr_->template addInputEvent<T>();
   }
 };
 

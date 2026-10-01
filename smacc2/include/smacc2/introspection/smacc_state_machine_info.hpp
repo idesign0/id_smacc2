@@ -67,7 +67,7 @@ public:
   template <typename StateType>
   std::shared_ptr<SmaccStateInfo> getState()
   {
-    if (this->containsState<StateType>())
+    if (this->template containsState<StateType>())
     {
       return states[typeid(StateType).name()];
     }
@@ -216,22 +216,22 @@ void processTransitionAux(
 
   RCLCPP_INFO_STREAM(globalNh_->get_logger(), "Transition tag: " << transitionTag);
 
-  if (!sourceState->stateMachine_->containsState<Dst>())
+  if (!sourceState->stateMachine_->template containsState<Dst>())
   {
-    auto realparentState = sourceState->stateMachine_->getState<typename Dst::TContext>();
-    auto siblingnode = sourceState->stateMachine_->createState<Dst>(realparentState);
+    auto realparentState = sourceState->stateMachine_->template getState<typename Dst::TContext>();
+    auto siblingnode = sourceState->stateMachine_->template createState<Dst>(realparentState);
 
-    // auto siblingnode = sourceState->stateMachine_->createState<Dst>(sourceState->parentState_);
+    // auto siblingnode = sourceState->stateMachine_->template createState<Dst>(sourceState->parentState_);
     WalkStatesExecutor<Dst>::walkStates(siblingnode, true);
     sourceState->declareTransition<Ev>(
       siblingnode, transitionTag, transitionType, history, transitionTypeInfo);
   }
   else
   {
-    // auto realparentState = sourceState->stateMachine_->getState<typename Dst::TContext>();
-    // auto siblingnode = sourceState->stateMachine_->createState<Dst>(realparentState);
+    // auto realparentState = sourceState->stateMachine_->template getState<typename Dst::TContext>();
+    // auto siblingnode = sourceState->stateMachine_->template createState<Dst>(realparentState);
 
-    auto siblingnode = sourceState->stateMachine_->getState<Dst>();
+    auto siblingnode = sourceState->stateMachine_->template getState<Dst>();
     sourceState->declareTransition<Ev>(
       siblingnode, transitionTag, transitionType, history, transitionTypeInfo);
   }
@@ -434,7 +434,7 @@ void WalkStatesExecutor<InitialStateType>::walkStates(
 
   if (!rootInitialNode)
   {
-    if (parentState->stateMachine_->containsState<InitialStateType>())
+    if (parentState->stateMachine_->template containsState<InitialStateType>())
     {
       // it already exist: break;
       return;
@@ -466,7 +466,7 @@ void WalkStatesExecutor<InitialStateType>::walkStates(
 template <typename InitialStateType>
 void SmaccStateMachineInfo::buildStateMachineInfo()
 {
-  auto initialState = this->createState<InitialStateType>(nullptr);
+  auto initialState = this->template createState<InitialStateType>(nullptr);
   WalkStatesExecutor<InitialStateType>::walkStates(initialState, true);
 }
 
@@ -504,9 +504,9 @@ void SmaccStateMachineInfo::addState(std::shared_ptr<StateType> & state)
 template <typename StateType>
 std::shared_ptr<SmaccStateInfo> SmaccStateInfo::createChildState()
 {
-  auto realparentState = this->stateMachine_->getState<typename StateType::TContext>();
+  auto realparentState = this->stateMachine_->template getState<typename StateType::TContext>();
 
-  auto childState = this->stateMachine_->createState<StateType>(realparentState);
+  auto childState = this->stateMachine_->template createState<StateType>(realparentState);
 
   RCLCPP_WARN_STREAM(
     getLogger(), "Real parent state> " << demangleSymbol<typename StateType::TContext>());

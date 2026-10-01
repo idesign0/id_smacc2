@@ -54,7 +54,7 @@ public:
       getLogger(), "[CbWaitTopicMessage] waiting message from topic: "
                      << topicname_ << "[" << demangledTypeName<TMessage>() << "]");
 
-    // sub_ = getNode()->create_subscription<TMessage>(
+    // sub_ = getNode()->template create_subscription<TMessage>(
     //   topicname_, qos,
     //   std::bind(&CbWaitTopicMessage<TMessage>::onMessageReceived, this, std::placeholders::_1),
     //   sub_option);

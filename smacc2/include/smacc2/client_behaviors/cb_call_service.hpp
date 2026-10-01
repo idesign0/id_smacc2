@@ -41,7 +41,7 @@ public:
     RCLCPP_INFO_STREAM(
       getLogger(), "[" << this->getName() << "] creating service client: " << serviceName_);
 
-    client_ = getNode()->create_client<ServiceType>(serviceName_);
+    client_ = getNode()->template create_client<ServiceType>(serviceName_);
 
     result_ = client_->async_send_request(request_).get();
 

@@ -419,7 +419,7 @@ void ISmaccStateMachine::notifyOnStateEntryStart(StateType * state)
 
   stateSeqCounter_++;
   currentState_ = state;
-  currentStateInfo_ = stateMachineInfo_->getState<StateType>();
+  currentStateInfo_ = stateMachineInfo_->template getState<StateType>();
 }
 
 template <typename StateType>
@@ -606,7 +606,7 @@ template <typename InitialStateType>
 void ISmaccStateMachine::buildStateMachineInfo()
 {
   this->stateMachineInfo_ = std::make_shared<SmaccStateMachineInfo>(this->getNode());
-  this->stateMachineInfo_->buildStateMachineInfo<InitialStateType>();
+  this->stateMachineInfo_->template buildStateMachineInfo<InitialStateType>();
   this->stateMachineInfo_->assembleSMStructureMessage(this);
   this->checkStateMachineConsistence();
 }
