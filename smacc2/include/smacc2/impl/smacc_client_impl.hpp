@@ -40,7 +40,7 @@ void ISmaccClient::postEvent()
 template <typename TComponent>
 TComponent * ISmaccClient::getComponent()
 {
-  return this->getComponent<TComponent>(std::string());
+  return this->template getComponent<TComponent>(std::string());
 }
 
 template <typename TComponent>
@@ -131,7 +131,7 @@ SmaccComponentType * ISmaccClient::createNamedComponent(std::string name, TArgs.
 template <typename SmaccComponentType, typename TOrthogonal, typename TClient, typename... TArgs>
 SmaccComponentType * ISmaccClient::createComponent(TArgs... targs)
 {
-  return this->createNamedComponent<SmaccComponentType, TOrthogonal, TClient>(
+  return this->template createNamedComponent<SmaccComponentType, TOrthogonal, TClient>(
     std::string(), targs...);
 }
 

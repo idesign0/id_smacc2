@@ -51,7 +51,7 @@ using namespace smacc2::default_events;
  * Usage Example:
  * @code
  * // In your client's onInitialize():
- * auto serviceClient = this->createComponent<
+ * auto serviceClient = this->template createComponent<
  *   smacc2::client_core_components::CpServiceClient<my_msgs::srv::MyService>>(
  *   "/my_service_name");
  *
@@ -271,7 +271,7 @@ public:
     RCLCPP_INFO_STREAM(
       getLogger(), "[" << this->getName() << "] Initializing service client for: " << *serviceName);
 
-    client_ = getNode()->create_client<ServiceType>(*serviceName);
+    client_ = getNode()->template create_client<ServiceType>(*serviceName);
 
     RCLCPP_INFO_STREAM(
       getLogger(),
