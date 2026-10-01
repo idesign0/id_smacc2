@@ -126,12 +126,12 @@ public:
   {
     // we create here all the event factory functions capturing the TOrthogonal
     postSuccessEvent = [this](auto msg)
-    { this->postResultEvent<EvActionSucceeded<TSourceObject, TOrthogonal>>(msg); };
+    { this->template postResultEvent<EvActionSucceeded<TSourceObject, TOrthogonal>>(msg); };
     postAbortedEvent = [this](auto msg)
-    { this->postResultEvent<EvActionAborted<TSourceObject, TOrthogonal>>(msg); };
+    { this->template postResultEvent<EvActionAborted<TSourceObject, TOrthogonal>>(msg); };
 
     postCancelledEvent = [this](auto msg)
-    { this->postResultEvent<EvActionCancelled<TSourceObject, TOrthogonal>>(msg); };
+    { this->template postResultEvent<EvActionCancelled<TSourceObject, TOrthogonal>>(msg); };
 
     postFeedbackEvent = [this](auto msg)
     {
