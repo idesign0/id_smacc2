@@ -60,7 +60,7 @@ public:
 
       RCLCPP_INFO_STREAM(
         getLogger(), "[" << this->getName() << "] Client Publisher to topic: " << topicName);
-      pub_ = getNode()->create_publisher<MessageType>(*(this->topicName), qos);
+      pub_ = getNode()->template create_publisher<MessageType>(*(this->topicName), qos);
 
       this->initialized_ = true;
     }

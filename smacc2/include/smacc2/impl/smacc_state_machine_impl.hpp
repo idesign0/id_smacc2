@@ -762,7 +762,7 @@ template <typename InitialStateType>
 void ISmaccStateMachine::buildStateMachineInfo()
 {
   this->stateMachineInfo_ = std::make_shared<SmaccStateMachineInfo>(this->getNode());
-  this->stateMachineInfo_->buildStateMachineInfo<InitialStateType>();
+  this->stateMachineInfo_->template buildStateMachineInfo<InitialStateType>();
   this->stateMachineInfo_->assembleSMStructureMessage(this);
   this->checkStateMachineConsistence();
 }

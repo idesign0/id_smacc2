@@ -179,13 +179,13 @@ public:
   {
     // Set up event posting functions with proper template parameters
     postSuccessEvent = [this](const WrappedResult & result)
-    { this->postResultEvent<EvActionSucceeded<TSourceObject, TOrthogonal>>(result); };
+    { this->template postResultEvent<EvActionSucceeded<TSourceObject, TOrthogonal>>(result); };
 
     postAbortedEvent = [this](const WrappedResult & result)
-    { this->postResultEvent<EvActionAborted<TSourceObject, TOrthogonal>>(result); };
+    { this->template postResultEvent<EvActionAborted<TSourceObject, TOrthogonal>>(result); };
 
     postCancelledEvent = [this](const WrappedResult & result)
-    { this->postResultEvent<EvActionCancelled<TSourceObject, TOrthogonal>>(result); };
+    { this->template postResultEvent<EvActionCancelled<TSourceObject, TOrthogonal>>(result); };
 
     postFeedbackEvent = [this](const Feedback & feedback)
     {
