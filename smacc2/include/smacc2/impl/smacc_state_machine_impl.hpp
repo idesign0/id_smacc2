@@ -509,7 +509,7 @@ void ISmaccStateMachine::notifyOnStateEntryStart(StateType * state)
 
   stateSeqCounter_++;
   currentState_.push_back(state);
-  currentStateInfo_ = stateMachineInfo_->getState<StateType>();
+  currentStateInfo_ = stateMachineInfo_->template getState<StateType>();
 }
 
 template <typename StateType>

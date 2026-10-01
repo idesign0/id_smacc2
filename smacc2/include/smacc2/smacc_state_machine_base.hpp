@@ -75,7 +75,7 @@ public:
     this->onInitialize();
 
     RCLCPP_INFO(getLogger(), "[SmaccStateMachine] Introspecting state machine via typeWalker");
-    this->buildStateMachineInfo<InitialStateType>();
+    this->template buildStateMachineInfo<InitialStateType>();
 
     RCLCPP_INFO(getLogger(), "[SmaccStateMachine] initiate_impl");
     auto shortname = smacc2::utils::cleanShortTypeName(typeid(DerivedStateMachine));
@@ -87,7 +87,7 @@ public:
 
     // publish startup state machine transition info
     auto transitionInfo = std::make_shared<SmaccTransitionInfo>();
-    transitionInfo->destinyState = this->stateMachineInfo_->getState<InitialStateType>();
+    transitionInfo->destinyState = this->stateMachineInfo_->template getState<InitialStateType>();
     this->publishTransition(*transitionInfo);
 
     RCLCPP_INFO(getLogger(), "[SmaccStateMachine] Initializing state machine");
