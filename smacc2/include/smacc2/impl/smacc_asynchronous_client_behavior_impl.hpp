@@ -43,19 +43,19 @@ void SmaccAsyncClientBehavior::onStateOrthogonalAllocation()
   postFinishEventFn_ = [this]
   {
     this->onFinished_();
-    this->postEvent<EvCbFinished<TSourceObject, TOrthogonal>>();
+    this->template postEvent<EvCbFinished<TSourceObject, TOrthogonal>>();
   };
 
   postSuccessEventFn_ = [this]
   {
     this->onSuccess_();
-    this->postEvent<EvCbSuccess<TSourceObject, TOrthogonal>>();
+    this->template postEvent<EvCbSuccess<TSourceObject, TOrthogonal>>();
   };
 
   postFailureEventFn_ = [this]
   {
     this->onFailure_();
-    this->postEvent<EvCbFailure<TSourceObject, TOrthogonal>>();
+    this->template postEvent<EvCbFailure<TSourceObject, TOrthogonal>>();
   };
 }
 
