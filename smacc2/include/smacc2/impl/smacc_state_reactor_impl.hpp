@@ -33,7 +33,7 @@ void StateReactor::postEvent(const EventType & ev)
 template <typename EventType>
 void StateReactor::postEvent()
 {
-  ownerState->postEvent<EventType>();
+  ownerState->template postEvent<EventType>();
 }
 
 template <typename TEv>

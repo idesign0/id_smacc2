@@ -33,7 +33,7 @@ void SmaccEventGenerator::postEvent(const EventType & ev)
 template <typename EventType>
 void SmaccEventGenerator::postEvent()
 {
-  ownerState_->postEvent<EventType>();
+  ownerState_->template postEvent<EventType>();
 }
 
 template <typename TState, typename TSource>
