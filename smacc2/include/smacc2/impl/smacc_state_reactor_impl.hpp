@@ -87,7 +87,7 @@ void StateReactorHandler::addInputEvent()
     RCLCPP_INFO(
       nh_->get_logger(), "[%s] State Reactor adding input event: %s",
       srInfo_->stateReactorType->getFullName().c_str(), demangledTypeName<TEv>().c_str());
-    sr->addInputEvent<TEv>();
+    sr->template addInputEvent<TEv>();
   };
 
   this->callbacks_.push_back(functor);

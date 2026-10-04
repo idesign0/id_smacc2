@@ -127,7 +127,7 @@ void ISmaccStateMachine::requiresComponent(
   {
     for (auto & client : ortho.second->clients_)
     {
-      storage = client->getComponent<SmaccComponentType>();
+      storage = client->template getComponent<SmaccComponentType>();
       if (storage != nullptr)
       {
         return;
@@ -157,7 +157,7 @@ void ISmaccStateMachine::requiresComponent(
   {
     for (auto & client : ortho.second->clients_)
     {
-      storage = client->getComponent<SmaccComponentType>(name);
+      storage = client->template getComponent<SmaccComponentType>(name);
       if (storage != nullptr)
       {
         return;
