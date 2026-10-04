@@ -335,7 +335,11 @@ public:
         << "] Action request "
         // << rclcpp_action::to_string(this->goalHandle_->get_goal_id()) <<". Goal sent to " << this->action_endpoint_
         << "\": " << std::endl
-        << goal);
+        // A generated action Goal has no operator<<, so streaming it directly is
+        // ill-formed on clang/libc++ ("invalid operands to binary expression
+        // ('ostream' and 'Goal')"). rosidl gives every message a to_yaml() in
+        // rosidl_generator_traits, which is the supported way to render one.
+        << rosidl_generator_traits::to_yaml(goal));
 
     // if (client_->isServerConnected())
     // {
