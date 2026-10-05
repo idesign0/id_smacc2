@@ -328,18 +328,12 @@ public:
     auto lastRequest = this->client_->async_send_goal(goal, options);
     this->lastRequest_ = lastRequest;
 
-    RCLCPP_INFO_STREAM(
-      getLogger(),
-      "["
-        << getName()
-        << "] Action request "
-        // << rclcpp_action::to_string(this->goalHandle_->get_goal_id()) <<". Goal sent to " << this->action_endpoint_
-        << "\": " << std::endl
-        // A generated action Goal has no operator<<, so streaming it directly is
-        // ill-formed on clang/libc++ ("invalid operands to binary expression
-        // ('ostream' and 'Goal')"). rosidl gives every message a to_yaml() in
-        // rosidl_generator_traits, which is the supported way to render one.
-        << rosidl_generator_traits::to_yaml(goal));
+    // The goal body is deliberately not streamed here. A generated action Goal
+    // has no operator<<, so "<< goal" is ill-formed on clang/libc++ ("invalid
+    // operands to binary expression ('ostream' and 'Goal')"), and to_yaml() is
+    // declared in the message's own <pkg>/action/detail/..._traits.hpp, which a
+    // client template parameterised on an arbitrary ActionType cannot include.
+    RCLCPP_INFO_STREAM(getLogger(), "[" << getName() << "] Action request sent.");
 
     // if (client_->isServerConnected())
     // {

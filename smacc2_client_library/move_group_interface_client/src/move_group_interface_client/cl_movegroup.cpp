@@ -28,6 +28,25 @@ using namespace moveit::planning_interface;
 
 namespace cl_move_group_interface
 {
+namespace
+{
+// MoveGroupInterface::Options spells its namespace field without a trailing
+// underscore from moveit2 2.9 onwards (it was move_group_namespace_ before).
+// Pick whichever one the installed moveit actually declares, so this file
+// builds against both. The int/long parameter only orders the overloads.
+template <typename Options>
+auto moveGroupNamespaceOf(const Options & o, int) -> decltype(o.move_group_namespace_)
+{
+  return o.move_group_namespace_;
+}
+
+template <typename Options>
+auto moveGroupNamespaceOf(const Options & o, long) -> decltype(o.move_group_namespace)
+{
+  return o.move_group_namespace;
+}
+}  // namespace
+
 ClMoveGroup::ClMoveGroup(const moveit::planning_interface::MoveGroupInterface::Options & options)
 : options_(options)
 {
@@ -40,7 +59,7 @@ ClMoveGroup::~ClMoveGroup() {}
 void ClMoveGroup::onInitialize()
 {
   moveGroupClientInterface = std::make_shared<MoveGroupInterface>(getNode(), options_);
-  planningSceneInterface = std::make_shared<PlanningSceneInterface>(options_.move_group_namespace_);
+  planningSceneInterface = std::make_shared<PlanningSceneInterface>(moveGroupNamespaceOf(options_, 0));
 }
 
 void ClMoveGroup::postEventMotionExecutionSucceded()
