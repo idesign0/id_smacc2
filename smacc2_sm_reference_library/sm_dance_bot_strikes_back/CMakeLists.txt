@@ -28,6 +28,11 @@ find_package(sr_conditional REQUIRED)
 find_package(ros_timer_client REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
+# ci: this package calls rosidl_generate_interfaces() below, which is defined by
+# rosidl_default_generators. package.xml already declares it as a buildtool_depend;
+# only the find_package() was missing, so the call failed with
+#   CMake Error: Unknown CMake command "rosidl_generate_interfaces".
+find_package(rosidl_default_generators REQUIRED)
 
 set(dependencies
   smacc2
