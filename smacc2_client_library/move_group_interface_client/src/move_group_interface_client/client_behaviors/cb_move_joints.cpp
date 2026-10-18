@@ -88,7 +88,7 @@ void CbMoveJoints::moveJoints(moveit::planning_interface::MoveGroupInterface & m
     //moveGroupInterface.setGoalJointTolerance(0.01);
     success =
       (moveGroupInterface.plan(computedMotionPlan) ==
-       moveit::planning_interface::MoveItErrorCode::SUCCESS);
+       moveit::core::MoveItErrorCode::SUCCESS);
     RCLCPP_INFO(getLogger(), "Success Visualizing plan 1 (pose goal) %s", success ? "" : "FAILED");
   }
 

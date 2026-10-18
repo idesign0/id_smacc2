@@ -79,7 +79,7 @@ bool CbMoveEndEffector::moveToAbsolutePose(
   moveit::planning_interface::MoveGroupInterface::Plan computedMotionPlan;
   bool success =
     (moveGroupInterface.plan(computedMotionPlan) ==
-     moveit::planning_interface::MoveItErrorCode::SUCCESS);
+     moveit::core::MoveItErrorCode::SUCCESS);
   RCLCPP_INFO(
     getLogger(), "[CbMoveEndEffector] Success Visualizing plan 1 (pose goal) %s",
     success ? "" : "FAILED");

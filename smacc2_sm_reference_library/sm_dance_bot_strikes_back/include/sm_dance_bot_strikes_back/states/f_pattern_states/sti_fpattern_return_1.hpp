@@ -27,8 +27,8 @@ template <typename SS>
 struct StiFPatternReturn1 : smacc2::SmaccState<StiFPatternReturn1<SS>, SS>
 {
   typedef SmaccState<StiFPatternReturn1<SS>, SS> TSti;
-  using TSti::context_type;
-  using TSti::SmaccState;
+  using typename TSti::context_type;
+  using TSti::TSti;
 
   // TRANSITION TABLE
   typedef mpl::list<
