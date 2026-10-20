@@ -114,7 +114,7 @@ void CbMoveCartesianRelative::moveRelativeCartesian(
     moveit::planning_interface::MoveGroupInterface::Plan grasp_pose_plan;
 
     // grasp_pose_plan.start_state_ = *(moveGroupInterface.getCurrentState());
-    grasp_pose_plan.trajectory_ = trajectory;
+    grasp_pose_plan.trajectory = trajectory;
     behaviorResult = movegroupClient->execute(grasp_pose_plan);
   }
 
