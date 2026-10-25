@@ -59,7 +59,13 @@ ament_target_dependencies(${PROJECT_NAME}
                           ${dependencies})
 
 ament_export_include_directories(include)
-ament_export_libraries(${PROJECT_NAME})
+# ci-export-yamlcpp: this is a STATIC library and cb_move_known_state.cpp calls YAML::Load,
+# so the yaml-cpp symbols stay undefined for consumers to resolve. macOS does not chain
+# them transitively, so every consumer failed to link ("Undefined symbols for architecture
+# arm64: YAML::Load(...), YAML::BadConversion::~BadConversion()", sm_test_moveit_ur5_sim).
+# CI_YAML_CPP_LIB is the absolute dylib path set in cmake/toolchain.cmake; it expands to
+# nothing outside this workspace, leaving the call identical to before.
+ament_export_libraries(${PROJECT_NAME} ${CI_YAML_CPP_LIB})
 ament_export_dependencies(${dependencies})
 
 install(TARGETS ${PROJECT_NAME}

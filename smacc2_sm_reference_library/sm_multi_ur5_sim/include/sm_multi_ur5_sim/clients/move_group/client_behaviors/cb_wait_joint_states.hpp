@@ -29,6 +29,27 @@
 
 namespace cl_move_group_interface
 {
+// ci-movegroup-ns: MoveGroupInterface::Options spells its namespace field WITHOUT a
+// trailing underscore from moveit2 2.9 onwards (it was move_group_namespace_ before).
+// Pick whichever the installed moveit actually declares, so this header builds against
+// both. The int/long parameter only orders the overloads. Same shim as the one in
+// move_group_interface_client/src/.../cl_movegroup.cpp, but that one lives in an
+// anonymous namespace inside a .cpp and so cannot be reached from here; this copy is in
+// a NAMED namespace, which keeps it ODR-safe in a header.
+namespace ci_detail
+{
+template <typename Options>
+auto moveGroupNamespaceOf(const Options & o, int) -> decltype(o.move_group_namespace_)
+{
+  return o.move_group_namespace_;
+}
+
+template <typename Options>
+auto moveGroupNamespaceOf(const Options & o, long) -> decltype(o.move_group_namespace)
+{
+  return o.move_group_namespace;
+}
+}  // namespace ci_detail
 class CbWaitJointState : public smacc2::SmaccAsyncClientBehavior
 {
 public:
@@ -43,7 +64,7 @@ public:
     requiresClient(movegroupClient_);
 
     //auto group_name = movegroupClient_->getOptions().group_name_;
-    std::string ns =  movegroupClient_->getOptions().move_group_namespace_;
+    std::string ns = ci_detail::moveGroupNamespaceOf(movegroupClient_->getOptions(), 0);
 
     //auto topicname = "/joint_state_broadcaster_"UR5PREFIX"/joint_states";
 
